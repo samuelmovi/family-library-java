@@ -1,13 +1,24 @@
-# SPRING LIBRARY MANAGER
+# FAMILY LIBRARY MANAGER
+
+Java-based desktop app for the managemnt of an individual/family book collection, including location data, and loan tracking.
 
 ## Requirements
-
+- Spring Framework:
+	- Spring-core
+	- Spring-context
+	- Spring-tx
+	- Spring-data-jpa
+- H2 database
+- HiakriCP
+- Hibernate
 
 ## Installation
 
+
 ### Database Setup
 
-```
+- For pre-JPA versions, use this sql statements to reproduce database:
+```sql
 create database if not exists web_library;
 
 create table if not exists web_library.locations(
@@ -54,6 +65,7 @@ exit
 
 
 ## Usage
+Execute jar file. Navigate UI.
 
 
 ## Contributing
