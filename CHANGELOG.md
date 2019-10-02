@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - create tests
 - replace the column width scheme with something better
 - all books table not refreshing when adding new book
+- main fame's title not displaying
+- collection summary not showing in welcome panel
 
 
 ## 2019-10-02
