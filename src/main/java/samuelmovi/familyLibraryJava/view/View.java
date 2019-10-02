@@ -162,13 +162,7 @@ public class View {
 	}
 	
 	public void createPanels() {
-		
-		homePanel = new JPanel();
-		homePanel.setBounds(5, 50, 975, 795);
-		contentPane.add(homePanel);
-		homePanel.setLayout(null);
-		homePanel.setVisible(true);
-		
+
 		booksPanel = new JPanel();
 		booksPanel.setBackground(booksColor);
 		booksPanel.setBounds(5, 50, 975, 795);
@@ -189,6 +183,30 @@ public class View {
 		contentPane.add(loansPanel);
 		loansPanel.setLayout(null);
 		loansPanel.setVisible(false);
+
+
+		homePanel = new JPanel();
+		homePanel.setBounds(5, 50, 975, 795);
+		contentPane.add(homePanel);
+		homePanel.setLayout(null);
+		homePanel.setVisible(true);
+
+
+		// setting top row buttons
+		booksB= new JButton(stringMap.get("books"));
+		booksB.setBackground(Color.WHITE);
+		booksB.setBounds(5, 5, 320, 40);
+		contentPane.add(booksB);
+
+		locationsB= new JButton(stringMap.get("locations"));
+		locationsB.setBackground(Color.WHITE);
+		locationsB.setBounds(330, 5,  320, 40);
+		contentPane.add(locationsB);
+
+		loansB = new JButton(stringMap.get("loans"));
+		loansB.setBackground(Color.WHITE);
+		loansB.setBounds(655, 5, 320, 40);
+		contentPane.add(loansB);
 	}
 	
 	public void createMenuBar() {
@@ -271,35 +289,19 @@ public class View {
 	}
 	
 	public void fillHomePanel() {
-		booksB= new JButton(stringMap.get("books"));
-		locationsB= new JButton(stringMap.get("locations"));
-		loansB = new JButton(stringMap.get("loans"));
-		
+
 		JLabel welcomeLabel = new JLabel(stringMap.get("welcomeLabel"));
 		welcomeLabel.setBounds(200, 200, 600, 100);
 		welcomeLabel.setFont(new Font("Dialog", Font.BOLD, 25));
 		homePanel.add(welcomeLabel);
-		
+
 		JLabel booksTotalLabel = new JLabel(stringMap.get("booksTotalLabel")+all_books.size());
-		booksTotalLabel.setBounds(200, 300, 150, 40);
-		contentPane.add(booksTotalLabel);
+		booksTotalLabel.setBounds(200, 350, 150, 40);
+		homePanel.add(booksTotalLabel);
 		JLabel pendingLoansLabel = new JLabel(stringMap.get("pendingLoansLabel")+all_loans.size());
-		pendingLoansLabel.setBounds(200, 350, 150, 40);
-		contentPane.add(pendingLoansLabel);
-		
-		// setting top row buttons
-		booksB.setBackground(Color.WHITE);
-		booksB.setBounds(5, 5, 320, 40);
-		contentPane.add(booksB);
-		
-		locationsB.setBackground(Color.WHITE);
-		locationsB.setBounds(330, 5,  320, 40);
-		contentPane.add(locationsB);
-		
-		loansB.setBackground(Color.WHITE);
-		loansB.setBounds(655, 5, 320, 40);
-		contentPane.add(loansB);
-		
+		pendingLoansLabel.setBounds(200, 400, 250, 40);
+		homePanel.add(pendingLoansLabel);
+
 	}
 	
 	public void setColumnWidths(JTable table, int widths[]) {

@@ -10,13 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - replace the column width scheme with something better
 - all books table not refreshing when adding new book
 - main fame's title not displaying
-- collection summary not showing in welcome panel
 
 
 ## 2019-10-02
 ### Changed
 - refactor project with Spring and JPA
 
+### Fixed
+- collection summary not showing in welcome panel
 
 ## 2019-09-20
 ### Fixed
