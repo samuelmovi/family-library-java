@@ -1,70 +1,47 @@
-# MenuBar [0-8]
-
-menuM :: Menu
-saveDataMI :: Guardar Datos
-exitMI :: Salir
-tableM :: Datos
-booksMI :: Libros
-locationsMI :: Ubicaciones
-loansMI :: Prestamos
-helpM :: Ayuda
-aboutMI :: Acerca de
-
-# general [9-12]
-
+# SIMPLE WORDS
+refresh :: Refrescar
+search :: Buscar
+add :: Agregar
+clear :: Vaciar Campos
+return :: Devolver
+exit :: Salir
+data :: Datos
 books :: Libros
 locations :: Ubicaciones
 loans :: Prestamos
+help :: Ayuda
+everything :: Todos
+new :: Nuevo
+modify :: Modificar
+delete :: Borrar
+loan :: Prestar
+returns :: Devoluciones
+
+# System
+menu :: Menu
+saveData :: Guardar Datos
+about :: Acerca de
 welcomeLabel :: BIENVENIDOS A LA BIBLIOTECA-FAMILIAR
+confirmExit::Seguro que quieres cerrar el Programa?
+confirmExitHeader::Cerrar Progama
+saveData::Deseas guardar una copia de los datos?
+saveDataHeader::Confirmar Copia de Datos
+successfulSave::Archivos guardados con exito
+successfulSaveHeader::Archivos Guardados
+aboutInfo::Software de Gestion de Bibliotecas || Version: 0.1.1 || Samuel Movi [ github.com/samuelmovi ]
+aboutInforHeader::Acerca de Biblioteca-Familiar
+fillModelX::Error al refrescar Modelo
+fillModelXHeader::Error de refresco
 
-# tabs [13-19]
-
-everythingTab :: Todos
-searchTab :: Buscar
-newTab :: Nuevo
-modifyTab :: Modificar
-deleteTab :: Borrar
-loanTab :: Prestar
-returnsTab :: Devoluciones
-
-# buttons [20-27]
-
-refreshB :: Refrescar
-searchB :: Buscar
-addB :: Agregar
-clearB :: Vaciar Campos
-modifyB :: Modificar
-deleteB :: Borrar
-loanB :: Prestar
-returnB :: Devolver
-
-# alias [28-32]
-
-bookAlias :: books_index as 'ID',title as 'Titulo',author as 'Autor',genre as'Genero',editorial as 'Editorial',isbn as 'ISBN', publish_date as 'Publicacion', purchase_date 'Adquisicion', location as 'Ubicacion', registration_date as 'Registrado', modification_date as 'Modificado'
-
-bookJoinAliases :: books.books_index as 'ID',books.title as 'Titulo',books.author as 'Autor',books.genre as'Genero',books.editorial as 'Editorial',books.isbn as 'ISBN', books.publish_date as 'Publicacion', books.purchase_date 'Adquisicion', locations.address as 'Ubicacion', books.registration_date as 'Registrado', books.modification_date as 'Modificado'
-
-locationAlias :: locations_index as 'ID',address as 'Direccion', room as 'Habitacion', furniture as 'Mueble', details as 'Detalles'
-
-loansAlias :: loans_index as 'Indice', book as 'ID del Libro', recipient as 'Prestado a', loan_date as 'Fecha de Prestamo', return_date as 'Fecha Devolucion' 
-
-loansJoinAliases :: loans.loans_index as 'ID', books.title as 'Libro', loans.recipient as 'Prestado a', loans.loan_date as 'Fecha de Prestamo', loans.return_date as 'Fecha Devolucion'
-
-# labels [33-36]
-
+# BOOK STUFF
+booksTotalLabel :: Total de libros:
+pendingLoansLabel :: Prestamos pendientes:
+bookJoinAliases :: Título/Autor/Género/Editorial/ISBN/Publicación/Adquisición/Ubicación/Prestado/Registrado/Modificado
+bookFieldAlias :: ID/Título/Autor/Género/Editorial/ISBN/Publicación/Adquisición/Ubicación/Prestado/Registrado
+searchBookFields :: Titulo/Autor/Genero/Editorial/ISBN
 bookLabelsText :: Titulo,Autor,Genero,Editorial,ISBN,Publicacion [AAAA-MM-DD],Adquisicion [AAAA-MM-DD],Ubicacion
-locationLabelsText :: Direccion,Habitacion,Mueble,Detalles
-loanLabelsText :: ID del Libro,Prestado a
-loanIdLabel :: ID del Prestamo
-
-# popUps [37-52]
-
 refreshBookTablesX::Fallo al refrescar las tablas de Libros
 refreshBookTablesXHeader::Error de refresco
-refreshLocationTablesX::Fallo al refrescar las tablas de Ubicaciones
-refreshLocationTablesXHeader::Error de refresco
-refreshLoanTablesX::Fallo al refrescar las tablas de Prestamos
-refreshLoanTablesXHeader::Error de refresco
 searchBooksX::Error durante la busqueda del libro
 searchBooksXHeader::Error de busqueda
 deleteBookC::Seguro que desea Borrar el libro de la base de datos?
@@ -73,10 +50,6 @@ deleteBookX::El indice no es correcto
 deleteBookXHeader::Error al Borrar
 returnBook::El indice del Prestamo no es correcto
 returnBookH::Error al devolver
-fillModelX::Error al refrescar Modelo
-fillModelXHeader::Error de refresco
-
-# book stuff [53-62]
 addBookC::Libro agregado a la base de datos
 addBookCHeader::Libro Agregado
 addBookX::El libro no se ha agregado correctamente
@@ -88,7 +61,11 @@ modifyBookXHeader::Error de Modificacion
 deleteBookC::Seguro que desea borrar el libro '
 deleteBookCHeader::Confirmar Borrado
 
-# location stuff [63-72]
+# LOCATION STUFF
+locationFieldAlias :: ID/Dirección/Habitación/Prestado/Devuelto
+locationLabelsText :: Direccion,Habitacion,Mueble,Detalles
+refreshLocationTablesX::Fallo al refrescar las tablas de Ubicaciones
+refreshLocationTablesXHeader::Error de refresco
 addLocationC::Ubicacion agregada a la base de datos
 addLocationCHeader::Ubicacion Agregada
 addLocationX::La ubicacion no se ha agregado correctamente
@@ -100,7 +77,12 @@ modifyLocationXHeader::Error de Modificacion
 deleteLocationC::Seguro que desea borrar la ubicacion?
 deleteLocationCHeader::Confirmar Borrado
 
-# loan stuff [73-80]
+# LOAN STUFF
+loanFieldALias :: ID/Libro/Prestatario/Prestado/Devuelto
+loanLabelsText :: ID del Libro,Prestado a
+loanIdLabel :: ID del Prestamo
+refreshLoanTablesX::Fallo al refrescar las tablas de Prestamos
+refreshLoanTablesXHeader::Error de refresco
 loanBookQ::Seguro que desea Prestar el libro '
 loanBookQHeader::Confirmar Prestamo
 loanBookC::Prestamo registrado en la base de datos
@@ -109,13 +91,3 @@ loanBookX::El prestamo no se ha agregado correctamente
 loanBookXHeader::Error al registrar
 returnBookC::Confirmar devolucion del libro
 returnBookCHeader::Confirmar devolucion
-
-# sistema [81- ]
-confirmExit::Seguro que quieres cerrar el Programa?
-confirmExitHeader::Cerrar Progama
-saveData::Deseas guardar una copia de los datos?
-saveDataHeader::Confirmar Copia de Datos
-successfulSave::Archivos guardados con exito
-successfulSaveHeader::Archivos Guardados
-aboutInfo::Software de Gestion de Bibliotecas || Version: 0.1.1 || Samuel Movi [ github.com/samuelmovi ]
-aboutInforHeader::Acerca de Biblioteca-Familiar

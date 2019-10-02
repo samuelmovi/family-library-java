@@ -1,119 +1,93 @@
-# MenuBar [0-8]
-
-menuM :: Menu
-saveDataMI :: Save Data
-exitMI :: Exit
-tableM :: Data
-booksMI :: Books
-locationsMI :: Locations
-loansMI :: Loans
-helpM :: Help
-aboutMI :: About
-
-# general [9-12]
-
+# SIMPLE WORDS
+refresh :: Refresh
+search :: Search
+add :: Add
+clear :: Empty Fields
+return :: Return
+exit :: Exit
+data :: Data
 books :: Books
 locations :: Locations
 loans :: Loans
-welcomeLabel :: WELCOME TO THE FAMILY-LIBRARY
+help :: Help
+everything :: All
+new :: New
+modify :: Modify
+delete :: Delete
+loan :: Loan
+returns :: Returns
 
-# tabs [13-19]
-
-everythingTab :: All
-searchTab :: Search
-newTab :: Add
-modifyTab :: Modify
-deleteTab :: Delete
-loanTab :: Loan
-returnsTab :: Return
-
-# buttons [20-27]
-
-refreshB :: Refresh
-searchB :: Search
-addB :: Add
-clearB :: Clear Fields
-modifyB :: Modify
-deleteB :: Delete
-loanB :: Loan
-returnB :: Return
-
-# alias [28-32]
-
-bookAlias :: books_index as 'ID',title as 'Title',author as 'Author',genre as'Genre',editorial as 'Editorial',isbn as 'ISBN', publish_date as 'Published', purchase_date 'Acquired', location as 'Location', registration_date as 'Registered', modification_date as 'Modified'
-
-bookJoinAliases :: books.books_index as 'ID',books.title as 'Title',books.author as 'Author',books.genre as'Genero',books.editorial as 'Editorial',books.isbn as 'ISBN', books.publish_date as 'Published', books.purchase_date 'Acquired', locations.address as 'Location', books.registration_date as 'Registered', books.modification_date as 'Modified'
-
-locationAlias :: locations_index as 'ID',address as 'Address', room as 'Room', furniture as 'Furniture', details as 'Details'
-
-loansAlias :: loans_index as 'ID', book as 'Book [ID]', recipient as 'Recipient', loan_date as 'Loan Date', return_date as 'Return Date' 
-
-loansJoinAliases :: loans.loans_index as 'ID', books.title as 'Book Title', loans.recipient as 'Recipient', loans.loan_date as 'Loan Date', loans.return_date as 'Return Date'
-
-# labels [33-36]
-
-bookLabelsText :: Title,Author,Genre,Editorial,ISBN,Published [AAAA-MM-DD],Acquired [AAAA-MM-DD],Location
-locationLabelsText :: Address,Room,Furniture,Details
-loanLabelsText :: Book [ID],Recipient
-loanIdLabel :: Loan ID
-
-# popUps [37- ]
-
-refreshBookTablesX::Error while refreshing Book Tables
-refreshBookTablesXHeader::Refresh Error
-refreshLocationTablesX::Error while refreshing Location Tables
-refreshLocationTablesXHeader::Refresh Error
-refreshLoanTablesX::Error while refreshing Loan Tables
-refreshLoanTablesXHeader::Refresh Error
-searchBooksX::Error while searching for book
-searchBooksXHeader::Search Error
-deleteBookC::Confirm deletion of book from data base
-deleteBookCHeader::Confirm Deletion
-deleteBookX::Book index is not correct
-deleteBookXHeader::Deletion Error
-returnBook::Loan index is not correct
-returnBookH::Return Error
-fillModelX::Error while refreshing model
-fillModelXHeader::Refresh Error
-
-# book stuff [53- ]
-addBookC::Book successfully added to data base
-addBookCHeader::Book added
-addBookX:: Failure to add new book to data base
-addBookXHeader::Error adding book
-modifyBookC::Book successfully modified
-modifyBookCHeader::Book modified
-modifyBookX::Failure to modify book
-modifyBookXHeader::Error modifying book
-deleteBookC::Confirm deletion of book '
-deleteBookCHeader::Confirm deletion
-
-addLocationC::Location successfully added to data base
-addLocationCHeader::Location added
-addLocationX::Failure to add new location to data base
-addLocationXHeader::Error adding location
-modifyLocationC::Location successfully modified
-modifyLocationCHeader::Location modified
-modifyLocationX::Failure to modify location
-modifyLocationXHeader::Error modifying location
-deleteBookC::Confirm deletion of location
-deleteBookCHeader::Confirm deletion
-
-loanBookQ::Confirm loan of book '
-loanBookQHeader::Confirm loan
-loanBookC::Loan successfully registered in data base
-loanBookCHeader::Loan registered
-loanBookX::Failure to register loan
-loanBookXHeader::Error registering loan
-returnBookC::Confirm return of loaned book
-returnBookCHeader::Confirm return
-
-# sistema [81- ]
-confirmExit::Sure you want to exit application?
-confirmExitHeader::Exit Application
-saveData::Save local copy of data?
-saveDataHeader::Confirm Local Data Copy
-successfulSave::Files successfully saved
+# System
+menu :: Menu
+saveData :: Save data
+about :: About
+welcomeLabel :: WELCOME TO YOUR FAMILY LIBRARY
+confirmExit:: Exit the program?
+confirmExitHeader::Exit program
+saveData::Save copy of data?
+saveDataHeader::Confirm Data Copy
+successfulSave::Files succesfully saved
 successfulSaveHeader::Files Saved
 aboutInfo::Library Management Software || Version: 0.1.1 || Samuel Movi [ github.com/samuelmovi ]
-aboutInforHeader::About Family-Library
+aboutInforHeader::About Family Library
+fillModelX::Error refreshing model
+fillModelXHeader::Refreshing Error
+
+# BOOK STUFF
+booksTotalLabel :: Books total:
+pendingLoansLabel :: Pending loans:
+bookJoinAliases :: Title/Author/Genre/Publisher/ISBN/Published/Acquired/Location/Loaned/Registered/Modified
+bookFieldAlias :: ID/Title/Author/Genre/Publisher/ISBN/Published/Acquired/Location/Loaned/Registered
+searchBookFields :: Title/Author/Genre/Publisher/ISBN
+bookLabelsText :: Title,Author,Genre,Publisher,ISBN,Published,Acquired,Location
+refreshBookTablesX::Error refreshing book tables
+refreshBookTablesXHeader::Refreshing Error
+searchBooksX::Error searching for book
+searchBooksXHeader::Search Error
+deleteBookC::Delete book from database?
+deleteBookCHeader::Confirm Deletion
+deleteBookX::ID is not correct
+deleteBookXHeader::Deletion Error
+returnBook::Loan ID is incorrect
+returnBookH::Return Error
+addBookC::Book added to database
+addBookCHeader::Book added
+addBookX::Book wasn't correctly added
+addBookXHeader::Error
+modifyBookC::Book correctly modifies
+modifyBookCHeader::Modifies Book
+modifyBookX:: Error modifying book
+modifyBookXHeader::Modification Error 
+deleteBookC::Delete book titled '
+deleteBookCHeader::Confirm Deletion
+
+# LOCATION STUFF
+locationFieldAlias :: ID/Address/Room/Loaned/Returned
+locationLabelsText :: Address,Room,Loaned,Returned
+refreshLocationTablesX::Error refreshing location tables
+refreshLocationTablesXHeader::Refresh Error
+addLocationC::Location correctly added to database
+addLocationCHeader::Location added
+addLocationX::Error adding location to database
+addLocationXHeader::Error
+modifyLocationC::Location correctly modifies
+modifyLocationCHeader::Location modified
+modifyLocationX::Error modifying location
+modifyLocationXHeader::Modification Error
+deleteLocationC::Delete selected location?
+deleteLocationCHeader::Confirm Deletion
+
+# LOAN STUFF
+loanFieldALias :: ID/Book/Borrower/Loaned/Returned
+loanLabelsText :: Book ID,Loaned to
+loanIdLabel :: Loan ID
+refreshLoanTablesX::Error refreshing loan tables
+refreshLoanTablesXHeader::Refresh Error
+loanBookQ:: Loan book titles '
+loanBookQHeader::Confirm Loan
+loanBookC::Loan registered to the database
+loanBookCHeader::Loan registered
+loanBookX::Loan wans't correctly processed
+loanBookXHeader::Error
+returnBookC::Confirm book return
+returnBookCHeader::Confirm return

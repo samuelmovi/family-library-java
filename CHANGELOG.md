@@ -5,25 +5,80 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- exclude loaned-out books from loan-book tab table
+- workaround for selecting correct location in modify book dropdown when clicking on row
+- create tests
+- replace the column width scheme with something better
+- all books table not refreshing when adding new book
 
-## [0.1.1] - 2019-07-01
+
+## 2019-10-02
+### Changed
+- refactor project with Spring and JPA
+
+
+## 2019-09-20
 ### Fixed
-- Regression in inserts (duplicated db connector)
-- Regression in book returns
+- refreshing all books tab function was not using book views
+
+## 2019-09-18
+### Changed
+- Moved project to maven on IntelliJ
+- Moved database to H2 file-based database
 
 ### Added
-- Field-clearing when adding new book
-- Field-clearing when modifying book
-- New refresh button to modify location tab
-- Field-clearing when modifying location
-- Field-clearing after book loan
-- Field-clearing after adding new location
+- new book view with joined location name
 
+## 2019-09-15
 
 ### Changed
-- removed index field from return book
-- centered all dialogs on window frame
-- added controller functionality from view's menu bar
-- changed loayout in delete tabs
-- updated about info in string files
+- only string fields in search book dropdown, translations in the strings files
+- restructuring of strings file
+
+### Added
+- added searchFieldText to strings file
+- total books, and loand in library displayed in welcome panel
+
+## 2019-09-14
+
+### Added
+- functionality to search book button
+
+### Fixed
+- index causing errors, changed it to string
+- make table contents span the whole table
+- find way to feed languag-specific aliases to the table model
+- fix erroneous content change when modifying location
+- fix empty rows in table for each real row
+- fix modifying entry doubles entry in model
+
+## 2019-09-13
+
+### Fixed
+- locations list properly displaying the information
+
+### Changed
+- removed calls to getBook_index in book dao because of autoincrement
+- new map-based system for loading the strings from file
+- got workaorund for setting content in view form controller
+
+### Added
+- mew functionality to the add book buttom in controller
+- new implementation for add and modify buttons
+- missing fields to models's pojos
+- add close function to close button
+- create list of fields for find book panel
+- independent functions to populate table models
+
+### Fixed
+- Starting code wrong on Main. All better now
+- Issue with dropdowns content in views construction
+- functionality in daos
+
+
+## 2019-09-12
+
+### Changed
+- Moved functions in old Model to their respective classes, as seen fit.
+
+### Added
+- New functionality for DAOs

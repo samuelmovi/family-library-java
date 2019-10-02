@@ -4,3 +4,6 @@
 LibraryData.sqlite
 bin/
 *.csv
+.idea/**
+target/**
+db/**
