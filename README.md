@@ -10,7 +10,7 @@ Java-based desktop samuelmovi.familyLibraryJava.app for the managemnt of an indi
 	- Spring-tx
 	- Spring-data-jpa
 - H2 database
-- HiakriCP
+- HikariCP
 - Hibernate
 
 ## Installation
@@ -44,14 +44,12 @@ There are 5 tabs for book management:
 
 ### Locations
 Locations are defined by the following fields:
-
 - Address
 - Room
 - Furniture
 - Details
 
 It has 4 tabs:
-
 - All: it shows all locations in the database.
 - New: you can enter info on a new book location.
 - Modify: click on a row from table to populate fields, modify them, and save the changes.
@@ -60,14 +58,12 @@ It has 4 tabs:
 
 ### Loans
 Loans have 4 fields:
-
 - Book name
 - Loaned to
 - Date of loan
 - Date of return
 
 There are 3 tabs to manage loans:
-
 - All: it shows all book loans, past and current.
 - Loan: choose a book, input the borrower's name, and save the transaction to the database.
 - Return: choose from the table of current loans, and set it as returned.
@@ -80,7 +76,7 @@ To change the language, copy your chosen language file `` strings-XX.txt `` to t
 
 
 ## Database Storage
-The application uses an [H2](https://en.wikipedia.org/wiki/H2_(DBMS)) file-based database. On first run, the application will create a file named `h2-database.mv.db`. This file contains ALL of the database information in binary format, and it should be readable with any other H2 compatible application.
+The application uses an [H2](https://en.wikipedia.org/wiki/H2_(DBMS) file-based database. On first run, the application will create a file named `h2-database.mv.db`. This file contains ALL of the database information in binary format, and it should be readable with any other H2 compatible application.
 
 To ensure reliability I have also implemented a way to save the data in a human-readable format. In this particular case, it's [CSV](https://en.wikipedia.org/wiki/Comma-separated_values).
 
