@@ -1,6 +1,8 @@
-package model;
+package samuelmovi.familyLibraryJava.repo;
 
 import java.util.List;
+
+import samuelmovi.familyLibraryJava.model.Book;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

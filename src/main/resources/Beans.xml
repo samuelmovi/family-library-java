@@ -35,7 +35,7 @@
 				<prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
 			</props>
 		</property>
-		<property name="packagesToScan" value="model" />
+		<property name="packagesToScan" value="samuelmovi.familyLibraryJava.model" />
 	</bean>
 
 	<!-- TRANSACTION BEAN -->
@@ -45,14 +45,14 @@
 
 	<tx:annotation-driven />
 
-	<jpa:repositories base-package="model" />
+	<jpa:repositories base-package="samuelmovi.familyLibraryJava.model, samuelmovi.familyLibraryJava.repo" />
 
-	<context:component-scan base-package="model" />
+	<context:component-scan base-package="samuelmovi.familyLibraryJava.model" />
 
 	<!-- APP BEAN -->
-    <bean id="view" class="view.View"></bean>
+    <bean id="view" class="samuelmovi.familyLibraryJava.view.View"></bean>
 
-    <bean id="controller" class="controller.Controller">
+    <bean id="controller" class="samuelmovi.familyLibraryJava.controller.Controller">
         <constructor-arg name="view" ref="view"/>
     </bean>
 

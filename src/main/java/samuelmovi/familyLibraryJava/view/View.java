@@ -1,4 +1,4 @@
-package view;
+package samuelmovi.familyLibraryJava.view;
 
 
 import java.awt.Color;
@@ -31,10 +31,10 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import model.Book;
-import model.BookView;
-import model.Loan;
-import model.Location;
+import samuelmovi.familyLibraryJava.model.Book;
+import samuelmovi.familyLibraryJava.model.BookView;
+import samuelmovi.familyLibraryJava.model.Loan;
+import samuelmovi.familyLibraryJava.model.Location;
 
 public class View {
 	
@@ -322,7 +322,7 @@ public class View {
 		model.setRowCount(0);
 		model.setColumnCount(bookFieldAlias.length);
 		model.setColumnIdentifiers(bookFieldAlias);
-		// populate model
+		// populate samuelmovi.familyLibraryJava.model
 		for(Book b:list) {
 			Vector<String> vector = new Vector<String>();
 			vector.add(String.valueOf(b.getBook_index()));
@@ -345,7 +345,7 @@ public class View {
 		model.setRowCount(0);
 		model.setColumnCount(bookJoinAliases.length);
 		model.setColumnIdentifiers(bookJoinAliases);
-		// populate model
+		// populate samuelmovi.familyLibraryJava.model
 		for(BookView b:list) {
 			Vector<String> vector = new Vector<String>();
 			// vector.add(String.valueOf(b.getBookview_index()));
@@ -628,7 +628,7 @@ public class View {
 		model.setRowCount(0);
 		model.setColumnCount(locationFieldAlias.length);
 		model.setColumnIdentifiers(locationFieldAlias);
-		// populate model
+		// populate samuelmovi.familyLibraryJava.model
 		
 		for(Location loc:list) {
 			Vector<String> vector = new Vector<String>();
@@ -790,7 +790,7 @@ public class View {
 		model.setRowCount(0);
 		model.setColumnCount(loanFieldAlias.length);
 		model.setColumnIdentifiers(loanFieldAlias);
-		// populate model
+		// populate samuelmovi.familyLibraryJava.model
 		for(Loan loan:list) {
 			Vector<String> vector = new Vector<String>();
 			vector.add(String.valueOf(loan.getLoan_index()));

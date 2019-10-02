@@ -1,6 +1,6 @@
 # FAMILY LIBRARY MANAGER
 
-Java-based desktop app for the managemnt of an individual/family book collection, including location data, and loan tracking.
+Java-based desktop samuelmovi.familyLibraryJava.app for the managemnt of an individual/family book collection, including location data, and loan tracking.
 
 ## Requirements
 - Spring Framework:

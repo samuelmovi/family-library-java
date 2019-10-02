@@ -30,7 +30,7 @@ successfulSave::Files succesfully saved
 successfulSaveHeader::Files Saved
 aboutInfo::Library Management Software || Version: 0.1.1 || Samuel Movi [ github.com/samuelmovi ]
 aboutInforHeader::About Family Library
-fillModelX::Error refreshing model
+fillModelX::Error refreshing samuelmovi.familyLibraryJava.model
 fillModelXHeader::Refreshing Error
 
 # BOOK STUFF

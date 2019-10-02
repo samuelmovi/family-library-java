@@ -1,4 +1,4 @@
-package controller;
+package samuelmovi.familyLibraryJava.controller;
 
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -21,8 +21,12 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import model.*;
-import view.View;
+import samuelmovi.familyLibraryJava.model.*;
+import samuelmovi.familyLibraryJava.repo.BookRepository;
+import samuelmovi.familyLibraryJava.repo.BookViewRepository;
+import samuelmovi.familyLibraryJava.repo.LoanRepository;
+import samuelmovi.familyLibraryJava.repo.LocationRepository;
+import samuelmovi.familyLibraryJava.view.View;
 
 public class Controller {
 	
@@ -54,7 +58,7 @@ public class Controller {
 	
 	public void initController() {
 		loadTextStrings();
-		// set view info
+		// set samuelmovi.familyLibraryJava.view info
 		view.setLocationsArray(createLocationList());
 		view.setStringMap(stringMap);
 		// books stuff
@@ -180,7 +184,7 @@ public class Controller {
 	
 	public void refreshAllBooksTab() {
 		try {
-			// view.fillJoinedModel(view.getAllBooksModel(), view.getBookJoinAliases(), "books", "locations", "books.location", "locations.locations_index");
+			// samuelmovi.familyLibraryJava.view.fillJoinedModel(samuelmovi.familyLibraryJava.view.getAllBooksModel(), samuelmovi.familyLibraryJava.view.getBookJoinAliases(), "books", "locations", "books.location", "locations.locations_index");
 			view.fillBookViewModel(view.getAllBooksModel(), (List<BookView>)bookViews.findAll());
 			view.setColumnWidths(view.getAllBooksTabTable(), view.getBookColumnWidths());
 		}catch (Exception e) {
@@ -200,7 +204,7 @@ public class Controller {
 			// check value for field
 			// must find way to do this with orm
 		}
-		//view.fillBookModel(view.getSearchBooksModel(), books.findByField(field, value));
+		//samuelmovi.familyLibraryJava.view.fillBookModel(samuelmovi.familyLibraryJava.view.getSearchBooksModel(), books.findByField(field, value));
 	}
 	
 	public void addBookB() {
@@ -242,7 +246,7 @@ public class Controller {
 	
 	public void modifyBookB() {
 		JTextField[] modInputFields = (JTextField[]) view.getModifyBookInputObjects();
-		// create Book object from into in fields and pass that to repo
+		// create Book object from into in fields and pass that to samuelmovi.familyLibraryJava.repo
 		Book newBook = new Book(
 				modInputFields[0].getText(),
 				modInputFields[1].getText(),
@@ -299,10 +303,10 @@ public class Controller {
 			}
 			else if(view.getModifyBookInputObjects()[i] instanceof JComboBox) {
 				/* TODO: disabled until workaround found to proper choice selection
-				int location_index = Integer.valueOf(String.valueOf(view.getModifyBookTabTable()
-								.getValueAt(view.getModifyBookTabTable()
+				int location_index = Integer.valueOf(String.valueOf(samuelmovi.familyLibraryJava.view.getModifyBookTabTable()
+								.getValueAt(samuelmovi.familyLibraryJava.view.getModifyBookTabTable()
 										.getSelectedRow(),i+1)));
-				view.getModifyBookCB().setSelectedIndex(location_index);
+				samuelmovi.familyLibraryJava.view.getModifyBookCB().setSelectedIndex(location_index);
 				*/
 			}
 		}
@@ -535,7 +539,7 @@ public class Controller {
 	}
 	
 	public void returnLoanTabTable() {
-		// view.getLoanId().setText(String.valueOf(view.getReturnLoanTabTable().getValueAt(view.getReturnLoanTabTable().getSelectedRow(),0)));
+		// samuelmovi.familyLibraryJava.view.getLoanId().setText(String.valueOf(samuelmovi.familyLibraryJava.view.getReturnLoanTabTable().getValueAt(samuelmovi.familyLibraryJava.view.getReturnLoanTabTable().getSelectedRow(),0)));
 		loanIndex=String.valueOf(view.getReturnLoanTabTable().getValueAt(view.getReturnLoanTabTable().getSelectedRow(),0));
 	}
 	

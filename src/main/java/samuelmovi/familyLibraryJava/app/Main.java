@@ -1,10 +1,13 @@
-package app;
+package samuelmovi.familyLibraryJava.app;
 
-import model.*;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import controller.Controller;
+import samuelmovi.familyLibraryJava.controller.Controller;
+import samuelmovi.familyLibraryJava.repo.BookRepository;
+import samuelmovi.familyLibraryJava.repo.BookViewRepository;
+import samuelmovi.familyLibraryJava.repo.LoanRepository;
+import samuelmovi.familyLibraryJava.repo.LocationRepository;
 
 public class Main {
 
@@ -19,13 +22,13 @@ public class Main {
 		LocationRepository locationRepository = (LocationRepository) context.getBean("locationRepository");
 		LoanRepository loanRepository = (LoanRepository) context.getBean("loanRepository");
 
-		// set controller requirements
+		// set samuelmovi.familyLibraryJava.controller requirements
 		controller.setBooks(bookRepository);
 		controller.setBookViews(bookViewRepository);
 		controller.setLocations(locationRepository);
 		controller.setLoans(loanRepository);
 
-		// launch controller
+		// launch samuelmovi.familyLibraryJava.controller
 		controller.initController();
 		context.registerShutdownHook();
 	}

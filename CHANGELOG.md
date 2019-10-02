@@ -28,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Moved database to H2 file-based database
 
 ### Added
-- new book view with joined location name
+- new book samuelmovi.familyLibraryJava.view with joined location name
 
 ## 2019-09-15
 
@@ -48,10 +48,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - index causing errors, changed it to string
 - make table contents span the whole table
-- find way to feed languag-specific aliases to the table model
+- find way to feed languag-specific aliases to the table samuelmovi.familyLibraryJava.model
 - fix erroneous content change when modifying location
 - fix empty rows in table for each real row
-- fix modifying entry doubles entry in model
+- fix modifying entry doubles entry in samuelmovi.familyLibraryJava.model
 
 ## 2019-09-13
 
@@ -61,10 +61,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - removed calls to getBook_index in book dao because of autoincrement
 - new map-based system for loading the strings from file
-- got workaorund for setting content in view form controller
+- got workaorund for setting content in samuelmovi.familyLibraryJava.view form samuelmovi.familyLibraryJava.controller
 
 ### Added
-- mew functionality to the add book buttom in controller
+- mew functionality to the add book buttom in samuelmovi.familyLibraryJava.controller
 - new implementation for add and modify buttons
 - missing fields to models's pojos
 - add close function to close button
