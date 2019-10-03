@@ -32,7 +32,7 @@ import samuelmovi.familyLibraryJava.view.View;
 public class Controller {
 	
 	private View view;
-	private Map<String, String> stringMap = new HashMap<String, String>();
+	private Map<String, String> stringMap;
 	
 	// BOOKS
 	@Autowired
@@ -59,9 +59,13 @@ public class Controller {
 
 	public Controller(View view) {
 		this.view = view;
+		this.view.setUpFrame();
 	}
 	
 	public void initController() {
+
+		//view.initSetup();
+
 		loadTextStrings();
 		// set samuelmovi.familyLibraryJava.view info
 		view.setLocationsArray(createLocationList());
@@ -84,8 +88,8 @@ public class Controller {
 		view.setAll_loans((List<Loan>)loans.findAll());
 		view.setLoanFieldAlias(stringMap.get("loanFieldALias").split("/"));
 
-		// now initialise it
-		view.initializeView();
+		// FINAL SETUP
+		view.finalSetup();
 		
 		// SYSTEM
 		view.getSaveDataMI().addActionListener(e -> saveDataMI());
@@ -189,7 +193,6 @@ public class Controller {
 	
 	public void refreshAllBooksTab() {
 		try {
-			// samuelmovi.familyLibraryJava.view.fillJoinedModel(samuelmovi.familyLibraryJava.view.getAllBooksModel(), samuelmovi.familyLibraryJava.view.getBookJoinAliases(), "books", "locations", "books.location", "locations.locations_index");
 			view.fillBookViewModel(view.getAllBooksModel(), (List<BookView>)bookViews.findAll());
 			view.setColumnWidths(view.getAllBooksTabTable(), view.getBookColumnWidths());
 		}catch (Exception e) {
@@ -571,7 +574,7 @@ public class Controller {
 		String line;
 		String chunks[];
 		String filePath="strings.txt";
-		
+		stringMap = new HashMap<String, String>();
 		try(BufferedReader br=new BufferedReader(new FileReader(filePath))) {
 			line = br.readLine().trim();
 			while(line != null) {
@@ -712,5 +715,17 @@ public class Controller {
 
 	public void setLoans(LoanRepository loans) {
 		this.loans = loans;
+	}
+
+	public View getView() {
+		return view;
+	}
+
+	public void setView(View view) {
+		this.view = view;
+	}
+
+	public Map<String, String> getStringMap() {
+		return stringMap;
 	}
 }

@@ -11,5 +11,6 @@ public interface BookRepository extends CrudRepository<Book, Long>{
 
     List<Book> findByLoaned(boolean loaned);
     //List<Book> findByField(String field, String value);
+    Book findByTitle(String title);
 
 }

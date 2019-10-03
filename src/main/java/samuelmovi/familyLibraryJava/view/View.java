@@ -137,22 +137,24 @@ public class View {
 	private String chunks[];
 	private JMenuItem saveDataMI;
 	private JMenuItem exitMI;
-	
-	public View() {
-		print("[#] Starting View...");
-		frame = new JFrame("window_title");
+
+
+	public void setUpFrame(){
+		print("[#] setting frame up...");
+		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setBounds(100, 100, 1000, 700);
 		frame.setResizable(false);
 		frame.setVisible(true);
-		
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
 		frame.setContentPane(contentPane);
 	}
 	
-	public void initializeView() {
+	public void finalSetup() {
+
 		createMenuBar();
 		createPanels();
 		fillHomePanel();
@@ -1308,5 +1310,6 @@ public class View {
 	public void setAvailableBooks(List<Book> availableBooks) {
 		this.availableBooks = availableBooks;
 	}
+
 
 }
