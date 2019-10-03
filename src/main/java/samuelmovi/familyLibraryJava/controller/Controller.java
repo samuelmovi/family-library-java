@@ -21,6 +21,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import samuelmovi.familyLibraryJava.model.*;
 import samuelmovi.familyLibraryJava.repo.BookRepository;
 import samuelmovi.familyLibraryJava.repo.BookViewRepository;
@@ -34,7 +35,9 @@ public class Controller {
 	private Map<String, String> stringMap = new HashMap<String, String>();
 	
 	// BOOKS
+	@Autowired
 	private BookRepository books;
+	@Autowired
 	private BookViewRepository bookViews;
 	private String bookIndex;
 	private String[] bookFields = {"book_index", "title", "author", "genre", "publisher", "isbn", "publish_date", "purchase_date", "location"};
@@ -42,11 +45,13 @@ public class Controller {
 	private String bookTitle = "";
 
 	// LOCATIONS
+	@Autowired
 	private LocationRepository locations;
 	private String locationIndex;
 	private String locationFields[] = {"location_index", "address","room","furniture","details"};
 
 	// LOANS
+	@Autowired
 	private LoanRepository loans;
 	private String loanIndex;
 	private String[] loanFields = {"loan_index", "book", "borrower", "loan_date", "return_date"};
