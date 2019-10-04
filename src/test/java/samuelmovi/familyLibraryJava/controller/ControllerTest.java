@@ -104,11 +104,11 @@ public class ControllerTest {
 
     @Test
     public void refreshAllBooksTabTest(){
+        int before = view.getAllBooksTabTable().getColumnCount();
         // execute method
         controller.refreshAllBooksTab();
         // assert model contents are what expected
-        Assert.assertEquals(7, view.getAllBooksModel().getColumnCount());
-        Assert.assertEquals(3, view.getAllBooksModel().getRowCount());
+        Assert.assertEquals(before, view.getAllBooksTabTable().getColumnCount());
     }
 
     @After
