@@ -37,16 +37,18 @@ public class ControllerTest {
     };
 
 
-    boolean firstRun = true;
+    private static boolean firstRun = true;
 
     @Before
     public void before(){
-        if (firstRun){
+        /*if (firstRun){
             System.out.println("[#] this should only print once, but doesn't");
             controller.initController();
             view = controller.getView();
             firstRun = false;
-        }
+        }*/
+        controller.initController();
+        view = controller.getView();
 
         // POPULATE DATABASE
         loadLocationData();

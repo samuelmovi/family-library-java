@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix column width mismatch problem
 
 
+## 2019-10-05
+### Fixed
+- tests now using correct test database
+
 ## 2019-10-02
 ### Changed
 - refactor project with Spring and JPA
