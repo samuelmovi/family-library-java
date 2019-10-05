@@ -20,17 +20,17 @@ import java.awt.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ControllerTest {
 
-    View view;
+    private static View view;
     @Autowired
-    Controller controller;
+    private Controller controller;
 
-    String[][] bookData = {
+    private static String[][] bookData = {
             {"title1", "author1", "genre1", "publisher1", "isbn1", "publish_date1", "purchase_date1"},
             {"title2", "author2", "genre2", "publisher2", "isbn2", "publish_date2", "purchase_date2"},
             {"title3", "author3", "genre3", "publisher3", "isbn3", "publish_date3", "purchase_date3"}
     };
 
-    String[][] locationData = {
+    private static String[][] locationData = {
             {"address1", "room1", "furniture1", "details1"},
             {"address2", "room2", "furniture2", "details2"},
             {"address3", "room3", "furniture3", "details3"}
@@ -41,18 +41,15 @@ public class ControllerTest {
 
     @Before
     public void before(){
-        /*if (firstRun){
-            System.out.println("[#] this should only print once, but doesn't");
-            controller.initController();
-            view = controller.getView();
-            firstRun = false;
-        }*/
-        controller.initController();
-        view = controller.getView();
-
         // POPULATE DATABASE
         loadLocationData();
         loadBookData();
+
+        if (firstRun){
+            controller.initController();
+            view = controller.getView();
+            firstRun = false;
+        }
     }
 
     @Test
