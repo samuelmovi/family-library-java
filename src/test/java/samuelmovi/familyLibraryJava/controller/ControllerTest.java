@@ -62,6 +62,10 @@ public class ControllerTest {
         if (firstRun){
             controller.initController();
             view = controller.getView();
+            books = controller.getBooks();
+            locations = controller.getLocations();
+            loans = controller.getLoans();
+
             firstRun = false;
         }
     }
