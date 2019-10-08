@@ -6,12 +6,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import samuelmovi.familyLibraryJava.model.Book;
 import samuelmovi.familyLibraryJava.model.Loan;
 import samuelmovi.familyLibraryJava.model.Location;
+import samuelmovi.familyLibraryJava.repo.BookRepository;
 import samuelmovi.familyLibraryJava.view.View;
 
 import java.awt.*;
@@ -20,6 +22,10 @@ import java.awt.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ControllerTest {
 
+    @Autowired
+    private BookRepository books;
+    @Mock
+    private View mockView;
     private static View view;
     @Autowired
     private Controller controller;
@@ -52,6 +58,17 @@ public class ControllerTest {
         }
     }
 
+    @After
+    public void after(){
+
+        controller.getBooks().deleteAll();
+        controller.getLocations().deleteAll();
+        controller.getLoans().deleteAll();
+
+    }
+
+    // BOOK TESTS
+
     @Test
     public void showBooksBTest(){
         // execute showBooksB()
@@ -69,6 +86,30 @@ public class ControllerTest {
     }
 
     @Test
+    public void refreshAllBooksTabTest(){
+        int before = view.getAllBooksTabTable().getColumnCount();
+        // execute method
+        controller.refreshAllBooksTab();
+        // assert model contents are what expected
+        Assert.assertEquals(before, view.getAllBooksTabTable().getColumnCount());
+    }
+
+    @Test
+    public void testAddBookB(){
+        long before = books.count();
+        // set data sources for nre book: view's addBookTextFields and comboLocations
+        for (int i=0; i< bookData[0].length; i++){
+            view.getAddBookTextFields()[i].setText(bookData[0][i]);
+        }
+        view.getComboLocations().setSelectedIndex(0);
+        // execute method
+        controller.addBookB();
+        // assert expected outcome
+        Assert.assertEquals(before+1, books.count());
+    }
+
+    // LOCATION TESTS
+    @Test
     public void showLocationsBTest(){
         // execute showLocationsB()
         controller.showLocationsB();
@@ -84,6 +125,8 @@ public class ControllerTest {
         Assert.assertEquals(Color.WHITE, view.getLoansB().getBackground());
     }
 
+
+    // LOAN TESTS
     @Test
     public void showLoansBTest(){
         // execute showLoansB()
@@ -101,24 +144,9 @@ public class ControllerTest {
 
     }
 
-    @Test
-    public void refreshAllBooksTabTest(){
-        int before = view.getAllBooksTabTable().getColumnCount();
-        // execute method
-        controller.refreshAllBooksTab();
-        // assert model contents are what expected
-        Assert.assertEquals(before, view.getAllBooksTabTable().getColumnCount());
-    }
 
-    @After
-    public void after(){
 
-        controller.getBooks().deleteAll();
-        controller.getLocations().deleteAll();
-        controller.getLoans().deleteAll();
-
-    }
-
+    // UTILITIES
     public void loadBookData(){
         for (String[] data: bookData){
             Book newBook = new Book(

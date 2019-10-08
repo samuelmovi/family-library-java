@@ -202,12 +202,13 @@ public class Controller {
 	}
 	
 	public void searchBooksB() {
+		// TODO: this is a mess, fix it
 		// get selected index and fetch equivalent field name
 		int selection = view.getSearchBookCombo().getSelectedIndex();
 		String field = bookSearchFields[selection];
 		String value = view.getSearchTerm().getText().trim();
 
-		List<Book> filteresBooks = new ArrayList<Book>();
+		List<Book> filteredBooks = new ArrayList<Book>();
 		for (Book b: books.findAll()){
 			// check value for field
 			// must find way to do this with orm
