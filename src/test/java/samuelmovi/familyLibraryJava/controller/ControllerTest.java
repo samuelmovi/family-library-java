@@ -14,8 +14,11 @@ import samuelmovi.familyLibraryJava.model.Book;
 import samuelmovi.familyLibraryJava.model.Loan;
 import samuelmovi.familyLibraryJava.model.Location;
 import samuelmovi.familyLibraryJava.repo.BookRepository;
+import samuelmovi.familyLibraryJava.repo.LoanRepository;
+import samuelmovi.familyLibraryJava.repo.LocationRepository;
 import samuelmovi.familyLibraryJava.view.View;
 
+import javax.swing.*;
 import java.awt.*;
 
 @ContextConfiguration(locations = "classpath:Tests.xml")
@@ -24,6 +27,11 @@ public class ControllerTest {
 
     @Autowired
     private BookRepository books;
+    @Autowired
+    private LocationRepository locations;
+    @Autowired
+    private LoanRepository loans;
+
     @Mock
     private View mockView;
     private static View view;
@@ -70,7 +78,7 @@ public class ControllerTest {
     // BOOK TESTS
 
     @Test
-    public void showBooksBTest(){
+    public void testShowBooksB(){
         // execute showBooksB()
         controller.showBooksB();
         // assert only visible panel is BooksPanel
@@ -90,14 +98,14 @@ public class ControllerTest {
         int before = view.getAllBooksTabTable().getColumnCount();
         // execute method
         controller.refreshAllBooksTab();
-        // assert model contents are what expected
+        // assert table contents are what expected
         Assert.assertEquals(before, view.getAllBooksTabTable().getColumnCount());
     }
 
     @Test
     public void testAddBookB(){
         long before = books.count();
-        // set data sources for nre book: view's addBookTextFields and comboLocations
+        // set data sources for new book: view's addBookTextFields and comboLocations
         for (int i=0; i< bookData[0].length; i++){
             view.getAddBookTextFields()[i].setText(bookData[0][i]);
         }
@@ -108,9 +116,56 @@ public class ControllerTest {
         Assert.assertEquals(before+1, books.count());
     }
 
+    @Test
+    public void testClearAddBookFieldsB() {
+        // populate add book fields
+        for (int i=0; i< bookData[0].length; i++){
+            view.getAddBookTextFields()[i].setText(bookData[0][i]);
+        }
+        view.getComboLocations().setSelectedIndex(0);
+        // execute method
+        controller.clearAddBookFieldsB();
+        // assert expected outcome
+        for(JTextField field: view.getAddBookTextFields()){
+            Assert.assertEquals(field.getText(), "");
+        }
+        Assert.assertNull(view.getComboLocations().getSelectedItem());
+    }
+
+    @Test
+    public void testModifyBookB() {
+        // TODO: check if modifyBook is changing the book's index
+        // populate view.getModifyBookInputObjects()
+
+        // execute method
+
+        // assert expected outcome
+
+    }
+
+    // @Test
+    public void testResetModifyBookTab() {
+
+    }
+
+    // @Test
+    public void testFillModifyBookFields() {
+
+    }
+
+    // @Test
+    public void testDeleteBookB() {
+
+    }
+
+    // @Test
+    public void testDeleteBookTabTable(){
+
+    }
+
     // LOCATION TESTS
     @Test
-    public void showLocationsBTest(){
+    public void testShowLocationsB(){
         // execute showLocationsB()
         controller.showLocationsB();
         // assert only visible panel is BooksPanel
@@ -125,10 +180,66 @@ public class ControllerTest {
         Assert.assertEquals(Color.WHITE, view.getLoansB().getBackground());
     }
 
+    @Test
+    public void testRefreshAllLocationsB(){
+        int before = view.getAllLocationsTabTable().getColumnCount();
+        // execute method
+        controller.refreshAllLocationsB();
+        // assert table contents are what expected
+        Assert.assertEquals(before, view.getAllLocationsTabTable().getColumnCount());
+    }
+
+    @Test
+    public void testAddLocationB(){
+        long before = locations.count();
+        // set data in view.getAddLocationTextFields
+        for (int i=0; i< locationData[0].length; i++){
+            view.getAddLocationTextFields()[i].setText(locationData[0][i]);
+        }
+        // execute method
+        controller.addLocationB();
+        // assert expected outcome
+        Assert.assertEquals(before+1, locations.count());
+    }
+
+    // @Test
+    public void testClearAddLocationFieldsB(){
+
+    }
+
+    // @Test
+    public void testModifyLocationB(){
+
+    }
+
+    // @Test
+    public void testFillModifyLocationFields(){
+
+    }
+
+    // @Test
+    public void testClearModifyLocationFields(){
+
+    }
+
+    // @Test
+    public void testSetLocationToDelete(){
+
+    }
+
+    // @Test
+    public void testDeleteLocationB(){
+
+    }
+
+    // @Test
+    public void testCreateLocationList(){
+
+    }
 
     // LOAN TESTS
     @Test
-    public void showLoansBTest(){
+    public void testShowLoansB(){
         // execute showLoansB()
         controller.showLoansB();
         // assert only visible panel is BooksPanel
@@ -144,6 +255,35 @@ public class ControllerTest {
 
     }
 
+    // @Test
+    public void testLoanBookB(){
+
+    }
+
+    // @Test
+    public void testLoanThisBook(){
+
+    }
+
+    // @Test
+    public void testMakeLoanTabTable(){
+
+    }
+
+    // @Test
+    public void testRefreshLoansTableB(){
+
+    }
+
+    // @Test
+    public void testReturnLoanTabTable(){
+
+    }
+
+    // @Test
+    public void testReturnBookB(){
+
+    }
 
 
     // UTILITIES

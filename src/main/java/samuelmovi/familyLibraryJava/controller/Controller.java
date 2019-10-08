@@ -255,7 +255,7 @@ public class Controller {
 	
 	public void modifyBookB() {
 		JTextField[] modInputFields = (JTextField[]) view.getModifyBookInputObjects();
-		// create Book object from into in fields and pass that to samuelmovi.familyLibraryJava.repo
+		// create Book object from info in fields
 		Book newBook = new Book(
 				modInputFields[0].getText(),
 				modInputFields[1].getText(),
