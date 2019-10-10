@@ -20,6 +20,9 @@ import samuelmovi.familyLibraryJava.view.View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.Vector;
 
 @ContextConfiguration(locations = "classpath:Tests.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -55,6 +58,10 @@ public class ControllerTest {
 
     @Before
     public void before(){
+        controller.getBooks().deleteAll();
+        controller.getLocations().deleteAll();
+        controller.getLoans().deleteAll();
+
         // POPULATE DATABASE
         loadLocationData();
         loadBookData();
@@ -158,14 +165,74 @@ public class ControllerTest {
 
     }
 
-    // @Test
+    @Test
     public void testResetModifyBookTab() {
-
+        // set content of modify fields
+        JTextField textField;
+        String testString = "wqerWQErQEW";
+        for(int i=0;i<view.getModifyBookInputObjects().length;i++) {
+            if (view.getModifyBookInputObjects()[i] instanceof JTextField) {
+                textField=(JTextField) view.getModifyBookInputObjects()[i];
+                textField.setText(testString);
+            }
+            else if(view.getModifyBookInputObjects()[i] instanceof JComboBox) {
+                view.getModifyBookCB().setSelectedItem(null);
+            }
+        }
+        // execute method
+        controller.resetModifyBookTab();
+        // assert expected outcome
+        for(int i=0;i<view.getModifyBookInputObjects().length;i++) {
+            if (view.getModifyBookInputObjects()[i] instanceof JTextField) {
+                textField=(JTextField) view.getModifyBookInputObjects()[i];
+                Assert.assertEquals("", textField.getText());
+            }
+            else if(view.getModifyBookInputObjects()[i] instanceof JComboBox) {
+                Assert.assertNull(view.getModifyBookCB().getSelectedItem());
+            }
+        }
     }
 
-    // @Test
+    @Test
     public void testFillModifyBookFields() {
+        // set content of table model
+        Book b = books.findByTitle(bookData[0][0]).get(0);
+        Vector<String> vector = new Vector<String>();
+        vector.add(String.valueOf(b.getBook_index()));
+        vector.add(b.getTitle());
+        vector.add(b.getAuthor());
+        vector.add(b.getGenre());
+        vector.add(b.getPublisher());
+        vector.add(b.getIsbn());
+        vector.add(b.getPublish_date());
+        vector.add(b.getPurchase_date());
 
+        view.getModifyBooksModel().setRowCount(0);
+        view.getModifyBooksModel().setColumnCount(view.getBookFieldAlias().length);
+        view.getModifyBooksModel().addRow(vector);
+        // set location combo content
+        String[] locationString = new String[1];
+        locationString[0] = b.getBook_index() + "/ qwerqwe ";
+        view.getModifyBookCB().setModel(new DefaultComboBoxModel<String>(locationString));
+        // set selected table row
+        view.getModifyBookTabTable().setRowSelectionInterval(0,0);
+        // execute method
+        controller.fillModifyBookFields();
+        // assert expected outcome
+        for(int i=0;i<view.getModifyBookInputObjects().length;i++) {
+            if(view.getModifyBookInputObjects()[i] instanceof JTextField ) {
+                JTextField textField=(JTextField) view.getModifyBookInputObjects()[i];
+                String value = textField.getText();
+                System.out.println("["+i+"] "+value+" - "+bookData[0][i]);
+                Assert.assertEquals(bookData[0][i], value);
+            }
+            else if(view.getModifyBookInputObjects()[i] instanceof JComboBox) {
+                JComboBox locationCombo = (JComboBox) view.getModifyBookInputObjects()[i];
+                String selected = (String) locationCombo.getSelectedItem();
+                System.out.println("[#] Combo selection: "+ selected);
+                Assert.assertEquals(String.valueOf(b.getBook_index()), selected.split("/")[0]);
+            }
+        }
     }
 
     // @Test

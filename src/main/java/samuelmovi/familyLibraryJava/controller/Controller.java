@@ -323,12 +323,19 @@ public class Controller {
 								.getValueAt(view.getModifyBookTabTable().getSelectedRow(),0));
 			}
 			else if(view.getModifyBookInputObjects()[i] instanceof JComboBox) {
-				/* TODO: disabled until workaround found to proper choice selection
-				int location_index = Integer.valueOf(String.valueOf(samuelmovi.familyLibraryJava.view.getModifyBookTabTable()
-								.getValueAt(samuelmovi.familyLibraryJava.view.getModifyBookTabTable()
-										.getSelectedRow(),i+1)));
-				samuelmovi.familyLibraryJava.view.getModifyBookCB().setSelectedIndex(location_index);
-				*/
+				JComboBox locationCombo = (JComboBox) view.getModifyBookInputObjects()[i];
+				// get id of selected book
+				String location_index = String.valueOf(view.getModifyBookTabTable()
+						.getValueAt(view.getModifyBookTabTable()
+								.getSelectedRow(),i+1));
+				// match id to first chunk of location combo items
+				for (int j=0; j<locationCombo.getItemCount(); j++){
+					String item = String.valueOf(locationCombo.getItemAt(j));
+					if(location_index.equals(item.split("/")[0])){
+						locationCombo.setSelectedIndex(j);
+						break;
+					}
+				}
 			}
 		}
 	}

@@ -14,6 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - programmatically click ok buttons when adding items during tests
 
 
+## 2019-10-10
+### Fixed
+- controller code for the search book button
+### Added
+- controller class tests
+
 ## 2019-10-05
 ### Fixed
 - tests now using correct test database
