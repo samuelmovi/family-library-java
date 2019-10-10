@@ -80,7 +80,6 @@ public class ControllerTest {
     }
 
     // BOOK TESTS
-
     @Test
     public void testShowBooksB(){
         // execute showBooksB()
@@ -104,6 +103,18 @@ public class ControllerTest {
         controller.refreshAllBooksTab();
         // assert table contents are what expected
         Assert.assertEquals(before, view.getAllBooksTabTable().getColumnCount());
+    }
+
+    @Test
+    public void testSearchBookB(){
+        // set search field to title in combo
+        view.getSearchBookCombo().setSelectedIndex(0);
+        // set field value in text field
+        view.getSearchTerm().setText(bookData[0][0]);
+        // execute method
+        controller.searchBooksB();
+        // assert expected outcome
+        Assert.assertEquals(1, view.getSearchBooksModel().getRowCount());
     }
 
     @Test

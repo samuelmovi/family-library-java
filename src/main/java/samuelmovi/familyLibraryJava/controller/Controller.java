@@ -202,7 +202,6 @@ public class Controller {
 	}
 	
 	public void searchBooksB() {
-		// TODO: this is a mess, fix it
 		// get database field from combo
 		int selection = view.getSearchBookCombo().getSelectedIndex();
 		String field = bookSearchFields[selection];
