@@ -203,17 +203,30 @@ public class Controller {
 	
 	public void searchBooksB() {
 		// TODO: this is a mess, fix it
-		// get selected index and fetch equivalent field name
+		// get database field from combo
 		int selection = view.getSearchBookCombo().getSelectedIndex();
 		String field = bookSearchFields[selection];
+		// get value from text field
 		String value = view.getSearchTerm().getText().trim();
 
-		List<Book> filteredBooks = new ArrayList<Book>();
-		for (Book b: books.findAll()){
-			// check value for field
-			// must find way to do this with orm
+		List<Book> filteredBooks = new ArrayList<>();
+		if(field.equals(bookSearchFields[0])){
+			filteredBooks = books.findByTitle(value);
 		}
-		//samuelmovi.familyLibraryJava.view.fillBookModel(samuelmovi.familyLibraryJava.view.getSearchBooksModel(), books.findByField(field, value));
+		else if(field.equals(bookSearchFields[1])){
+			filteredBooks = books.findByAuthor(value);
+		}
+		else if(field.equals(bookSearchFields[2])){
+			filteredBooks =  books.findByGenre(value);
+		}
+		else if(field.equals(bookSearchFields[3])){
+			filteredBooks =  books.findByPublisher(value);
+		}
+		else if(field.equals(bookSearchFields[4])){
+			filteredBooks =  books.findByIsbn(value);
+		}
+
+		view.fillBookModel(view.getSearchBooksModel(), filteredBooks);
 	}
 	
 	public void addBookB() {

@@ -29,7 +29,7 @@ public class ViewTest {
     private LoanRepository loans;
 
     @Autowired
-    private static View view;
+    private View view;
     @Autowired
     private Controller controller;
     @Mock
