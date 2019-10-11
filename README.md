@@ -1,6 +1,6 @@
 # FAMILY LIBRARY MANAGER
 
-Java-based desktop samuelmovi.familyLibraryJava.app for the managemnt of an individual/family book collection, including location data, and loan tracking.
+Java-based desktop app for the managemnt of an individual/family book collection, including location data, and loan tracking.
 
 ## Requirements
 - Maven: `sudo apt install maven`
@@ -94,8 +94,8 @@ create table if not exists web_library.locations(
 	room varchar(45),
 	furniture varchar(45),
 	details varchar(45),
-	registration_date date not null,
-	modification_date date
+	registrationDate date not null,
+	modificationDate date
 	);
 
 create table if not exists web_library.books(
@@ -105,12 +105,12 @@ create table if not exists web_library.books(
   genre text, 
   publisher text, 
   isbn text,
-  publish_date text, 
+  publishDate text, 
   purchase_date text,
   location int, 
   loaned boolean, 
-  registration_date date not null,
-  modification_date date,
+  registrationDate date not null,
+  modificationDate date,
   foreign key(location) references web_library.locations(location_index)
   );
 

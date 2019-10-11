@@ -329,17 +329,17 @@ public class View {
 		// populate samuelmovi.familyLibraryJava.model
 		for(Book b:list) {
 			Vector<String> vector = new Vector<String>();
-			vector.add(String.valueOf(b.getBook_index()));
+			vector.add(String.valueOf(b.getIndex()));
 			vector.add(b.getTitle());
 			vector.add(b.getAuthor());
 			vector.add(b.getGenre());
 			vector.add(b.getPublisher());
 			vector.add(b.getIsbn());
-			vector.add(b.getPublish_date());
+			vector.add(b.getPublishDate());
 			vector.add(b.getPurchase_date());
 			vector.add(String.valueOf(b.getLocation()));
 			vector.add(String.valueOf(b.isLoaned()));
-			vector.add(b.getRegistration_date());
+			vector.add(b.getRegistrationDate());
 			model.addRow(vector);
 		}
 	}
@@ -635,7 +635,7 @@ public class View {
 		
 		for(Location loc:list) {
 			Vector<String> vector = new Vector<String>();
-			vector.add(String.valueOf(loc.getLocation_index()));
+			vector.add(String.valueOf(loc.getIndex()));
 			vector.add(loc.getAddress());
 			vector.add(loc.getRoom());
 			vector.add(loc.getFurniture());

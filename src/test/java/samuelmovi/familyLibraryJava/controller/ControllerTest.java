@@ -20,8 +20,6 @@ import samuelmovi.familyLibraryJava.view.View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
-import java.util.Optional;
 import java.util.Vector;
 
 @ContextConfiguration(locations = "classpath:Tests.xml")
@@ -158,10 +156,10 @@ public class ControllerTest {
     public void testModifyBookB() {
         Book testBook = books.findByTitle(bookData[0][0]).get(0);
         // set location on test-book
-        testBook.setLocation(locations.findAll().get(0).getLocation_index());
+        testBook.setLocation(locations.findAll().get(0).getIndex());
         books.save(testBook);
         // set selected book index
-        controller.setBookIndex(String.valueOf(testBook.getBook_index()));
+        controller.setBookIndex(String.valueOf(testBook.getIndex()));
         // vector holds data to feed to input objects
         Vector<String> vector = new Vector<String>();
         String testString = "vsdFvgFDS";
@@ -170,7 +168,7 @@ public class ControllerTest {
         vector.add(testString); // vector.add(testBook.getGenre());
         vector.add(testString); // vector.add(testBook.getPublisher());
         vector.add(testString); // vector.add(testBook.getIsbn());
-        vector.add(testString); // vector.add(testBook.getPublish_date());
+        vector.add(testString); // vector.add(testBook.getPublishDate());
         vector.add(testString); //vector.add(testBook.getPurchase_date());
         // set values for ModifyBookInputObjects
         for(int i=0;i<view.getModifyBookInputObjects().length;i++) {
@@ -191,7 +189,7 @@ public class ControllerTest {
         Assert.assertEquals(testString, result.getTitle());
 
         // TODO: updating the book creates new entry, fix it
-        /*Optional<Book> result = books.findById(testBook.getBook_index());
+        /*Optional<Book> result = books.findById(testBook.getIndex());
         if (result.isPresent()){
             Book book = result.get();
             Assert.assertEquals(testString, book.getTitle());
@@ -232,13 +230,13 @@ public class ControllerTest {
         // set content of table model
         Book b = books.findByTitle(bookData[0][0]).get(0);
         Vector<String> vector = new Vector<String>();
-        vector.add(String.valueOf(b.getBook_index()));
+        vector.add(String.valueOf(b.getIndex()));
         vector.add(b.getTitle());
         vector.add(b.getAuthor());
         vector.add(b.getGenre());
         vector.add(b.getPublisher());
         vector.add(b.getIsbn());
-        vector.add(b.getPublish_date());
+        vector.add(b.getPublishDate());
         vector.add(b.getPurchase_date());
 
         view.getModifyBooksModel().setRowCount(0);
@@ -246,7 +244,7 @@ public class ControllerTest {
         view.getModifyBooksModel().addRow(vector);
         // set location combo content
         String[] locationString = new String[1];
-        locationString[0] = b.getBook_index() + "/ qwerqwe ";
+        locationString[0] = b.getIndex() + "/ qwerqwe ";
         view.getModifyBookCB().setModel(new DefaultComboBoxModel<String>(locationString));
         // set selected table row
         view.getModifyBookTabTable().setRowSelectionInterval(0,0);
@@ -264,18 +262,18 @@ public class ControllerTest {
                 JComboBox locationCombo = (JComboBox) view.getModifyBookInputObjects()[i];
                 String selected = (String) locationCombo.getSelectedItem();
                 System.out.println("[#] Combo selection: "+ selected);
-                Assert.assertEquals(String.valueOf(b.getBook_index()), selected.split("/")[0]);
+                Assert.assertEquals(String.valueOf(b.getIndex()), selected.split("/")[0]);
             }
         }
     }
 
-    // @Test
+    // @Test TODO: figure out how to click the dialog's ok button
     public void testDeleteBookB() {
         // set selected book index
 
         // execute method
 
-        // click ok (???)
+        // click ok
 
         // assert expected outcome
     }
@@ -419,7 +417,7 @@ public class ControllerTest {
                     data[4],
                     data[5],
                     data[6],
-                    controller.getLocations().findByAddress(locationData[0][0]).getLocation_index()
+                    controller.getLocations().findByAddress(locationData[0][0]).getIndex()
             );
             controller.getBooks().save(newBook);
         }

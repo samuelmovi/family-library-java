@@ -87,7 +87,7 @@ public class ViewTest {
                     data[4],
                     data[5],
                     data[6],
-                    controller.getLocations().findByAddress(locationData[0][0]).getLocation_index()
+                    controller.getLocations().findByAddress(locationData[0][0]).getIndex()
             );
             controller.getBooks().save(newBook);
         }

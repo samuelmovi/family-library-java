@@ -1,9 +1,6 @@
 package samuelmovi.familyLibraryJava.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -11,21 +8,34 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    long book_index;
-    String title;
-    String author;
-    String genre;
-    String publisher;
-    String isbn;
-    String publish_date;
-    String purchase_date;
-    long location;
-    boolean loaned;
-    String registration_date;
-    String modification_date;
+    private long index;
+    private String title;
+    private String author;
+    private String genre;
+    private String publisher;
+    private String isbn;
+    private String publishDate;
+    private  String purchase_date;
+    private  long location;
+    private  boolean loaned;
+    private  String registrationDate;
+    private  String modificationDate;
 
 
     protected Book(){}
+
+    public Book(String title, String author, String genre, String publisher, String isbn, String publish_date, String purchase_date){
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.publisher = publisher;
+        this.isbn = isbn;
+        this.publishDate = publish_date;
+        this.purchase_date = purchase_date;
+        // this.location = location;
+        this.loaned = false;
+        this.registrationDate = LocalDate.now().toString();
+    }
 
     public Book(String title, String author, String genre, String publisher, String isbn, String publish_date, String purchase_date, long location){
         this.title = title;
@@ -33,23 +43,23 @@ public class Book {
         this.genre = genre;
         this.publisher = publisher;
         this.isbn = isbn;
-        this.publish_date = publish_date;
+        this.publishDate = publish_date;
         this.purchase_date = purchase_date;
         this.location = location;
         this.loaned = false;
-        this.registration_date = LocalDate.now().toString();
+        this.registrationDate = LocalDate.now().toString();
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Book[id=%d, title='%s', author='%s', publish_date=%s]",
-                book_index, title, author, publish_date);
+                "Book[id=%d, title='%s', author='%s', publishDate=%s]",
+                index, title, author, publishDate);
     }
 
-
-    public long getBook_index() {
-        return book_index;
+    @Column(name="index")
+    public long getIndex() {
+        return index;
     }
 
     public String getTitle() {
@@ -72,10 +82,12 @@ public class Book {
         return isbn;
     }
 
-    public String getPublish_date() {
-        return publish_date;
+    @Column(name="publish_date")
+    public String getPublishDate() {
+        return publishDate;
     }
 
+    @Column(name="purchase_date")
     public String getPurchase_date() {
         return purchase_date;
     }
@@ -88,12 +100,14 @@ public class Book {
         return loaned;
     }
 
-    public String getRegistration_date() {
-        return registration_date;
+    @Column(name="registrationDate")
+    public String getRegistrationDate() {
+        return registrationDate;
     }
 
-    public String getModification_date() {
-        return modification_date;
+    @Column(name="modificationDate")
+    public String getModificationDate() {
+        return modificationDate;
     }
 
     public void setTitle(String title) {
@@ -116,8 +130,8 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public void setPublish_date(String publish_date) {
-        this.publish_date = publish_date;
+    public void setPublishDate(String publishDate) {
+        this.publishDate = publishDate;
     }
 
     public void setPurchase_date(String purchase_date) {
@@ -132,11 +146,11 @@ public class Book {
         this.loaned = loaned;
     }
 
-    public void setRegistration_date(String registration_date) {
-        this.registration_date = registration_date;
+    public void setRegistrationDate(String registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
-    public void setModification_date(String modification_date) {
-        this.modification_date = modification_date;
+    public void setModificationDate(String modificationDate) {
+        this.modificationDate = modificationDate;
     }
 }

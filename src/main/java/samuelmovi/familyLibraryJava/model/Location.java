@@ -1,9 +1,6 @@
 package samuelmovi.familyLibraryJava.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -11,13 +8,13 @@ public class Location {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    long location_index;
-    String address;
-    String room;
-    String furniture;
-    String details;
-    String registration_date;
-    String modification_date;
+    private long index;
+    private String address;
+    private  String room;
+    private  String furniture;
+    private  String details;
+    private  String registrationDate;
+    private  String modificationDate;
 
     protected Location(){}
 
@@ -26,19 +23,18 @@ public class Location {
         this.room = room;
         this.furniture = furniture;
         this.details = details;
-        this.registration_date = String.valueOf(LocalDate.now());
-        // this.modification_date = modification_date;
+        this.registrationDate = String.valueOf(LocalDate.now());
     }
 
     @Override
     public String toString() {
         return String.format(
                 "Location[id=%d, address='%s', room='%s', furniture=%s]",
-                location_index, address, room, furniture);
+                index, address, room, furniture);
     }
 
-    public long getLocation_index() {
-        return location_index;
+    public long getIndex() {
+        return index;
     }
 
     public String getAddress() {
@@ -57,12 +53,14 @@ public class Location {
         return details;
     }
 
-    public String getRegistration_date() {
-        return registration_date;
+    @Column(name="registrationDate")
+    public String getRegistrationDate() {
+        return registrationDate;
     }
 
-    public String getModification_date() {
-        return modification_date;
+    @Column(name="rmodificationDate")
+    public String getModificationDate() {
+        return modificationDate;
     }
 
     public void setAddress(String address) {
@@ -81,11 +79,11 @@ public class Location {
         this.details = details;
     }
 
-    public void setRegistration_date(String registration_date) {
-        this.registration_date = registration_date;
+    public void setRegistrationDate(String registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
-    public void setModification_date(String modification_date) {
-        this.modification_date = modification_date;
+    public void setModificationDate(String modificationDate) {
+        this.modificationDate = modificationDate;
     }
 }

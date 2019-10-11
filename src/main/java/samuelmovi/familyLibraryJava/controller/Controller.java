@@ -483,7 +483,7 @@ public class Controller {
 			locationArray = new String[locationsList.size()];
 			for (int i=0; i<locationsList.size(); i++) {
 				Location loc = locationsList.get(i);
-				locationArray[i] = loc.getLocation_index() + "/ ";
+				locationArray[i] = loc.getIndex() + "/ ";
 				locationArray[i] += loc.getAddress() + " / ";
 				locationArray[i] += loc.getRoom() + " / ";
 				locationArray[i] += loc.getFurniture() + " / ";
@@ -639,7 +639,7 @@ public class Controller {
 				holder += b.getGenre();
 				holder += b.getPublisher();
 				holder += b.getIsbn();
-				holder += b.getPublish_date();
+				holder += b.getPublishDate();
 				holder += b.getPurchase_date();
 				text.add(holder);
 				holder = "";

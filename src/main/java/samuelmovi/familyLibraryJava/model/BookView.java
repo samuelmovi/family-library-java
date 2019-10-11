@@ -10,18 +10,18 @@ public class BookView {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    Long id;
-    String title;
-    String author;
-    String genre;
-    String publisher;
-    String isbn;
-    String publish_date;
-    String purchase_date;
-    String location;
-    boolean loaned;
-    String registration_date;
-    String modification_date;
+    private  Long id;
+    private  String title;
+    private  String author;
+    private  String genre;
+    private  String publisher;
+    private   String isbn;
+    private  String publish_date;
+    private  String purchase_date;
+    private  String location;
+    private boolean loaned;
+    private  String registration_date;
+    private  String modification_date;
 
     protected BookView(){}
 

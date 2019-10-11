@@ -11,11 +11,11 @@ public class Loan {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    long loan_index;
-    long book;
-    String borrower;
-    String loan_date;
-    String return_date;
+    private long loan_index;
+    private  long book;
+    private  String borrower;
+    private  String loan_date;
+    private  String return_date;
 
     protected Loan(){}
 
