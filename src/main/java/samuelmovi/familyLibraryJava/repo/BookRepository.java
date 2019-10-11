@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BookRepository extends CrudRepository<Book, Long>{
 
+    List<Book> findAll();
     List<Book> findByLoaned(boolean loaned);
     List<Book> findByTitle(String title);
     List<Book> findByAuthor(String author);

@@ -5,7 +5,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- workaround for selecting correct location in modify book dropdown when clicking on row
 - create all necessary tests
 - replace the column width scheme with something better
 - all books table not refreshing when adding new book
@@ -13,6 +12,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix column width mismatch problem
 - programmatically click ok buttons when adding items during tests
 
+
+## 2019-10-11
+### Fixed
+- method to modify book
+
+### Added
+- new controller test
 
 ## 2019-10-10
 ### Fixed

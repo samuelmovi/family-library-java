@@ -38,8 +38,6 @@ public class Book {
         this.location = location;
         this.loaned = false;
         this.registration_date = LocalDate.now().toString();
-        // this.modification_date = modification_date;
-
     }
 
     @Override

@@ -11,11 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -266,24 +262,33 @@ public class Controller {
 	}
 	
 	public void modifyBookB() {
-		JTextField[] modInputFields = (JTextField[]) view.getModifyBookInputObjects();
-		// create Book object from info in fields
-		Book newBook = new Book(
-				modInputFields[0].getText(),
-				modInputFields[1].getText(),
-				modInputFields[2].getText(),
-				modInputFields[3].getText(),
-				modInputFields[4].getText(),
-				modInputFields[5].getText(),
-				modInputFields[6].getText(),
-				Integer.valueOf(view.getComboLocations().getSelectedIndex() + 1)
-				// TODO: last line of code won't add the correct code, i think
+		// get the input objects
+		Object[] inputFields = view.getModifyBookInputObjects();
+		// extract content and add to vector
+		Vector<String> vector = new Vector<String>();
+		for (int i=0; i<(inputFields.length-1); i++){
+			JTextField textField = (JTextField) inputFields[i];
+			vector.add(textField.getText());
+		}
+		// set location id from combo
+		vector.add(
+				String.valueOf(view.getModifyBookCB().getSelectedItem()).split("/")[0]
 		);
-
+		// create Book object from info in fields
 		try{
+			Book newBook = new Book(
+					vector.get(0),
+					vector.get(1),
+					vector.get(2),
+					vector.get(3),
+					vector.get(4),
+					vector.get(5),
+					vector.get(6),
+					Long.valueOf(vector.get(7))
+			);
 			books.save(newBook);
 			JOptionPane.showMessageDialog(view.getFrame(), stringMap.get("addBookC"), stringMap.get("addBookCHeader"), JOptionPane.INFORMATION_MESSAGE);
-			view.setAll_books((List<Book>)books.findAll());
+			view.setAll_books(books.findAll());
 			view.refreshBookTables();
 			clearAddBookFieldsB();
 		}
@@ -747,5 +752,13 @@ public class Controller {
 
 	public Map<String, String> getStringMap() {
 		return stringMap;
+	}
+
+	public String getBookIndex() {
+		return bookIndex;
+	}
+
+	public void setBookIndex(String bookIndex) {
+		this.bookIndex = bookIndex;
 	}
 }

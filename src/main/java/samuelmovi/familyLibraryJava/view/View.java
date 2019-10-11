@@ -535,11 +535,10 @@ public class View {
 		}
 		
 		height=260;
-		JTextField textField=new JTextField();
-		
+
 		for(int i=0;i<modifyBookInputObjects.length;i++) {
 			if(modifyBookInputObjects[i] instanceof JTextField ) {
-				textField=(JTextField)modifyBookInputObjects[i];
+				JTextField textField=(JTextField)modifyBookInputObjects[i];
 				textField.setBounds(300, height, 302, 19);
 				modifyBookTab.add(textField);
 				height+=25;
