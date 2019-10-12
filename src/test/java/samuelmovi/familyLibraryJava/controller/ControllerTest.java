@@ -417,12 +417,21 @@ public class ControllerTest {
         for (int i=0; i<view.getModifyLocationTextFields().length; i++){
             Assert.assertEquals(testString, view.getModifyLocationTextFields()[i].getText());
         }
-
     }
 
-    // @Test
+    @Test
     public void testClearModifyLocationFields(){
-
+        // set content of modify fields
+        String testString = "fdDSFGre e evgf";
+        for(JTextField field: view.getModifyLocationTextFields()){
+            field.setText(testString);
+        }
+        // execute method
+        controller.clearModifyLocationFields();
+        // assert expected outcome
+        for(JTextField field: view.getModifyLocationTextFields()){
+            Assert.assertEquals("", field.getText());
+        }
     }
 
     // @Test
