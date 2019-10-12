@@ -565,14 +565,44 @@ public class ControllerTest {
         Assert.assertEquals(before+2, view.getAllLoansTabTable().getRowCount());
     }
 
-    // @Test
-    public void testReturnLoanTabTable(){
+    @Test
+    public void testLoanToReturn(){
+        // clear loan index
+        controller.setLoanIndex("");
+        // populate loan table model
+        Loan loan1 = new Loan(books.findAll().get(0).getIndex(), "borrower1");
+        loans.save(loan1);
+        Vector<String> vector = new Vector<String>();
+        vector.add(String.valueOf(loan1.getLoan_index()));
+        vector.add(String.valueOf(loan1.getBook()));
+        vector.add(loan1.getBorrower());
+        vector.add(loan1.getLoan_date());
+        vector.add(loan1.getReturn_date());
+        view.getLoansModel().setRowCount(0);
+        view.getLoansModel().setColumnCount(view.getLoanFieldAlias().length);
+        view.getLoansModel().addRow(vector);
+        // set selected row
+        view.getReturnLoanTabTable().setRowSelectionInterval(0,0);
+        // execute method
+        controller.loanToReturn();
+        // assert expected outcome
+        Assert.assertEquals(String.valueOf(loan1.getLoan_index()), controller.getLoanIndex());
 
     }
 
-    // @Test
+    // @Test TODO: figure out how to click the dialog's ok button
     public void testReturnBookB(){
+        Loan loan1 = new Loan(books.findAll().get(0).getIndex(), "borrower1");
 
+        // assert expected outcome
+        Optional<Loan> optionalLoan = loans.findById(loan1.getLoan_index());
+        Assert.assertTrue(optionalLoan.isPresent());
+        Loan returnedLoan = optionalLoan.get();
+        Assert.assertEquals(LocalDate.now().toString(), returnedLoan.getReturn_date());
+        Optional<Book> optionalBook = books.findById(loan1.getBook());
+        Assert.assertTrue(optionalBook.isPresent());
+        Book returnedBook = optionalBook.get();
+        Assert.assertFalse(returnedBook.isLoaned());
     }
 
 

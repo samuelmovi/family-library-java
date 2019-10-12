@@ -151,7 +151,7 @@ public class Controller {
 		view.getReturnLoanTabTable().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				returnLoanTabTable();
+				loanToReturn();
 			}
 		});
 		
@@ -583,8 +583,7 @@ public class Controller {
 		view.refreshLoanTables();
 	}
 	
-	public void returnLoanTabTable() {
-		// samuelmovi.familyLibraryJava.view.getLoanId().setText(String.valueOf(samuelmovi.familyLibraryJava.view.getReturnLoanTabTable().getValueAt(samuelmovi.familyLibraryJava.view.getReturnLoanTabTable().getSelectedRow(),0)));
+	public void loanToReturn() {
 		loanIndex=String.valueOf(view.getReturnLoanTabTable().getValueAt(view.getReturnLoanTabTable().getSelectedRow(),0));
 	}
 	

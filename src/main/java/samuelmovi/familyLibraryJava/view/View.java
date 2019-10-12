@@ -349,7 +349,7 @@ public class View {
 		model.setRowCount(0);
 		model.setColumnCount(bookJoinAliases.length);
 		model.setColumnIdentifiers(bookJoinAliases);
-		// populate samuelmovi.familyLibraryJava.model
+		// populate model
 		for(BookView b:list) {
 			Vector<String> vector = new Vector<String>();
 			// vector.add(String.valueOf(b.getBookview_index()));
@@ -793,7 +793,7 @@ public class View {
 		model.setRowCount(0);
 		model.setColumnCount(loanFieldAlias.length);
 		model.setColumnIdentifiers(loanFieldAlias);
-		// populate samuelmovi.familyLibraryJava.model
+		// populate model
 		for(Loan loan:list) {
 			Vector<String> vector = new Vector<String>();
 			vector.add(String.valueOf(loan.getLoan_index()));
@@ -1317,4 +1317,5 @@ public class View {
 	public void setAllLoansTabTable(JTable allLoansTabTable) {
 		this.allLoansTabTable = allLoansTabTable;
 	}
+
 }
