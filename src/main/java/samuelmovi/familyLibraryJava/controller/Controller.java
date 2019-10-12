@@ -145,7 +145,7 @@ public class Controller {
 		view.getMakeLoanTabTable().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				makeLoanTabTable();
+				bookToLoan();
 			}
 		});
 		view.getReturnLoanTabTable().addMouseListener(new MouseAdapter() {
@@ -571,8 +571,10 @@ public class Controller {
 		}
 	}
 	
-	public void makeLoanTabTable() {
+	public void bookToLoan() {
+		// populate book index field
 		view.getLoanBookTextFields()[0].setText(String.valueOf(view.getMakeLoanTabTable().getValueAt(view.getMakeLoanTabTable().getSelectedRow(),0)));
+		// set book title
 		bookTitle = String.valueOf(view.getMakeLoanTabTable().getValueAt(view.getMakeLoanTabTable().getSelectedRow(),1));
 	}
 	

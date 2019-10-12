@@ -423,7 +423,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void testSetLocationToDelete(){
+    public void testLocationToDelete(){
         // reset location index value
         controller.setLocationIndex("");
         // set content of all locations model
@@ -521,9 +521,33 @@ public class ControllerTest {
         Assert.assertEquals(LocalDate.now().toString(), testLoan.getLoan_date());
     }
 
-    // @Test
-    public void testMakeLoanTabTable(){
+    @Test
+    public void testBookToLoan(){
+        // clear book title and first loan book input field
+        controller.setBookTitle("");
+        view.getLoanBookTextFields()[0].setText("");
+        // populate table model and select row
+        Book b = books.findByTitle(bookData[0][0]).get(0);
+        Vector<String> vector = new Vector<String>();
+        vector.add(String.valueOf(b.getIndex()));
+        vector.add(b.getTitle());
+        vector.add(b.getAuthor());
+        vector.add(b.getGenre());
+        vector.add(b.getPublisher());
+        vector.add(b.getIsbn());
+        vector.add(b.getPublishDate());
+        vector.add(b.getPurchase_date());
 
+        view.getAllBooksModel().setRowCount(0);
+        view.getAllBooksModel().setColumnCount(view.getBookFieldAlias().length);
+        view.getAllBooksModel().addRow(vector);
+        // set selected table row
+        view.getMakeLoanTabTable().setRowSelectionInterval(0,0);
+        // execute method
+        controller.bookToLoan();
+        // assert expected results
+        Assert.assertEquals(String.valueOf(b.getIndex()), view.getLoanBookTextFields()[0].getText());
+        Assert.assertEquals(b.getTitle(), controller.getBookTitle());
     }
 
     // @Test
@@ -576,7 +600,7 @@ public class ControllerTest {
                 id,
                 borrower
         );
-        controller.getLoans().save(newLoan);
+        loans.save(newLoan);
     }
 
 }
