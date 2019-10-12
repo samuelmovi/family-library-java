@@ -129,7 +129,7 @@ public class Controller {
 		view.getDeleteLocationTabTable().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				setLocationToDelete();
+				locationToDelete();
 			}
 		});
 		view.getRefreshAllLocationsB().addActionListener(e -> refreshAllLocationsB());
