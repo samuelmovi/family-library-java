@@ -227,7 +227,7 @@ public class Controller {
 	public void addBookB() {
 		JTextField textfields[] = view.getAddBookTextFields();
 		// create Book object from into in fields and pass that to dao
-		String locationId = String.valueOf(view.getComboLocations().getSelectedItem()).split("/")[0];
+		String locationId = String.valueOf(view.getComboLocations().getSelectedItem()).split("/")[0].trim();
 
 		Book newBook = new Book(
 				textfields[0].getText(),
@@ -272,7 +272,7 @@ public class Controller {
 		}
 		// set location id from combo
 		vector.add(
-				String.valueOf(view.getModifyBookCB().getSelectedItem()).split("/")[0]
+				String.valueOf(view.getModifyBookCB().getSelectedItem()).split("/")[0].trim()
 		);
 		// create Book object from info in fields
 		try{
@@ -288,13 +288,21 @@ public class Controller {
 			);
 			newBook.setModificationDate(String.valueOf(LocalDate.now()));
 			books.save(newBook);
-			JOptionPane.showMessageDialog(view.getFrame(), stringMap.get("addBookC"), stringMap.get("addBookCHeader"), JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(
+					view.getFrame(),
+					stringMap.get("modifyBookC"),
+					stringMap.get("modifyBookCHeader"),
+					JOptionPane.INFORMATION_MESSAGE);
 			view.setAll_books(books.findAll());
 			view.refreshBookTables();
 			clearAddBookFieldsB();
 		}
 		catch(Exception e){
-			JOptionPane.showMessageDialog(view.getFrame(), stringMap.get("addBookX"), stringMap.get("addBookXHeader"), JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(
+					view.getFrame(),
+					stringMap.get("addBookX") + e,
+					stringMap.get("addBookXHeader"),
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -481,11 +489,11 @@ public class Controller {
 		String[] locationArray = null;
 
 		try {
-			List<Location> locationsList = (List<Location>) locations.findAll();
+			List<Location> locationsList = locations.findAll();
 			locationArray = new String[locationsList.size()];
 			for (int i=0; i<locationsList.size(); i++) {
 				Location loc = locationsList.get(i);
-				locationArray[i] = loc.getIndex() + "/ ";
+				locationArray[i] = loc.getIndex() + " / ";
 				locationArray[i] += loc.getAddress() + " / ";
 				locationArray[i] += loc.getRoom() + " / ";
 				locationArray[i] += loc.getFurniture() + " / ";

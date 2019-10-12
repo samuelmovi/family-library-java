@@ -81,9 +81,9 @@ public class ControllerTest {
     @After
     public void after(){
 
-        controller.getBooks().deleteAll();
+        /*controller.getBooks().deleteAll();
         controller.getLocations().deleteAll();
-        controller.getLoans().deleteAll();
+        controller.getLoans().deleteAll();*/
 
     }
 
@@ -163,21 +163,12 @@ public class ControllerTest {
         books.save(testBook);
         // set selected book index
         controller.setBookIndex(String.valueOf(testBook.getIndex()));
-        // vector holds data to feed to input objects
-        Vector<String> vector = new Vector<String>();
-        String testString = "vsdFvgFDS";
-        vector.add(testString); //vector.add(testBook.getTitle());
-        vector.add(testString); //vector.add(testBook.getAuthor());
-        vector.add(testString); // vector.add(testBook.getGenre());
-        vector.add(testString); // vector.add(testBook.getPublisher());
-        vector.add(testString); // vector.add(testBook.getIsbn());
-        vector.add(testString); // vector.add(testBook.getPublishDate());
-        vector.add(testString); //vector.add(testBook.getPurchase_date());
         // set values for ModifyBookInputObjects
+        String testString = "vsdFvgFDS";
         for(int i=0;i<view.getModifyBookInputObjects().length;i++) {
             if(view.getModifyBookInputObjects()[i] instanceof JTextField ) {
                 JTextField textField=(JTextField) view.getModifyBookInputObjects()[i];
-                textField.setText(vector.get(i));
+                textField.setText(testString);
             }
             else if(view.getModifyBookInputObjects()[i] instanceof JComboBox) {
                 JComboBox locationCombo = (JComboBox) view.getModifyBookInputObjects()[i];
@@ -458,14 +449,31 @@ public class ControllerTest {
         Assert.assertNotEquals("", controller.getLocationIndex());
     }
 
-    // @Test
+    // @Test TODO: figure out how to click the dialog's ok button
     public void testDeleteLocationB(){
 
     }
 
-    // @Test
+    @Test
     public void testCreateLocationList(){
+        // db setup in @before
+        // execute method
+        String[] testResults = controller.createLocationList();
+        // assert expected outcome
+        Assert.assertEquals(locationData.length, testResults.length);
+        List<Location> allLocations = locations.findAll();
+        for(int i=0; i<testResults.length; i++){
+            // build expected result
+            String testString = "";
+            Location loc = allLocations.get(i);
+            testString += loc.getIndex() + " / ";
+            testString += loc.getAddress() + " / ";
+            testString += loc.getRoom() + " / ";
+            testString += loc.getFurniture() + " / ";
+            testString += loc.getDetails();
 
+            Assert.assertEquals(testString, testResults[i]);
+        }
     }
 
     // LOAN TESTS
