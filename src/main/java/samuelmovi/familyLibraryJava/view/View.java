@@ -1310,5 +1310,11 @@ public class View {
 		this.availableBooks = availableBooks;
 	}
 
+	public JTable getAllLoansTabTable() {
+		return allLoansTabTable;
+	}
 
+	public void setAllLoansTabTable(JTable allLoansTabTable) {
+		this.allLoansTabTable = allLoansTabTable;
+	}
 }

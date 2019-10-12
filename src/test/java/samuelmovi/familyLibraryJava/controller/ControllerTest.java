@@ -550,9 +550,19 @@ public class ControllerTest {
         Assert.assertEquals(b.getTitle(), controller.getBookTitle());
     }
 
-    // @Test
+    @Test
     public void testRefreshLoansTableB(){
-
+        long before = loans.count();
+        // set number of instances of loans
+        Loan loan1 = new Loan(books.findAll().get(0).getIndex(), "borrower1");
+        Loan loan2 = new Loan(books.findAll().get(1).getIndex(), "borrower2");
+        loans.save(loan1);
+        loans.save(loan2);
+        // execute method
+        controller.refreshLoansTableB();
+        // assert expected outcome
+        Assert.assertEquals(before+2, loans.count());
+        Assert.assertEquals(before+2, view.getAllLoansTabTable().getRowCount());
     }
 
     // @Test
