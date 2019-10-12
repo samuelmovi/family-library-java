@@ -97,7 +97,7 @@ public class Controller {
 		view.getSearchBookB().addActionListener(e -> searchBooksB());
 		view.getAddBookB().addActionListener(e -> addBookB());
 		view.getClearAddBookFieldsB().addActionListener(e -> clearAddBookFieldsB());
-		view.getModifyBookB().addActionListener(e -> modifyBookB());
+		view.getModifyBookB().addActionListener(e -> modifyBookB(view.getModifyBookInputObjects()));
 		view.getResetModifyBookTabB().addActionListener(e -> resetModifyBookTab());
 		view.getDeleteBookB().addActionListener(e -> deleteBookB());
 		view.getModifyBookTabTable().addMouseListener(new MouseAdapter() {
@@ -118,7 +118,7 @@ public class Controller {
 		view.getLocationsB().addActionListener(e -> showLocationsB());
 		view.getAddLocationB().addActionListener(e -> addLocationB());
 		view.getClearAddLocationFieldsB().addActionListener(e -> clearAddLocationFieldsB());
-		view.getModifyLocationB().addActionListener(e -> modifyLocationB());
+		view.getModifyLocationB().addActionListener(e -> modifyLocationB(view.getModifyLocationTextFields()));
 		view.getDeleteLocationB().addActionListener(e -> deleteLocationB());
 		view.getModifyLocationTabTable().addMouseListener(new MouseAdapter() {
 			@Override
@@ -261,48 +261,59 @@ public class Controller {
 		view.getComboLocations().setSelectedItem(null);
 	}
 	
-	public void modifyBookB() {
-		// get the input objects
-		Object[] inputFields = view.getModifyBookInputObjects();
-		// extract content and add to vector
-		Vector<String> vector = new Vector<String>();
-		for (int i=0; i<(inputFields.length-1); i++){
-			JTextField textField = (JTextField) inputFields[i];
-			vector.add(textField.getText());
+	public void modifyBookB(Object[] inputFields) {
+		JTextField holder;
+		Book book;
+		if (bookIndex != null){
+			Optional<Book> optionalBook = books.findById(Long.valueOf(bookIndex));
+			if (optionalBook.isPresent()){
+				book = optionalBook.get();
+				holder = (JTextField) inputFields[0];
+				book.setTitle(holder.getText());
+				holder = (JTextField) inputFields[1];
+				book.setAuthor(holder.getText());
+				holder = (JTextField) inputFields[2];
+				book.setGenre(holder.getText());
+				holder = (JTextField) inputFields[3];
+				book.setPublisher(holder.getText());
+				holder = (JTextField) inputFields[4];
+				book.setPublishDate(holder.getText());
+				holder = (JTextField) inputFields[5];
+				book.setPurchase_date(holder.getText());
+				book.setLocation(
+						Long.valueOf(
+								String.valueOf(
+										view.getModifyBookCB().getSelectedItem()).split("/")[0].trim()
+						)
+				);
+				book.setModificationDate(LocalDate.now().toString());
+				books.save(book);
+
+				JOptionPane.showMessageDialog(
+						view.getFrame(),
+						stringMap.get("modifyBookC"),
+						stringMap.get("modifyBookCHeader"),
+						JOptionPane.INFORMATION_MESSAGE);
+				view.setAll_books(books.findAll());
+				view.refreshBookTables();
+				clearAddBookFieldsB();
+			}
+			else{
+				JOptionPane.showMessageDialog(
+						view.getFrame(),
+						stringMap.get("modifyBookX"),
+						stringMap.get("modifyBookXHeader"),
+						JOptionPane.ERROR_MESSAGE);
+
+			}
 		}
-		// set location id from combo
-		vector.add(
-				String.valueOf(view.getModifyBookCB().getSelectedItem()).split("/")[0].trim()
-		);
-		// create Book object from info in fields
-		try{
-			Book newBook = new Book(
-					vector.get(0),
-					vector.get(1),
-					vector.get(2),
-					vector.get(3),
-					vector.get(4),
-					vector.get(5),
-					vector.get(6),
-					Long.valueOf(vector.get(7))
-			);
-			newBook.setModificationDate(String.valueOf(LocalDate.now()));
-			books.save(newBook);
+		else{
 			JOptionPane.showMessageDialog(
 					view.getFrame(),
-					stringMap.get("modifyBookC"),
-					stringMap.get("modifyBookCHeader"),
-					JOptionPane.INFORMATION_MESSAGE);
-			view.setAll_books(books.findAll());
-			view.refreshBookTables();
-			clearAddBookFieldsB();
-		}
-		catch(Exception e){
-			JOptionPane.showMessageDialog(
-					view.getFrame(),
-					stringMap.get("addBookX") + e,
-					stringMap.get("addBookXHeader"),
+					stringMap.get("modifyBookX"),
+					stringMap.get("modifyBookXHeader"),
 					JOptionPane.ERROR_MESSAGE);
+
 		}
 	}
 	
@@ -421,24 +432,33 @@ public class Controller {
 		}
 	}
 
-	public void modifyLocationB() {
-		JTextField textfields[] = view.getModifyLocationTextFields();
-		// create Location object from into in fields and pass that to dao
-		Location newLoc = new Location(
-				textfields[0].getText(),
-				textfields[1].getText(),
-				textfields[2].getText(),
-				textfields[3].getText()
-		);
-		newLoc.setModificationDate(String.valueOf(LocalDate.now()));
-		try{
-			locations.save(newLoc);
-			JOptionPane.showMessageDialog(view.getFrame(), stringMap.get("modifyLocationC"), stringMap.get("modifyLocationCHeader"), JOptionPane.INFORMATION_MESSAGE);
-			view.setAll_locations((List<Location>)locations.findAll());
-			view.refreshLocationTables();
-			clearAddLocationFieldsB();
+	public void modifyLocationB(JTextField[] textfields) {
+		if(locationIndex != null){
+			Optional<Location> optional = locations.findById(Long.valueOf(locationIndex));
+			if (optional.isPresent()){
+				Location location = optional.get();
+				location.setAddress(textfields[0].getText());
+				location.setRoom(textfields[1].getText());
+				location.setFurniture(textfields[2].getText());
+				location.setDetails(textfields[3].getText());
+				location.setModificationDate(LocalDate.now().toString());
+				try{
+					locations.save(location);
+					JOptionPane.showMessageDialog(view.getFrame(), stringMap.get("modifyLocationC"), stringMap.get("modifyLocationCHeader"), JOptionPane.INFORMATION_MESSAGE);
+					view.setAll_locations((List<Location>)locations.findAll());
+					view.refreshLocationTables();
+					clearAddLocationFieldsB();
+				}
+				catch (Exception e){
+					JOptionPane.showMessageDialog(view.getFrame(), stringMap.get("modifyLocationX"), stringMap.get("modifyLocationXHeader"), JOptionPane.ERROR_MESSAGE);
+				}
+
+			}
+			else{
+				JOptionPane.showMessageDialog(view.getFrame(), stringMap.get("modifyLocationX"), stringMap.get("modifyLocationXHeader"), JOptionPane.ERROR_MESSAGE);
+			}
 		}
-		catch (Exception e){
+		else{
 			JOptionPane.showMessageDialog(view.getFrame(), stringMap.get("modifyLocationX"), stringMap.get("modifyLocationXHeader"), JOptionPane.ERROR_MESSAGE);
 		}
 	}

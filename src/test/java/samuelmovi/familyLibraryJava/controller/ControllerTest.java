@@ -6,7 +6,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -35,9 +34,6 @@ public class ControllerTest {
     private LocationRepository locations;
     @Autowired
     private LoanRepository loans;
-
-    @Mock
-    private View mockView;
     private static View view;
     @Autowired
     private Controller controller;
@@ -174,21 +170,14 @@ public class ControllerTest {
             }
         }
         // execute method
-        controller.modifyBookB();
+        controller.modifyBookB(view.getModifyBookInputObjects());
         // assert expected outcome
-        List<Book> bookList = books.findByTitle(testString);
-        Assert.assertEquals(1, bookList.size());
-        Book result = bookList.get(0);
-        Assert.assertEquals(testString, result.getTitle());
-        Assert.assertEquals(LocalDate.now().toString(), result.getModificationDate());
-
-        // TODO: updating the book creates new entry, fix it
-        /*Optional<Book> result = books.findById(testBook.getIndex());
-        if (result.isPresent()){
-            Book book = result.get();
+        Optional<Book> optional = books.findById(testBook.getIndex());
+        if (optional.isPresent()){
+            Book book = optional.get();
             Assert.assertEquals(testString, book.getTitle());
-        }*/
-
+            Assert.assertEquals(LocalDate.now().toString(), book.getModificationDate());
+        }
     }
 
     @Test
@@ -365,21 +354,14 @@ public class ControllerTest {
         view.getModifyLocationTextFields()[3].setText(testString);
         controller.setLocationIndex(String.valueOf(location.getIndex()));
         // execute method
-        controller.modifyLocationB();
+        controller.modifyLocationB(view.getModifyLocationTextFields());
         // assert expected outcome
-        List<Location> locationList = locations.findByDetails(testString);
-        Assert.assertEquals(1, locationList.size());
-        Assert.assertNotNull(locationList.get(0).getModificationDate());
-        Assert.assertEquals(LocalDate.now().toString(), locationList.get(0).getModificationDate());
-
-        // TODO: fix new instance being created when modifying fields
-        /*
         Optional<Location> optional = locations.findById(location.getIndex());
         if (optional.isPresent()){
             Location testLocation = optional.get();
             Assert.assertEquals(testString, testLocation.getDetails());
+            Assert.assertNotNull(testLocation.getModificationDate());
         }
-         */
     }
 
     @Test
