@@ -278,9 +278,33 @@ public class ControllerTest {
         // assert expected outcome
     }
 
-    // @Test
-    public void testDeleteBookTabTable(){
+    @Test
+    public void testBookToDelete(){
+        // reset bookIndex and bookTitle
+        controller.setBookIndex("");
+        controller.setBookTitle("");
+        // set content of delete book table model
+        Book b = books.findByTitle(bookData[0][0]).get(0);
+        Vector<String> vector = new Vector<String>();
+        vector.add(String.valueOf(b.getIndex()));
+        vector.add(b.getTitle());
+        vector.add(b.getAuthor());
+        vector.add(b.getGenre());
+        vector.add(b.getPublisher());
+        vector.add(b.getIsbn());
+        vector.add(b.getPublishDate());
+        vector.add(b.getPurchase_date());
 
+        view.getAllBooksModel().setRowCount(0);
+        view.getAllBooksModel().setColumnCount(view.getBookFieldAlias().length);
+        view.getAllBooksModel().addRow(vector);
+        // set selected table row
+        view.getDeleteBookTabTable().setRowSelectionInterval(0,0);
+        // execute method
+        controller.bookToDelete();
+        // assert expected outcome
+        Assert.assertEquals(String.valueOf(b.getIndex()), controller.getBookIndex());
+        Assert.assertEquals(b.getTitle(), controller.getBookTitle());
     }
 
     // LOCATION TESTS

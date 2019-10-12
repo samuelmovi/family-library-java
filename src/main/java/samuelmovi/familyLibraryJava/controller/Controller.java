@@ -110,7 +110,7 @@ public class Controller {
 		view.getDeleteBookTabTable().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				deleteBookTabTable();
+				bookToDelete();
 			}
 		});
 		
@@ -354,7 +354,7 @@ public class Controller {
 		}
 	}
 	
-	public void deleteBookTabTable(){
+	public void bookToDelete(){
 		bookTitle = String.valueOf(view.getDeleteBookTabTable().getValueAt(view.getDeleteBookTabTable().getSelectedRow(),1));
 		bookIndex = String.valueOf(view.getDeleteBookTabTable().getValueAt(view.getDeleteBookTabTable().getSelectedRow(),0));
 	}
@@ -760,5 +760,13 @@ public class Controller {
 
 	public void setBookIndex(String bookIndex) {
 		this.bookIndex = bookIndex;
+	}
+
+	public String getBookTitle() {
+		return bookTitle;
+	}
+
+	public void setBookTitle(String bookTitle) {
+		this.bookTitle = bookTitle;
 	}
 }

@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - home panel still erratic about showing collection info, buttons, and welcome message
 - fix column width mismatch problem
 - programmatically click ok buttons when adding items during tests
+- change delete book table model fom all books model to all available books model
 
 
 ## 2019-10-11
