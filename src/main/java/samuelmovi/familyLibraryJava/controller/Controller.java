@@ -456,7 +456,7 @@ public class Controller {
 		}
 	}
 	
-	public void setLocationToDelete() {
+	public void locationToDelete() {
 		locationIndex = String.valueOf(
 				view.getDeleteLocationTabTable()
 				.getValueAt(view.getDeleteLocationTabTable()

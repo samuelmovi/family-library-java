@@ -434,9 +434,28 @@ public class ControllerTest {
         }
     }
 
-    // @Test
+    @Test
     public void testSetLocationToDelete(){
+        // reset location index value
+        controller.setLocationIndex("");
+        // set content of all locations model
+        Location testLocation = locations.findByAddress(locationData[0][0]).get(0);
+        Vector<String> vector = new Vector<String>();
+        vector.add(String.valueOf(testLocation.getIndex()));
+        vector.add(testLocation.getAddress());
+        vector.add(testLocation.getRoom());
+        vector.add(testLocation.getFurniture());
+        vector.add(testLocation.getDetails());
 
+        view.getAllLocationsModel().setRowCount(0);
+        view.getAllLocationsModel().setColumnCount(view.getLocationFieldAlias().length);
+        view.getAllLocationsModel().addRow(vector);
+        // set selected table row
+        view.getDeleteLocationTabTable().setRowSelectionInterval(0,0);
+        // execute method
+        controller.locationToDelete();
+        // assert expected outcome
+        Assert.assertNotEquals("", controller.getLocationIndex());
     }
 
     // @Test
