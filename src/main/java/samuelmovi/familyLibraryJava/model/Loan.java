@@ -23,14 +23,13 @@ public class Loan {
         this.book = book;
         this.borrower = borrower;
         this.loan_date = LocalDate.now().toString();
-        // this.return_date = return_date;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Loan[id=%d, book='%s', borrower='%s', return_date=%s]",
-                loan_index, book, borrower, return_date);
+                "Loan[id=%d, book='%s', borrower='%s', loan_date=%s, return_date=%s]",
+                loan_index, book, borrower, loan_date, return_date);
     }
 
     public long getLoan_index() {
@@ -51,6 +50,10 @@ public class Loan {
 
     public String getReturn_date() {
         return return_date;
+    }
+
+    public void setLoan_index(long loan_index) {
+        this.loan_index = loan_index;
     }
 
     public void setBook(long book) {

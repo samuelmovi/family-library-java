@@ -492,14 +492,33 @@ public class ControllerTest {
 
     }
 
-    // @Test
+    // @Test TODO: figure out how to click the dialog's ok button
     public void testLoanBookB(){
 
     }
 
-    // @Test
+    @Test
     public void testLoanThisBook(){
-
+        // populate input fields for borrower and book index
+        Book book = books.findAll().get(0);
+        if (view.getLoanBookTextFields().length == 2){
+            view.getLoanBookTextFields()[0].setText(String.valueOf(book.getIndex()));
+            view.getLoanBookTextFields()[1].setText("borrower1");
+        }
+        // execute method
+        boolean result = controller.loanThisBook(view.getLoanBookTextFields());
+        // assert expected outcome
+        Optional <Book> optionalBook = books.findById(book.getIndex());
+        Assert.assertTrue(optionalBook.isPresent());
+        Book testBook = optionalBook.get();
+        Assert.assertTrue(result);
+        Assert.assertTrue(testBook.isLoaned());
+        Optional<Loan> optionalLoan = loans.findByBorrower("borrower1");
+        Assert.assertTrue(optionalLoan.isPresent());
+        Loan testLoan = optionalLoan.get();
+        Assert.assertEquals("borrower1", testLoan.getBorrower());
+        Assert.assertEquals(testBook.getIndex(), testLoan.getBook());
+        Assert.assertEquals(LocalDate.now().toString(), testLoan.getLoan_date());
     }
 
     // @Test
