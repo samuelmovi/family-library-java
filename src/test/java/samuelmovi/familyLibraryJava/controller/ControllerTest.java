@@ -20,6 +20,9 @@ import samuelmovi.familyLibraryJava.view.View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 import java.util.Vector;
 
 @ContextConfiguration(locations = "classpath:Tests.xml")
@@ -185,8 +188,11 @@ public class ControllerTest {
         // execute method
         controller.modifyBookB();
         // assert expected outcome
-        Book result = books.findByTitle(testString).get(0);
+        List<Book> bookList = books.findByTitle(testString);
+        Assert.assertEquals(1, bookList.size());
+        Book result = bookList.get(0);
         Assert.assertEquals(testString, result.getTitle());
+        Assert.assertEquals(LocalDate.now().toString(), result.getModificationDate());
 
         // TODO: updating the book creates new entry, fix it
         /*Optional<Book> result = books.findById(testBook.getIndex());
@@ -346,18 +352,71 @@ public class ControllerTest {
         Assert.assertEquals(before+1, locations.count());
     }
 
-    // @Test
+    @Test
     public void testClearAddLocationFieldsB(){
-
+        // populate add location input fields
+        for (int i=0; i< locationData[0].length; i++){
+            view.getAddLocationTextFields()[i].setText(locationData[0][i]);
+        }
+        // execute method
+        controller.clearAddLocationFieldsB();
+        // assert expected outcome
+        for(JTextField field: view.getAddLocationTextFields()){
+            Assert.assertEquals(field.getText(), "");
+        }
     }
 
-    // @Test
+    @Test
     public void testModifyLocationB(){
+        String testString = "thTRGtrTR";
+        // get location and populate modify fields and location index
+        Location location = locations.findByAddress(locationData[0][0]).get(0);
+        view.getModifyLocationTextFields()[0].setText(location.getAddress());
+        view.getModifyLocationTextFields()[1].setText(location.getRoom());
+        view.getModifyLocationTextFields()[2].setText(location.getFurniture());
+        view.getModifyLocationTextFields()[3].setText(testString);
+        controller.setLocationIndex(String.valueOf(location.getIndex()));
+        // execute method
+        controller.modifyLocationB();
+        // assert expected outcome
+        List<Location> locationList = locations.findByDetails(testString);
+        Assert.assertEquals(1, locationList.size());
+        Assert.assertNotNull(locationList.get(0).getModificationDate());
+        Assert.assertEquals(LocalDate.now().toString(), locationList.get(0).getModificationDate());
 
+        // TODO: fix new instance being created when modifying fields
+        /*
+        Optional<Location> optional = locations.findById(location.getIndex());
+        if (optional.isPresent()){
+            Location testLocation = optional.get();
+            Assert.assertEquals(testString, testLocation.getDetails());
+        }
+         */
     }
 
-    // @Test
+    @Test
     public void testFillModifyLocationFields(){
+        String testString = "5t4Gtrgy45y";
+        // set content of modify location table model
+        Location testLocation = locations.findByAddress(locationData[0][0]).get(0);
+        Vector<String> vector = new Vector<String>();
+        vector.add(String.valueOf(testLocation.getIndex()));
+        vector.add(testString);
+        vector.add(testString);
+        vector.add(testString);
+        vector.add(testString);
+
+        view.getAllLocationsModel().setRowCount(0);
+        view.getAllLocationsModel().setColumnCount(view.getLocationFieldAlias().length);
+        view.getAllLocationsModel().addRow(vector);
+        // set selected table row
+        view.getModifyLocationTabTable().setRowSelectionInterval(0,0);
+        // execute method
+        controller.fillModifyLocationFields();
+        // assert expected outcome
+        for (int i=0; i<view.getModifyLocationTextFields().length; i++){
+            Assert.assertEquals(testString, view.getModifyLocationTextFields()[i].getText());
+        }
 
     }
 
@@ -441,7 +500,7 @@ public class ControllerTest {
                     data[4],
                     data[5],
                     data[6],
-                    controller.getLocations().findByAddress(locationData[0][0]).getIndex()
+                    controller.getLocations().findByAddress(locationData[0][0]).get(0).getIndex()
             );
             controller.getBooks().save(newBook);
         }

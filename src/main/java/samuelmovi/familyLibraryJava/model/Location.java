@@ -29,8 +29,8 @@ public class Location {
     @Override
     public String toString() {
         return String.format(
-                "Location[id=%d, address='%s', room='%s', furniture=%s]",
-                index, address, room, furniture);
+                "Location[id=%d, address='%s', room='%s', furniture=%s, details=%s]",
+                index, address, room, furniture, details);
     }
 
     public long getIndex() {
@@ -53,12 +53,12 @@ public class Location {
         return details;
     }
 
-    @Column(name="registrationDate")
+    @Column(name="registration_date")
     public String getRegistrationDate() {
         return registrationDate;
     }
 
-    @Column(name="rmodificationDate")
+    @Column(name="modification_date")
     public String getModificationDate() {
         return modificationDate;
     }

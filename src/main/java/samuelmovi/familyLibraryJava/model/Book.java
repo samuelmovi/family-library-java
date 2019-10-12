@@ -100,12 +100,12 @@ public class Book {
         return loaned;
     }
 
-    @Column(name="registrationDate")
+    @Column(name="registration_date")
     public String getRegistrationDate() {
         return registrationDate;
     }
 
-    @Column(name="modificationDate")
+    @Column(name="modification_date")
     public String getModificationDate() {
         return modificationDate;
     }

@@ -286,6 +286,7 @@ public class Controller {
 					vector.get(6),
 					Long.valueOf(vector.get(7))
 			);
+			newBook.setModificationDate(String.valueOf(LocalDate.now()));
 			books.save(newBook);
 			JOptionPane.showMessageDialog(view.getFrame(), stringMap.get("addBookC"), stringMap.get("addBookCHeader"), JOptionPane.INFORMATION_MESSAGE);
 			view.setAll_books(books.findAll());
@@ -323,9 +324,6 @@ public class Controller {
 						String.valueOf( 
 								view.getModifyBookTabTable()
 								.getValueAt(view.getModifyBookTabTable().getSelectedRow(),i+1)));
-				bookIndex = String.valueOf(
-								view.getModifyBookTabTable()
-								.getValueAt(view.getModifyBookTabTable().getSelectedRow(),0));
 			}
 			else if(view.getModifyBookInputObjects()[i] instanceof JComboBox) {
 				JComboBox locationCombo = (JComboBox) view.getModifyBookInputObjects()[i];
@@ -343,6 +341,10 @@ public class Controller {
 				}
 			}
 		}
+
+		bookIndex = String.valueOf(
+				view.getModifyBookTabTable()
+						.getValueAt(view.getModifyBookTabTable().getSelectedRow(),0));
 	}
 	
 	public void deleteBookB() {
@@ -420,7 +422,7 @@ public class Controller {
 				textfields[2].getText(),
 				textfields[3].getText()
 		);
-
+		newLoc.setModificationDate(String.valueOf(LocalDate.now()));
 		try{
 			locations.save(newLoc);
 			JOptionPane.showMessageDialog(view.getFrame(), stringMap.get("modifyLocationC"), stringMap.get("modifyLocationCHeader"), JOptionPane.INFORMATION_MESSAGE);
@@ -441,11 +443,11 @@ public class Controller {
 							view.getModifyLocationTabTable()
 							.getValueAt(view.getModifyLocationTabTable()
 									.getSelectedRow(),i+1)));
-			locationIndex = String.valueOf(
-					view.getModifyLocationTabTable()
-					.getValueAt(
-							view.getModifyLocationTabTable().getSelectedRow(),0));
 		}
+		locationIndex = String.valueOf(
+				view.getModifyLocationTabTable()
+						.getValueAt(
+								view.getModifyLocationTabTable().getSelectedRow(),0));
 	}
 	
 	public void clearModifyLocationFields() {
@@ -768,5 +770,21 @@ public class Controller {
 
 	public void setBookTitle(String bookTitle) {
 		this.bookTitle = bookTitle;
+	}
+
+	public String getLocationIndex() {
+		return locationIndex;
+	}
+
+	public void setLocationIndex(String locationIndex) {
+		this.locationIndex = locationIndex;
+	}
+
+	public String getLoanIndex() {
+		return loanIndex;
+	}
+
+	public void setLoanIndex(String loanIndex) {
+		this.loanIndex = loanIndex;
 	}
 }

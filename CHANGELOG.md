@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - change delete book table model fom all books model to all available books model
 
 
+## 2019-10-12
+### Changed
+- tweaks to repositories
+
+### Added
+- more controller tests
+
 ## 2019-10-11
 ### Fixed
 - method to modify book
