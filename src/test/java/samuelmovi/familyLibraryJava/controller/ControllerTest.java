@@ -433,7 +433,7 @@ public class ControllerTest {
 
     }
 
-    //@Test
+    // @Test
     public void testCreateLocationList(){
         // this method seems to be throwing a weird error, but not crashing
         // db setup in @before

@@ -76,6 +76,7 @@ public class View {
 	private JComboBox<String> comboLocations;
 	private JComboBox<String> modifyBookCB;
 	private JPanel searchBooksPanel;
+	private JPanel addBookTab;
 
 	//  location stuff
 	private List<Location> all_locations;
@@ -481,7 +482,7 @@ public class View {
 	
 	public void createAddBookTab() {
 		// NEW BOOK TAB
-		JPanel addBookTab = new JPanel();
+		addBookTab = new JPanel();
 		booksTabbedPane.addTab(stringMap.get("new"), addBookTab);
 		addBookTab.setLayout(null);
 		
@@ -937,6 +938,26 @@ public class View {
 	
 	//BOOKS setters and getters
 
+
+	public String[] getBookLabelsText() {
+		return bookLabelsText;
+	}
+
+	public void setBookLabelsText(String[] bookLabelsText) {
+		this.bookLabelsText = bookLabelsText;
+	}
+
+	public void setAddBookB(JButton addBookB) {
+		this.addBookB = addBookB;
+	}
+
+	public JPanel getAddBookTab() {
+		return addBookTab;
+	}
+
+	public void setAddBookTab(JPanel addBookTab) {
+		this.addBookTab = addBookTab;
+	}
 
 	public JTable getSearchBooksTabTable() {
 		return searchBooksTabTable;
