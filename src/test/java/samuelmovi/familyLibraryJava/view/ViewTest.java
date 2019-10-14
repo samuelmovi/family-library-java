@@ -145,6 +145,28 @@ public class ViewTest {
 
     }
 
+    @Test
+    public void testFillHomePanel(){
+        // check null: home label, book total label, pending loans label
+        Assert.assertNull(view.getWelcomeLabel());
+        Assert.assertNull(view.getBooksTotalLabel());
+        Assert.assertNull(view.getPendingLoansLabel());
+
+        // set home panel, all books and all loans
+        JPanel panel = new JPanel();
+        view.setHomePanel(panel);
+        view.setAll_books(books.findAll());
+        view.setAll_loans(loans.findAll());
+        // execute method
+        view.fillHomePanel();
+        // assert expected outcome
+        Assert.assertNotNull(view.getWelcomeLabel());
+        Assert.assertNotNull(view.getBooksTotalLabel());
+        Assert.assertNotNull(view.getPendingLoansLabel());
+
+        Assert.assertEquals(3, view.getHomePanel().getComponentCount());
+    }
+
 
     // UTILITIES
     public void loadBookData(){

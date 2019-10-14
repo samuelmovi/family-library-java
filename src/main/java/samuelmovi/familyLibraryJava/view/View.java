@@ -140,6 +140,10 @@ public class View {
 	private JMenuBar menuBar;
 	private JMenu mainMenu;
 	private JMenu helpM;
+	private JLabel welcomeLabel;
+	private JLabel booksTotalLabel;
+	private JLabel pendingLoansLabel;
+
 
 
 	public void setUpFrame(){
@@ -299,15 +303,16 @@ public class View {
 	
 	public void fillHomePanel() {
 
-		JLabel welcomeLabel = new JLabel(stringMap.get("welcomeLabel"));
+		welcomeLabel = new JLabel(stringMap.get("welcomeLabel"));
 		welcomeLabel.setBounds(200, 200, 600, 100);
 		welcomeLabel.setFont(new Font("Dialog", Font.BOLD, 25));
 		homePanel.add(welcomeLabel);
 
-		JLabel booksTotalLabel = new JLabel(stringMap.get("booksTotalLabel")+all_books.size());
+		booksTotalLabel = new JLabel(stringMap.get("booksTotalLabel")+all_books.size());
 		booksTotalLabel.setBounds(200, 350, 150, 40);
 		homePanel.add(booksTotalLabel);
-		JLabel pendingLoansLabel = new JLabel(stringMap.get("pendingLoansLabel")+all_loans.size());
+
+		pendingLoansLabel = new JLabel(stringMap.get("pendingLoansLabel")+all_loans.size());
 		pendingLoansLabel.setBounds(200, 400, 250, 40);
 		homePanel.add(pendingLoansLabel);
 
@@ -1365,4 +1370,31 @@ public class View {
 		this.helpM = helpM;
 	}
 
+	public void setSearchBookB(JButton searchBookB) {
+		this.searchBookB = searchBookB;
+	}
+
+	public JLabel getWelcomeLabel() {
+		return welcomeLabel;
+	}
+
+	public void setWelcomeLabel(JLabel welcomeLabel) {
+		this.welcomeLabel = welcomeLabel;
+	}
+
+	public JLabel getBooksTotalLabel() {
+		return booksTotalLabel;
+	}
+
+	public void setBooksTotalLabel(JLabel booksTotalLabel) {
+		this.booksTotalLabel = booksTotalLabel;
+	}
+
+	public JLabel getPendingLoansLabel() {
+		return pendingLoansLabel;
+	}
+
+	public void setPendingLoansLabel(JLabel pendingLoansLabel) {
+		this.pendingLoansLabel = pendingLoansLabel;
+	}
 }
