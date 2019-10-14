@@ -52,6 +52,7 @@ public class Controller {
 	private String loanIndex;
 	private String[] loanFields = {"loan_index", "book", "borrower", "loan_date", "return_date"};
 
+	public Controller(){}
 
 	public Controller(View view) {
 		this.view = view;

@@ -6,7 +6,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -31,9 +30,8 @@ public class ViewTest {
     @Autowired
     private LoanRepository loans;
 
-    //@Autowired
-    private View view = new View();
-
+    private View view;
+    private Controller controller;
 
     private static String[][] bookData = {
             {"title1", "author1", "genre1", "publisher1", "isbn1", "publish_date1", "purchase_date1"},
@@ -48,21 +46,16 @@ public class ViewTest {
     };
 
 
-    private static boolean firstRun = true;
+    // private static boolean firstRun = true;
 
     @Before
     public void before(){
-        // POPULATE DATABASE
-       //loadLocationData();
-        //loadBookData();
-
+        this.view = new View();
     }
 
     @After
     public void after(){
-        /*controller.getBooks().deleteAll();
-        controller.getLocations().deleteAll();
-        controller.getLoans().deleteAll();*/
+
     }
 
     @Test
@@ -165,6 +158,28 @@ public class ViewTest {
         Assert.assertNotNull(view.getPendingLoansLabel());
 
         Assert.assertEquals(3, view.getHomePanel().getComponentCount());
+    }
+
+    // @Test
+    public void testSetColumnWidths(){
+
+    }
+
+    @Test
+    public void testFillBookModel(){
+        // populate database
+        this.loadLocationData();
+        this.loadBookData();
+        // set bookFieldAlias
+        this.controller = new Controller();
+        controller.loadTextStrings();
+        view.setBookFieldAlias(controller.getStringMap().get("bookFieldAlias").split("/"));
+        // execute method
+        view.fillBookModel(view.getModifyBooksModel(), books.findAll());
+        // assert expected outcome
+        // Assert.assertEquals(3, view.getAllBooksTabTable().getRowCount());
+        Assert.assertEquals(books.count(), view.getModifyBooksModel().getRowCount());
+
     }
 
 

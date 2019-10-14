@@ -147,7 +147,6 @@ public class View {
 
 
 	public void setUpFrame(){
-		print("[#] setting frame up...");
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setBounds(100, 100, 1000, 700);
@@ -338,7 +337,7 @@ public class View {
 		model.setRowCount(0);
 		model.setColumnCount(bookFieldAlias.length);
 		model.setColumnIdentifiers(bookFieldAlias);
-		// populate samuelmovi.familyLibraryJava.model
+		// populate table model
 		for(Book b:list) {
 			Vector<String> vector = new Vector<String>();
 			vector.add(String.valueOf(b.getIndex()));
@@ -413,7 +412,6 @@ public class View {
 	
 	public void refreshBookTables() {
 		try {
-			// fillBookModel(allBooksModel, all_books);
 			fillBookViewModel(allBooksModel, allBookViews);
 			setColumnWidths(allBooksTabTable, bookColumnWidths);
 			setColumnWidths(deleteBookTabTable, bookColumnWidths);
