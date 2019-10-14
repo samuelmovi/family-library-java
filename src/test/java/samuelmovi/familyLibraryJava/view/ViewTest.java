@@ -14,6 +14,7 @@ import samuelmovi.familyLibraryJava.model.Book;
 import samuelmovi.familyLibraryJava.model.Loan;
 import samuelmovi.familyLibraryJava.model.Location;
 import samuelmovi.familyLibraryJava.repo.BookRepository;
+import samuelmovi.familyLibraryJava.repo.BookViewRepository;
 import samuelmovi.familyLibraryJava.repo.LoanRepository;
 import samuelmovi.familyLibraryJava.repo.LocationRepository;
 
@@ -25,6 +26,8 @@ public class ViewTest {
 
     @Autowired
     private BookRepository books;
+    @Autowired
+    private BookViewRepository bookViews;
     @Autowired
     private LocationRepository locations;
     @Autowired
@@ -177,9 +180,22 @@ public class ViewTest {
         // execute method
         view.fillBookModel(view.getModifyBooksModel(), books.findAll());
         // assert expected outcome
-        // Assert.assertEquals(3, view.getAllBooksTabTable().getRowCount());
         Assert.assertEquals(books.count(), view.getModifyBooksModel().getRowCount());
+    }
 
+    @Test
+    public void testFillBookViewModel(){
+        // set up db
+        this.loadLocationData();
+        this.loadBookData();
+        // set bookViewAlias
+        this.controller = new Controller();
+        controller.loadTextStrings();
+        view.setBookViewAliases(controller.getStringMap().get("bookViewAliases").split("/"));
+        // execute method
+        view.fillBookViewModel(view.getAllBookViewsModel(), bookViews.findAll());
+        // assert expected outcome
+        Assert.assertEquals(bookViews.count(), view.getAllBookViewsModel().getRowCount());
     }
 
 

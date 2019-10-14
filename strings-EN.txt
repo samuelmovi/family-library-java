@@ -36,7 +36,7 @@ fillModelXHeader::Refreshing Error
 # BOOK STUFF
 booksTotalLabel :: Books total:
 pendingLoansLabel :: Pending loans:
-bookJoinAliases :: Title/Author/Genre/Publisher/ISBN/Published/Acquired/Location/Loaned/Registered/Modified
+bookViewAliases :: Title/Author/Genre/Publisher/ISBN/Published/Acquired/Location/Loaned/Registered/Modified
 bookFieldAlias :: ID/Title/Author/Genre/Publisher/ISBN/Published/Acquired/Location/Loaned/Registered
 searchBookFields :: Title/Author/Genre/Publisher/ISBN
 bookLabelsText :: Title,Author,Genre,Publisher,ISBN,Published,Acquired,Location

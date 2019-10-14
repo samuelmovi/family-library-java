@@ -3,8 +3,6 @@ package samuelmovi.familyLibraryJava.view;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +58,7 @@ public class View {
 	private JTable deleteBookTabTable;
 	private	int[] bookColumnWidths = {25, 150, 125, 100, 80, 80, 95, 95, 80, 95, 95};
 	private DefaultTableModel allBooksModel=new DefaultTableModel();
+	private DefaultTableModel allBookViewsModel=new DefaultTableModel();
 	private DefaultTableModel searchBooksModel=new DefaultTableModel();
 	private DefaultTableModel modifyBooksModel=new DefaultTableModel();
 	private JComboBox<String> searchBookCombo;
@@ -73,7 +72,7 @@ public class View {
 	private Object[] modifyBookInputObjects= {new JTextField(),new JTextField(),new JTextField(),new JTextField(),new JTextField(),new JTextField(),new JTextField(),new JComboBox<String>()};
 	private String[] searchFields;
 	private String[] bookFieldAlias;
-	private String[] bookJoinAliases;
+	private String[] bookViewAliases;
 	private JComboBox<String> comboLocations;
 	private JComboBox<String> modifyBookCB;
 
@@ -358,8 +357,8 @@ public class View {
 	public void fillBookViewModel(DefaultTableModel model, List<BookView> list) {
 		// set table info
 		model.setRowCount(0);
-		model.setColumnCount(bookJoinAliases.length);
-		model.setColumnIdentifiers(bookJoinAliases);
+		model.setColumnCount(bookViewAliases.length);
+		model.setColumnIdentifiers(bookViewAliases);
 		// populate model
 		for(BookView b:list) {
 			Vector<String> vector = new Vector<String>();
@@ -387,8 +386,7 @@ public class View {
 		
 		bookLabelsText = stringMap.get("bookLabelsText").split(",");
 		try {
-			// fillBookModel(allBooksModel, all_books);
-			fillBookViewModel(allBooksModel, allBookViews);
+			fillBookViewModel(allBookViewsModel, allBookViews);
 		}catch(Exception e) {
 			
 		}
@@ -960,13 +958,20 @@ public class View {
 		this.all_books = all_books;
 	}
 
-
-	public String[] getBookJoinAliases() {
-		return bookJoinAliases;
+	public DefaultTableModel getAllBookViewsModel() {
+		return allBookViewsModel;
 	}
 
-	public void setBookJoinAliases(String[] bookJoinAliases) {
-		this.bookJoinAliases = bookJoinAliases;
+	public void setAllBookViewsModel(DefaultTableModel allBookViewsModel) {
+		this.allBookViewsModel = allBookViewsModel;
+	}
+
+	public String[] getBookViewAliases() {
+		return bookViewAliases;
+	}
+
+	public void setBookViewAliases(String[] bookViewAliases) {
+		this.bookViewAliases = bookViewAliases;
 	}
 	
 	public JComboBox<String> getSearchBookCombo() {

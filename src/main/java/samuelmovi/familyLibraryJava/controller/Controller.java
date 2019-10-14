@@ -68,7 +68,7 @@ public class Controller {
 		view.setLocationsArray(createLocationList());
 		view.setStringMap(stringMap);
 		// books stuff
-		view.setBookJoinAliases(stringMap.get("bookJoinAliases").split("/"));
+		view.setBookViewAliases(stringMap.get("bookJoinAliases").split("/"));
 		view.setAll_books((List<Book>)books.findAll());
 		view.setAllBookViews((List<BookView>)bookViews.findAll());
 		view.setBookFieldAlias(stringMap.get("bookFieldAlias").split("/"));

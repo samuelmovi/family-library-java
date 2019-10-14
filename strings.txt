@@ -36,7 +36,7 @@ fillModelXHeader::Error de refresco
 # BOOK STUFF
 booksTotalLabel :: Total de libros:
 pendingLoansLabel :: Prestamos pendientes:
-bookJoinAliases :: Título/Autor/Género/Editorial/ISBN/Publicación/Adquisición/Ubicación/Prestado/Registrado/Modificado
+bookViewAliases :: Título/Autor/Género/Editorial/ISBN/Publicación/Adquisición/Ubicación/Prestado/Registrado/Modificado
 bookFieldAlias :: ID/Título/Autor/Género/Editorial/ISBN/Publicación/Adquisición/Ubicación/Prestado/Registrado
 searchBookFields :: Titulo/Autor/Genero/Editorial/ISBN
 bookLabelsText :: Titulo,Autor,Genero,Editorial,ISBN,Publicacion [AAAA-MM-DD],Adquisicion [AAAA-MM-DD],Ubicacion
