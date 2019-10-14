@@ -198,6 +198,22 @@ public class ViewTest {
         Assert.assertEquals(bookViews.count(), view.getAllBookViewsModel().getRowCount());
     }
 
+    // @Test TODO: solve integration issues from internal method calls
+    public void testFillBooksPanel(){
+        // check null: books tabbed pane
+        Assert.assertNull(view.getBooksTabbedPane());
+        // set books panel
+        JPanel panel = new JPanel();
+        view.setBooksPanel(panel);
+        // set strings
+        this.controller = new Controller();
+        controller.loadTextStrings();
+        view.setStringMap(controller.getStringMap());
+        // execute method
+        view.fillBooksPanel();
+        // assert expected outcome
+        Assert.assertNotNull(view.getBooksTabbedPane());
+    }
 
     // UTILITIES
     public void loadBookData(){

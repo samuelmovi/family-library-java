@@ -385,11 +385,7 @@ public class View {
 		booksPanel.add(booksTabbedPane);
 		
 		bookLabelsText = stringMap.get("bookLabelsText").split(",");
-		try {
-			fillBookViewModel(allBookViewsModel, allBookViews);
-		}catch(Exception e) {
-			
-		}
+
 		createAllBooksTab();
 		createSearchBookTab();
 		createAddBookTab();
@@ -1105,7 +1101,15 @@ public class View {
 	public void setSearchFields(String[] searchFields) {
 		this.searchFields = searchFields;
 	}
-	
+
+	public JTabbedPane getBooksTabbedPane() {
+		return booksTabbedPane;
+	}
+
+	public void setBooksTabbedPane(JTabbedPane booksTabbedPane) {
+		this.booksTabbedPane = booksTabbedPane;
+	}
+
 	//LOCATIONS setters and getters
 	public List<Location> getAll_locations() {
 		return all_locations;
