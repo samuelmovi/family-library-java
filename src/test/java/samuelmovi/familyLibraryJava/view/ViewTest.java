@@ -273,6 +273,37 @@ public class ViewTest {
         Assert.assertNotNull(view.getClearAddBookFieldsB());
     }
 
+    // @Test controller.createLocationList throws unexpected error
+    public void testCreateModifyBookTab(){
+        // check null: modify book tab, modify book table, modify bok button, reset fields button
+        Assert.assertNull(view.getModifyBookTab());
+        Assert.assertNull(view.getModifyBookTabTable());
+        Assert.assertNull(view.getModifyBookB());
+        Assert.assertNull(view.getResetModifyBookTabB());
+
+        // set db
+        this.loadLocationData();
+        this.loadBookData();
+
+        // set object state
+        this.controller = new Controller();
+        controller.loadTextStrings();
+        view.setStringMap(controller.getStringMap());
+
+        JTabbedPane tabbedPane = new JTabbedPane();
+        view.setBooksTabbedPane(tabbedPane);
+
+        view.setBookLabelsText(controller.getStringMap().get("bookLabelsText").split(","));
+        // execute method
+         view.createModifyBookTab();
+
+        // assert expected outcome
+        Assert.assertNotNull(view.getModifyBookTab());
+        Assert.assertNotNull(view.getModifyBookTabTable());
+        Assert.assertNotNull(view.getModifyBookB());
+        Assert.assertNotNull(view.getResetModifyBookTabB());
+    }
+
     // UTILITIES
     public void loadBookData(){
         for (String[] data: bookData){

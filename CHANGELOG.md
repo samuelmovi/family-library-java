@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix column width mismatch problem
 - programmatically click ok buttons when adding items during tests
 - change delete book table model fom all books model to all available books model
+- fix create location list method in controller, causing issues in view test
 
 
 ## 2019-10-12
