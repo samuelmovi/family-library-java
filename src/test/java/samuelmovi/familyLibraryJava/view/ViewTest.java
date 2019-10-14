@@ -18,6 +18,8 @@ import samuelmovi.familyLibraryJava.repo.BookRepository;
 import samuelmovi.familyLibraryJava.repo.LoanRepository;
 import samuelmovi.familyLibraryJava.repo.LocationRepository;
 
+import javax.swing.*;
+
 @ContextConfiguration(locations = "classpath:Tests.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ViewTest {
@@ -77,6 +79,42 @@ public class ViewTest {
         Assert.assertTrue(view.getFrame().isVisible());
 
         Assert.assertNotNull(view.getContentPane());
+    }
+
+    @Test
+    public void testCreatePanels(){
+        // check panels are null
+        Assert.assertNull(view.getBooksPanel());
+        Assert.assertNull(view.getLocationsPanel());
+        Assert.assertNull(view.getLoansPanel());
+        Assert.assertNull(view.getHomePanel());
+
+        // check top buttons are null
+        Assert.assertNull(view.getBooksB());
+        Assert.assertNull(view.getLocationsB());
+        Assert.assertNull(view.getLoansB());
+
+        // execute method
+        JPanel contentPane = new JPanel();
+        view.setContentPane(contentPane);
+        view.createPanels();
+
+        // assert expected outcome
+        Assert.assertNotNull(view.getBooksPanel());
+        Assert.assertNotNull(view.getLocationsPanel());
+        Assert.assertNotNull(view.getLoansPanel());
+        Assert.assertNotNull(view.getHomePanel());
+
+        Assert.assertFalse(view.getBooksPanel().isVisible());
+        Assert.assertFalse(view.getLocationsPanel().isVisible());
+        Assert.assertFalse(view.getLoansPanel().isVisible());
+        Assert.assertTrue(view.getHomePanel().isVisible());
+
+        Assert.assertNotNull(view.getBooksB());
+        Assert.assertNotNull(view.getLocationsB());
+        Assert.assertNotNull(view.getLoansB());
+
+
     }
 
 

@@ -1325,4 +1325,6 @@ public class View {
 	public void setContentPane(JPanel contentPane) {
 		this.contentPane = contentPane;
 	}
+
+
 }
