@@ -75,6 +75,7 @@ public class View {
 	private String[] bookViewAliases;
 	private JComboBox<String> comboLocations;
 	private JComboBox<String> modifyBookCB;
+	private JPanel searchBooksPanel;
 
 	//  location stuff
 	private List<Location> all_locations;
@@ -443,14 +444,13 @@ public class View {
 	}
 	
 	public void createSearchBookTab() {
-		
-		JPanel searchBooks = new JPanel();
-		booksTabbedPane.addTab(stringMap.get("search"), searchBooks);
-		searchBooks.setLayout(null);
+		searchBooksPanel = new JPanel();
+		booksTabbedPane.addTab(stringMap.get("search"), searchBooksPanel);
+		searchBooksPanel.setLayout(null);
 
 		JScrollPane consultationScroll = new JScrollPane();
 		consultationScroll.setBounds(12, 108, 920, 435);
-		searchBooks.add(consultationScroll);
+		searchBooksPanel.add(consultationScroll);
 		
 		searchBooksTabTable = new JTable(searchBooksModel);
 		searchBooksSorter=new TableRowSorter<TableModel>(searchBooksModel);
@@ -465,18 +465,18 @@ public class View {
 
 		searchBookCombo=new JComboBox<String>();
 		searchBookCombo.setBounds(120,35,150,25);
-		searchBooks.add(searchBookCombo);
+		searchBooksPanel.add(searchBookCombo);
 		searchBookCombo.setModel(new DefaultComboBoxModel<String>(searchFields));
 		searchBookCombo.setSelectedItem(null);
 		
 		searchTerm = new JTextField();
 		searchTerm.setBounds(325, 35, 250, 25);
-		searchBooks.add(searchTerm);
+		searchBooksPanel.add(searchTerm);
 		searchTerm.setColumns(10);
 		
 		searchBookB = new JButton(stringMap.get("search"));
 		searchBookB.setBounds(650, 35, 117, 25);
-		searchBooks.add(searchBookB);
+		searchBooksPanel.add(searchBookB);
 	}
 	
 	public void createAddBookTab() {
@@ -937,6 +937,22 @@ public class View {
 	
 	//BOOKS setters and getters
 
+
+	public JTable getSearchBooksTabTable() {
+		return searchBooksTabTable;
+	}
+
+	public void setSearchBooksTabTable(JTable searchBooksTabTable) {
+		this.searchBooksTabTable = searchBooksTabTable;
+	}
+
+	public JPanel getSearchBooksPanel() {
+		return searchBooksPanel;
+	}
+
+	public void setSearchBooksPanel(JPanel searchBooksPanel) {
+		this.searchBooksPanel = searchBooksPanel;
+	}
 
 	public List<BookView> getAllBookViews() {
 		return allBookViews;

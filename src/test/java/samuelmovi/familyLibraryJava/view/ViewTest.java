@@ -215,6 +215,34 @@ public class ViewTest {
         Assert.assertNotNull(view.getBooksTabbedPane());
     }
 
+    @Test
+    public void testCreateSearchBookTab(){
+        // check null: search books panel, search books tab table, search book combo, search term field, search book button
+        Assert.assertNull(view.getSearchBooksPanel());
+        Assert.assertNull(view.getSearchBooksTabTable());
+        Assert.assertNull(view.getSearchBookCombo());
+        Assert.assertNull(view.getSearchTerm());
+        Assert.assertNull(view.getSearchBookB());
+
+        // set required object state
+        this.controller = new Controller();
+        controller.loadTextStrings();
+        view.setStringMap(controller.getStringMap());
+        JTabbedPane tabbedPane = new JTabbedPane();
+        view.setBooksTabbedPane(tabbedPane);
+        view.setSearchFields(controller.getStringMap().get("searchBookFields").split("/"));
+
+        // execute method
+        view.createSearchBookTab();
+        // assert expected outcome
+        Assert.assertNotNull(view.getSearchBooksPanel());
+        Assert.assertNotNull(view.getSearchBooksTabTable());
+        Assert.assertNotNull(view.getSearchBookCombo());
+        Assert.assertNotNull(view.getSearchTerm());
+        Assert.assertNotNull(view.getSearchBookB());
+
+    }
+
     // UTILITIES
     public void loadBookData(){
         for (String[] data: bookData){
