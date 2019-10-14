@@ -81,6 +81,11 @@ public class ViewTest {
         Assert.assertNotNull(view.getContentPane());
     }
 
+    //@Test
+    public void testFinalSetup(){
+
+    }
+
     @Test
     public void testCreatePanels(){
         // check panels are null
@@ -114,6 +119,29 @@ public class ViewTest {
         Assert.assertNotNull(view.getLocationsB());
         Assert.assertNotNull(view.getLoansB());
 
+
+    }
+
+    @Test
+    public void testCreateMenuBar(){
+        // check null: menu bar, main menu, help menu
+        Assert.assertNull(view.getMenuBar());
+        Assert.assertNull(view.getMainMenu());
+        Assert.assertNull(view.getHelpM());
+
+        // set frame, execute method
+        JFrame frame = new JFrame();
+        view.setFrame(frame);
+        view.createMenuBar();
+
+        // assert expected outcome
+        Assert.assertNotNull(view.getMenuBar());
+        Assert.assertNotNull(view.getMainMenu());
+        Assert.assertNotNull(view.getHelpM());
+
+        Assert.assertEquals(2, view.getMenuBar().getMenuCount());
+        Assert.assertEquals(2, view.getMainMenu().getItemCount());
+        Assert.assertEquals(1, view.getHelpM().getItemCount());
 
     }
 

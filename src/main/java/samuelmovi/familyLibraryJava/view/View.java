@@ -137,6 +137,9 @@ public class View {
 	private String[] chunks;
 	private JMenuItem saveDataMI;
 	private JMenuItem exitMI;
+	private JMenuBar menuBar;
+	private JMenu mainMenu;
+	private JMenu helpM;
 
 
 	public void setUpFrame(){
@@ -212,19 +215,19 @@ public class View {
 	}
 	
 	public void createMenuBar() {
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
-		
-		JMenu menuM = new JMenu(stringMap.get("menu"));
-		menuBar.add(menuM);
+
+		mainMenu = new JMenu(stringMap.get("menu"));
+		menuBar.add(mainMenu);
 		
 		saveDataMI = new JMenuItem(stringMap.get("saveData"));
-		menuM.add(saveDataMI);
+		mainMenu.add(saveDataMI);
 		
 		exitMI = new JMenuItem(stringMap.get("exit"));
-		menuM.add(exitMI);
+		mainMenu.add(exitMI);
 		
-		JMenu tableM = new JMenu(stringMap.get("data"));
+		/*JMenu tableM = new JMenu(stringMap.get("data"));
 		menuBar.add(tableM);
 		
 		JMenuItem booksMI = new JMenuItem(stringMap.get("books"));
@@ -276,16 +279,20 @@ public class View {
 				}
 			}
 		});
-		tableM.add(loansMI);
+		tableM.add(loansMI);*/
 		
-		JMenu helpM=new JMenu(stringMap.get("help"));
+		helpM = new JMenu(stringMap.get("help"));
 		menuBar.add(helpM);
 		JMenuItem aboutMI=new JMenuItem(stringMap.get("about"));
-		aboutMI.addActionListener(new ActionListener() {
+		/*aboutMI.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JOptionPane.showMessageDialog(frame, stringMap.get("aboutInfo"), stringMap.get("aboutInforHeader"), JOptionPane.INFORMATION_MESSAGE);
 			}
-		});
+		});*/
+
+		aboutMI.addActionListener( lambda ->
+				JOptionPane.showMessageDialog(frame, stringMap.get("aboutInfo"), stringMap.get("aboutInforHeader"), JOptionPane.INFORMATION_MESSAGE)
+		);
 		
 		helpM.add(aboutMI);
 	}
@@ -1278,6 +1285,10 @@ public class View {
 		return frame;
 	}
 
+	public void setFrame(JFrame frame){
+		this.frame = frame;
+	}
+
 	public JMenuItem getExitMI() {
 		return exitMI;
 	}
@@ -1326,5 +1337,32 @@ public class View {
 		this.contentPane = contentPane;
 	}
 
+	public void setBooksB(JButton booksB) {
+		this.booksB = booksB;
+	}
+
+	public JMenuBar getMenuBar() {
+		return menuBar;
+	}
+
+	public void setMenuBar(JMenuBar menuBar) {
+		this.menuBar = menuBar;
+	}
+
+	public JMenu getMainMenu() {
+		return mainMenu;
+	}
+
+	public void setMainMenu(JMenu mainMenu) {
+		this.mainMenu = mainMenu;
+	}
+
+	public JMenu getHelpM() {
+		return helpM;
+	}
+
+	public void setHelpM(JMenu helpM) {
+		this.helpM = helpM;
+	}
 
 }
