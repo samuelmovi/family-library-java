@@ -117,10 +117,10 @@ public class View {
 	private JTable allLoansTabTable;
 	private JTable makeLoanTabTable;
 	private JTable returnLoanTabTable;
-	private int loansColumnWidths[]= {27, 290, 250, 175, 175}; 
+	private int[] loansColumnWidths= {27, 290, 250, 175, 175};
 	private TableRowSorter<TableModel> loansSorter=new TableRowSorter<TableModel>();
 	private TableRowSorter<TableModel> allLoansSorter=new TableRowSorter<TableModel>();
-	private JTextField loanBookTextFields[];
+	private JTextField[] loanBookTextFields;
 	private JTabbedPane loansTabbedPane;
 	private String loanJoinAliases;
 	private String[] loanFieldAlias;
@@ -134,7 +134,7 @@ public class View {
 	private JTextField searchTerm;
 	private Font mediumBoldFont=new Font(Font.SANS_SERIF, Font.BOLD,13);
 	private Map<String, String> stringMap = new HashMap<String, String>();
-	private String chunks[];
+	private String[] chunks;
 	private JMenuItem saveDataMI;
 	private JMenuItem exitMI;
 
@@ -1318,4 +1318,11 @@ public class View {
 		this.allLoansTabTable = allLoansTabTable;
 	}
 
+	public JPanel getContentPane() {
+		return contentPane;
+	}
+
+	public void setContentPane(JPanel contentPane) {
+		this.contentPane = contentPane;
+	}
 }

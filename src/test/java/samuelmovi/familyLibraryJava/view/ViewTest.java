@@ -2,6 +2,7 @@ package samuelmovi.familyLibraryJava.view;
 
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,12 +29,9 @@ public class ViewTest {
     @Autowired
     private LoanRepository loans;
 
-    @Autowired
-    private View view;
-    @Autowired
-    private Controller controller;
-    @Mock
-    private Controller mockController;
+    //@Autowired
+    private View view = new View();
+
 
     private static String[][] bookData = {
             {"title1", "author1", "genre1", "publisher1", "isbn1", "publish_date1", "purchase_date1"},
@@ -53,26 +51,32 @@ public class ViewTest {
     @Before
     public void before(){
         // POPULATE DATABASE
-        loadLocationData();
-        loadBookData();
+       //loadLocationData();
+        //loadBookData();
 
-        if (firstRun){
-            controller.initController();
-            view = controller.getView();
-            firstRun = false;
-        }
     }
 
     @After
     public void after(){
-        controller.getBooks().deleteAll();
+        /*controller.getBooks().deleteAll();
         controller.getLocations().deleteAll();
-        controller.getLoans().deleteAll();
+        controller.getLoans().deleteAll();*/
     }
 
     @Test
     public void testSetUpFrame(){
+        // check frame and content pane are null
+        Assert.assertNull(view.getFrame());
+        Assert.assertNull(view.getContentPane());
 
+        // execute method
+        view.setUpFrame();
+
+        // assert expected outcome
+        Assert.assertNotNull(view.getFrame());
+        Assert.assertTrue(view.getFrame().isVisible());
+
+        Assert.assertNotNull(view.getContentPane());
     }
 
 
@@ -87,9 +91,9 @@ public class ViewTest {
                     data[4],
                     data[5],
                     data[6],
-                    controller.getLocations().findByAddress(locationData[0][0]).get(0).getIndex()
+                    locations.findByAddress(locationData[0][0]).get(0).getIndex()
             );
-            controller.getBooks().save(newBook);
+            books.save(newBook);
         }
     }
 
@@ -101,7 +105,7 @@ public class ViewTest {
                     data[2],
                     data[3]
             );
-            controller.getLocations().save(newLoc);
+            locations.save(newLoc);
         }
     }
 
@@ -110,7 +114,7 @@ public class ViewTest {
                 id,
                 borrower
         );
-        controller.getLoans().save(newLoan);
+        loans.save(newLoan);
     }
 
 }
