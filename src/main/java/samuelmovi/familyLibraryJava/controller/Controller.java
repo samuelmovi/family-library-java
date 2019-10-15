@@ -507,10 +507,11 @@ public class Controller {
 	}
 
 	public String[] createLocationList(){
+		String[] locationArray = null;
 
 		try {
 			List<Location> locationsList = locations.findAll();
-			String[] locationArray = new String[locationsList.size()];
+			locationArray = new String[locationsList.size()];
 			for (int i=0; i<locationsList.size(); i++) {
 				Location loc = locationsList.get(i);
 				locationArray[i] = loc.getIndex() + " / ";
@@ -518,12 +519,11 @@ public class Controller {
 				locationArray[i] += loc.getRoom() + " / ";
 				locationArray[i] += loc.getFurniture() + " / ";
 				locationArray[i] += loc.getDetails();
-				return locationArray;
 			}
 		}catch(Exception e) {
 			System.out.println("\n[!] Error at createLocationList : "+e+"\n");
 		}
-		return null;
+		return locationArray;
 	}
 
 	// LOANS

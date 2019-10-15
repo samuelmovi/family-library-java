@@ -75,9 +75,6 @@ public class View {
 	private String[] bookViewAliases;
 	private JComboBox<String> comboLocations;
 	private JComboBox<String> modifyBookCB;
-	private JPanel searchBooksPanel;
-	private JPanel addBookTab;
-	private JPanel modifyBookTab;
 
 	//  location stuff
 	private List<Location> all_locations;
@@ -446,13 +443,14 @@ public class View {
 	}
 	
 	public void createSearchBookTab() {
-		searchBooksPanel = new JPanel();
-		booksTabbedPane.addTab(stringMap.get("search"), searchBooksPanel);
-		searchBooksPanel.setLayout(null);
+		
+		JPanel searchBooks = new JPanel();
+		booksTabbedPane.addTab(stringMap.get("search"), searchBooks);
+		searchBooks.setLayout(null);
 
 		JScrollPane consultationScroll = new JScrollPane();
 		consultationScroll.setBounds(12, 108, 920, 435);
-		searchBooksPanel.add(consultationScroll);
+		searchBooks.add(consultationScroll);
 		
 		searchBooksTabTable = new JTable(searchBooksModel);
 		searchBooksSorter=new TableRowSorter<TableModel>(searchBooksModel);
@@ -467,23 +465,23 @@ public class View {
 
 		searchBookCombo=new JComboBox<String>();
 		searchBookCombo.setBounds(120,35,150,25);
-		searchBooksPanel.add(searchBookCombo);
+		searchBooks.add(searchBookCombo);
 		searchBookCombo.setModel(new DefaultComboBoxModel<String>(searchFields));
 		searchBookCombo.setSelectedItem(null);
 		
 		searchTerm = new JTextField();
 		searchTerm.setBounds(325, 35, 250, 25);
-		searchBooksPanel.add(searchTerm);
+		searchBooks.add(searchTerm);
 		searchTerm.setColumns(10);
 		
 		searchBookB = new JButton(stringMap.get("search"));
 		searchBookB.setBounds(650, 35, 117, 25);
-		searchBooksPanel.add(searchBookB);
+		searchBooks.add(searchBookB);
 	}
 	
 	public void createAddBookTab() {
 		// NEW BOOK TAB
-		addBookTab = new JPanel();
+		JPanel addBookTab = new JPanel();
 		booksTabbedPane.addTab(stringMap.get("new"), addBookTab);
 		addBookTab.setLayout(null);
 		
@@ -525,7 +523,7 @@ public class View {
 	
 	@SuppressWarnings("unchecked")
 	public void createModifyBookTab() {
-		modifyBookTab = new JPanel();
+		JPanel modifyBookTab = new JPanel();
 		booksTabbedPane.addTab(stringMap.get("modify"), modifyBookTab);
 		modifyBookTab.setLayout(null);
 		
@@ -939,54 +937,6 @@ public class View {
 	
 	//BOOKS setters and getters
 
-
-	public void setClearAddBookFieldsB(JButton clearAddBookFieldsB) {
-		this.clearAddBookFieldsB = clearAddBookFieldsB;
-	}
-
-	public JPanel getModifyBookTab() {
-		return modifyBookTab;
-	}
-
-	public void setModifyBookTab(JPanel modifyBookTab) {
-		this.modifyBookTab = modifyBookTab;
-	}
-
-	public String[] getBookLabelsText() {
-		return bookLabelsText;
-	}
-
-	public void setBookLabelsText(String[] bookLabelsText) {
-		this.bookLabelsText = bookLabelsText;
-	}
-
-	public void setAddBookB(JButton addBookB) {
-		this.addBookB = addBookB;
-	}
-
-	public JPanel getAddBookTab() {
-		return addBookTab;
-	}
-
-	public void setAddBookTab(JPanel addBookTab) {
-		this.addBookTab = addBookTab;
-	}
-
-	public JTable getSearchBooksTabTable() {
-		return searchBooksTabTable;
-	}
-
-	public void setSearchBooksTabTable(JTable searchBooksTabTable) {
-		this.searchBooksTabTable = searchBooksTabTable;
-	}
-
-	public JPanel getSearchBooksPanel() {
-		return searchBooksPanel;
-	}
-
-	public void setSearchBooksPanel(JPanel searchBooksPanel) {
-		this.searchBooksPanel = searchBooksPanel;
-	}
 
 	public List<BookView> getAllBookViews() {
 		return allBookViews;
