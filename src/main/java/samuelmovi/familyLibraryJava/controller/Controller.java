@@ -131,7 +131,7 @@ public class Controller {
 		
 		// LOANS
 		view.getLoansB().addActionListener(e -> showLoansB());
-		view.getRefreshLoanTablesB().addActionListener(e -> refreshLoansTableB());
+		view.getRefreshAllLoansTabB().addActionListener(e -> refreshLoansTableB());
 		view.getLoanBookB().addActionListener(e -> loanBookB());
 		view.getReturnBookB().addActionListener(e -> returnBookB());
 		view.getMakeLoanTabTable().addMouseListener(new MouseAdapter() {

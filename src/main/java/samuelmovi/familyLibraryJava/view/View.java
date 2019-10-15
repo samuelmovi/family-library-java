@@ -107,9 +107,9 @@ public class View {
 	private List<Loan> all_loans;
 	private List<Book> availableBooks;
 	private JPanel loansPanel;
-	private JButton refreshLoanTablesB;
+	private JButton refreshAllLoansTabB;
 	private JButton returnBookB;
-	private JPanel allLoansTab = new JPanel();
+	private JPanel allLoansTab;
 	private JButton loansB;
 	private JButton loanBookB;	
 	private DefaultTableModel loansModel=new DefaultTableModel();
@@ -122,6 +122,8 @@ public class View {
 	private TableRowSorter<TableModel> allLoansSorter=new TableRowSorter<TableModel>();
 	private JTextField[] loanBookTextFields;
 	private JTabbedPane loansTabbedPane;
+	private JPanel loanBookTab;
+	private JPanel returnBookTab;
 
 	// SYSTEM
 	private JFrame frame;
@@ -834,9 +836,9 @@ public class View {
 		
 		allLoansTabTable = new JTable(loansModel);
 		
-		createAllLoansTab(allLoansTab, loansTabbedPane, allLoansTabTable, loansModel, allLoansSorter, stringMap.get("loans"), "loans", loansColumnWidths);
+		createAllLoansTab();
 		createLoanBookTab();
-		createReturnBookTab(loansColumnWidths);
+		createReturnBookTab();
 		
 		refreshLoanTables();
 	}
@@ -852,31 +854,33 @@ public class View {
 		}
 	}
 	
-	public void createAllLoansTab(JPanel everythingTab, JTabbedPane tabbedPane,JTable table, DefaultTableModel model,TableRowSorter<TableModel> sorter, String alias, String tableName, Integer widths[]) {
-		tabbedPane.addTab(stringMap.get("everything"), everythingTab);
-		everythingTab.setLayout(null);
+	public void createAllLoansTab() {
+		allLoansTab = new JPanel();
+		loansTabbedPane.addTab(stringMap.get("everything"), allLoansTab);
+		allLoansTab.setLayout(null);
 		
 		JScrollPane scroll = new JScrollPane();
 		scroll.setBounds(12, 82, 920, 460);
-		everythingTab.add(scroll);
+		allLoansTab.add(scroll);
+
+		allLoansTabTable = new JTable();
+		allLoansTabTable.setFont(mediumBoldFont);
+		allLoansSorter=new TableRowSorter<TableModel>(loansModel);
+		allLoansTabTable.setRowSorter(allLoansSorter);
+		allLoansTabTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		setColumnWidths(allLoansTabTable, loansColumnWidths);
+		scroll.setViewportView(allLoansTabTable);
 		
-		table.setFont(mediumBoldFont);
-		sorter=new TableRowSorter<TableModel>(model);
-		table.setRowSorter(sorter);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		setColumnWidths(table, widths);
-		scroll.setViewportView(table);
-		
-		JTableHeader header=table.getTableHeader();
+		JTableHeader header=allLoansTabTable.getTableHeader();
 		header.setFont(mediumBoldFont);
 		
-		refreshLoanTablesB = new JButton(stringMap.get("refresh"));
-		refreshLoanTablesB.setBounds(375,25,120,25);
-		everythingTab.add(refreshLoanTablesB);
+		refreshAllLoansTabB = new JButton(stringMap.get("refresh"));
+		refreshAllLoansTabB.setBounds(375,25,120,25);
+		allLoansTab.add(refreshAllLoansTabB);
 	}
 	
 	public void createLoanBookTab() {
-		JPanel loanBookTab=new JPanel();
+		loanBookTab=new JPanel();
 		loansTabbedPane.addTab(stringMap.get("loan"), loanBookTab);
 		loanBookTab.setLayout(null);
 		
@@ -919,8 +923,8 @@ public class View {
 
 	}
 	
-	public void createReturnBookTab(Integer widths[]) {
-		JPanel returnBookTab=new JPanel();
+	public void createReturnBookTab() {
+		returnBookTab = new JPanel();
 		loansTabbedPane.addTab(stringMap.get("returns"),returnBookTab);
 		returnBookTab.setLayout(null);
 		
@@ -933,7 +937,7 @@ public class View {
 		returnLoanTabTable.setRowSorter(loansSorter);
 		returnLoanTabTable.setFont(mediumBoldFont);
 		returnLoanTabTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		setColumnWidths(returnLoanTabTable, widths);
+		setColumnWidths(returnLoanTabTable, loansColumnWidths);
 		
 		JTableHeader header=returnLoanTabTable.getTableHeader();
 		header.setFont(mediumBoldFont);
@@ -1349,6 +1353,72 @@ public class View {
 
 
 	//LOANS setters and getters
+
+
+	public JPanel getReturnBookTab() {
+		return returnBookTab;
+	}
+
+	public void setReturnBookTab(JPanel returnBookTab) {
+		this.returnBookTab = returnBookTab;
+	}
+
+	public void setRefreshAllLoansTabB(JButton refreshAllLoansTabB) {
+		this.refreshAllLoansTabB = refreshAllLoansTabB;
+	}
+
+	public void setReturnBookB(JButton returnBookB) {
+		this.returnBookB = returnBookB;
+	}
+
+	public void setLoansB(JButton loansB) {
+		this.loansB = loansB;
+	}
+
+	public JPanel getLoanBookTab() {
+		return loanBookTab;
+	}
+
+	public void setLoanBookTab(JPanel loanBookTab) {
+		this.loanBookTab = loanBookTab;
+	}
+
+	public void setModifyBookB(JButton modifyBookB) {
+		this.modifyBookB = modifyBookB;
+	}
+
+	public JPanel getAllLoansTab() {
+		return allLoansTab;
+	}
+
+	public void setAllLoansTab(JPanel allLoansTab) {
+		this.allLoansTab = allLoansTab;
+	}
+
+	public void setLoanBookB(JButton loanBookB) {
+		this.loanBookB = loanBookB;
+	}
+
+	public void setMakeLoanTabTable(JTable makeLoanTabTable) {
+		this.makeLoanTabTable = makeLoanTabTable;
+	}
+
+	public void setReturnLoanTabTable(JTable returnLoanTabTable) {
+		this.returnLoanTabTable = returnLoanTabTable;
+	}
+
+	public void setLoanBookTextFields(JTextField[] loanBookTextFields) {
+		this.loanBookTextFields = loanBookTextFields;
+	}
+
+	public JTabbedPane getLoansTabbedPane() {
+		return loansTabbedPane;
+	}
+
+	public void setLoansTabbedPane(JTabbedPane loansTabbedPane) {
+		this.loansTabbedPane = loansTabbedPane;
+	}
+
 	public List<Loan> getAll_loans() {
 		return all_loans;
 	}
@@ -1373,8 +1443,8 @@ public class View {
 		this.loansPanel = loansPanel;
 	}
 	
-	public JButton getRefreshLoanTablesB() {
-		return refreshLoanTablesB;
+	public JButton getRefreshAllLoansTabB() {
+		return refreshAllLoansTabB;
 	}
 
 	public JButton getReturnBookB() {

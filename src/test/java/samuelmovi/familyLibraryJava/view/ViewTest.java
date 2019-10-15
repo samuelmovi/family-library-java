@@ -568,6 +568,92 @@ public class ViewTest {
         Assert.assertEquals(loans.count(), view.getLoansModel().getRowCount());
     }
 
+    // @Test
+    public void testFillLoansPanel(){
+
+    }
+
+    // @Test
+    public void testRefreshLoanTables(){
+
+    }
+
+    @Test
+    public void testCreateAllLoansTab(){
+        // check null
+        Assert.assertNull(view.getAllLoansTab());
+        Assert.assertNull(view.getAllLoansTabTable());
+        Assert.assertNull(view.getRefreshAllLoansTabB());
+
+        // set object state
+        view.setLoansTabbedPane(new JTabbedPane());
+        this.controller = new Controller();
+        controller.loadTextStrings();
+        view.setStringMap(controller.getStringMap());
+
+        // execute method
+        view.createAllLoansTab();
+
+        // assert expected outcome
+        Assert.assertNotNull(view.getAllLoansTab());
+        Assert.assertNotNull(view.getAllLoansTabTable());
+        Assert.assertNotNull(view.getRefreshAllLoansTabB());
+
+        Assert.assertEquals(1, view.getLoansTabbedPane().getComponentCount());
+        Assert.assertEquals(2, view.getAllLoansTab().getComponentCount());
+    }
+
+    @Test
+    public void testCreateLoanBookTab(){
+        // check null
+        Assert.assertNull(view.getLoanBookTab());
+        Assert.assertNull(view.getMakeLoanTabTable());
+        Assert.assertNull(view.getLoanBookTextFields());
+        Assert.assertNull(view.getLoanBookB());
+
+        // set object state
+        view.setLoansTabbedPane(new JTabbedPane());
+        this.controller = new Controller();
+        controller.loadTextStrings();
+        view.setStringMap(controller.getStringMap());
+
+        // execute method
+        view.createLoanBookTab();
+
+        // assert expected outcome
+        Assert.assertNotNull(view.getLoanBookTab());
+        Assert.assertNotNull(view.getMakeLoanTabTable());
+        Assert.assertNotNull(view.getLoanBookTextFields());
+        Assert.assertNotNull(view.getLoanBookB());
+
+        Assert.assertEquals(1, view.getLoansTabbedPane().getComponentCount());
+        Assert.assertEquals(4 + view.getLoanBookTextFields().length, view.getLoanBookTab().getComponentCount());
+    }
+
+    @Test
+    public void testCreateReturnBookTab(){
+        // check null
+        Assert.assertNull(view.getReturnBookTab());
+        Assert.assertNull(view.getReturnLoanTabTable());
+        Assert.assertNull(view.getReturnBookB());
+
+        // set object state
+        view.setLoansTabbedPane(new JTabbedPane());
+        this.controller = new Controller();
+        controller.loadTextStrings();
+        view.setStringMap(controller.getStringMap());
+
+        // execute method
+        view.createReturnBookTab();
+
+        // assert expected outcome
+        Assert.assertNotNull(view.getReturnBookTab());
+        Assert.assertNotNull(view.getReturnLoanTabTable());
+        Assert.assertNotNull(view.getReturnBookB());
+
+        Assert.assertEquals(1, view.getLoansTabbedPane().getComponentCount());
+        Assert.assertEquals(2, view.getReturnBookTab().getComponentCount());
+    }
 
     // UTILITIES
     public void loadBookData(){
