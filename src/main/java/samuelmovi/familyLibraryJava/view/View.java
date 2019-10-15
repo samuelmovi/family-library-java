@@ -938,6 +938,26 @@ public class View {
 	//BOOKS setters and getters
 
 
+	public void setAllBooksTabTable(JTable allBooksTabTable) {
+		this.allBooksTabTable = allBooksTabTable;
+	}
+
+	public JTable getSearchBooksTabTable() {
+		return searchBooksTabTable;
+	}
+
+	public void setSearchBooksTabTable(JTable searchBooksTabTable) {
+		this.searchBooksTabTable = searchBooksTabTable;
+	}
+
+	public void setModifyBookTabTable(JTable modifyBookTabTable) {
+		this.modifyBookTabTable = modifyBookTabTable;
+	}
+
+	public void setDeleteBookTabTable(JTable deleteBookTabTable) {
+		this.deleteBookTabTable = deleteBookTabTable;
+	}
+
 	public List<BookView> getAllBookViews() {
 		return allBookViews;
 	}

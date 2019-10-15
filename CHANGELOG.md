@@ -19,6 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - tweaks to repositories
 
+### Fixed
+- regression introduced with changes while doing view tests
+
 ### Added
 - more controller tests
 

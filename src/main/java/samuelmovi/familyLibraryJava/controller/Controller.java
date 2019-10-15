@@ -61,28 +61,26 @@ public class Controller {
 	
 	public void initController() {
 
-		//view.initSetup();
-
 		loadTextStrings();
-		// set samuelmovi.familyLibraryJava.view info
+		// set view info
 		view.setLocationsArray(createLocationList());
 		view.setStringMap(stringMap);
 		// books stuff
-		view.setBookViewAliases(stringMap.get("bookJoinAliases").split("/"));
-		view.setAll_books((List<Book>)books.findAll());
-		view.setAllBookViews((List<BookView>)bookViews.findAll());
+		view.setBookViewAliases(stringMap.get("bookViewAliases").split("/"));
+		view.setAll_books(books.findAll());
+		view.setAllBookViews(bookViews.findAll());
 		view.setBookFieldAlias(stringMap.get("bookFieldAlias").split("/"));
 		view.setAvailableBooks(books.findByLoaned(false));
 		view.setSearchFields(stringMap.get("searchBookFields").split("/"));
 
 		// locations stuff
 		view.setLocationAliases(stringMap.get("locationAliases"));
-		view.setAll_locations((List<Location>)locations.findAll());
+		view.setAll_locations(locations.findAll());
 		view.setLocationFieldAlias(stringMap.get("locationFieldAlias").split("/"));
 
 		// loans stuff
 		view.setLoanJoinAliases(stringMap.get("loanJoinAliases"));
-		view.setAll_loans((List<Loan>)loans.findAll());
+		view.setAll_loans(loans.findAll());
 		view.setLoanFieldAlias(stringMap.get("loanFieldALias").split("/"));
 
 		// FINAL SETUP
