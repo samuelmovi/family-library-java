@@ -444,6 +444,80 @@ public class ViewTest {
         Assert.assertEquals(locations.count(), view.getAllLocationsModel().getRowCount());
     }
 
+    // @Test
+    public void testFillLocationsPanel(){
+
+    }
+
+    // @Test
+    public void testRefreshLocationTables(){
+
+    }
+
+    @Test
+    public void testCreateAddLocationTab(){
+        // check null
+        Assert.assertNull(view.getAddLocationB());
+        Assert.assertNull(view.getAddLocationB());
+        Assert.assertNull(view.getClearAddLocationFieldsB());
+
+        // set object state
+        view.setLocationsTabbedPane(new JTabbedPane());
+        this.controller = new Controller();
+        controller.loadTextStrings();
+        view.setStringMap(controller.getStringMap());
+
+        // execute method
+        view.createAddLocationTab();
+
+        // assert expected result:
+        Assert.assertNotNull(view.getAddLocationB());
+        Assert.assertNotNull(view.getAddLocationB());
+        Assert.assertNotNull(view.getClearAddLocationFieldsB());
+
+        Assert.assertEquals(
+                2
+                        + view.getAddLocationTextFields().length
+                        + view.getAddLocationLabelObjects().length,
+                view.getAddLocationTab().getComponentCount()
+        );
+        Assert.assertEquals(1, view.getLocationsTabbedPane().getComponentCount());
+    }
+
+    @Test
+    public void testCreatModifyLocationTab(){
+        // check null
+        Assert.assertNull(view.getModifyLocationTab());
+        Assert.assertNull(view.getModifyLocationTabTable());
+        Assert.assertNull(view.getModifyLocationB());
+        Assert.assertNull(view.getRefreshModifyLocationFieldsB());
+
+        // set object state
+        view.setLocationsTabbedPane(new JTabbedPane());
+        this.controller = new Controller();
+        controller.loadTextStrings();
+        view.setStringMap(controller.getStringMap());
+
+        // execute method
+        view.createModifyLocationTab();
+
+        // assert expected outcome
+        Assert.assertNotNull(view.getModifyLocationTab());
+        Assert.assertNotNull(view.getModifyLocationTabTable());
+        Assert.assertNotNull(view.getModifyLocationB());
+        Assert.assertNotNull(view.getRefreshModifyLocationFieldsB());
+
+        Assert.assertEquals(
+                3
+                        + view.getModifyLocationTextFields().length
+                        + controller.getStringMap().get("locationLabelsText").split(",").length,
+                view.getModifyLocationTab().getComponentCount()
+        );
+
+        Assert.assertEquals(1, view.getLocationsTabbedPane().getComponentCount());
+
+    }
+
     // UTILITIES
     public void loadBookData(){
         for (String[] data: bookData){

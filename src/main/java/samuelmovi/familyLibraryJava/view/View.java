@@ -97,10 +97,11 @@ public class View {
 	private TableRowSorter<TableModel> locationsSorter=new TableRowSorter<TableModel>();
 	private JTextField addLocationTextFields[] = new JTextField[4];
 	private JTabbedPane locationsTabbedPane;
-	private String locationLabelsText[];
+	// private String locationLabelsText[];
 	private JTextField modifyLocationTextFields[];
-	//private String locationAliases;
-	// private String[] locationFieldAlias;
+	private JPanel addLocationTab;
+	private JPanel modifyLocationTab;
+	private JLabel[] addLocationLabelObjects;
 
 	// loans stuff
 	private List<Loan> all_loans;
@@ -664,7 +665,7 @@ public class View {
 		locationsTabbedPane.setBounds(12, 12, 950, 575);
 		locationsPanel.add(locationsTabbedPane);
 		
-		locationLabelsText = stringMap.get("locationLabelsText").split(",");
+		//  locationLabelsText = stringMap.get("locationLabelsText").split(",");
 		
 		try {
 			fillLocationModel(allLocationsModel, all_locations);
@@ -697,15 +698,15 @@ public class View {
 	}
 	
 	public void createAddLocationTab() {
-		JPanel addLocationTab = new JPanel();
+		addLocationTab = new JPanel();
 		locationsTabbedPane.addTab(stringMap.get("new"), addLocationTab);
 		addLocationTab.setLayout(null);
 		
-		JLabel addLocationLabelObjects[]=new JLabel[locationLabelsText.length];
+		addLocationLabelObjects=new JLabel[stringMap.get("locationLabelsText").split(",").length];
 		int height=40;
 		
-		for(int i=0;i<locationLabelsText.length;i++) {
-			addLocationLabelObjects[i] = new JLabel(locationLabelsText[i]);
+		for(int i=0;i<stringMap.get("locationLabelsText").split(",").length;i++) {
+			addLocationLabelObjects[i] = new JLabel(stringMap.get("locationLabelsText").split(",")[i]);
 			addLocationLabelObjects[i].setBounds(12, height, 135, 15);
 			addLocationTab.add(addLocationLabelObjects[i]);
 			height+=25;
@@ -730,14 +731,14 @@ public class View {
 	}
 	
 	public void createModifyLocationTab() {
-		JPanel modifyLocationTab = new JPanel();
+		modifyLocationTab = new JPanel();
 		locationsTabbedPane.addTab(stringMap.get("modify"), modifyLocationTab);
 		modifyLocationTab.setLayout(null);
 		JLabel modifyBookLabelObjects[]=new JLabel[4];
 		int height=260;
 		
-		for(int i=0;i<locationLabelsText.length;i++) {
-			modifyBookLabelObjects[i] = new JLabel(locationLabelsText[i]);
+		for(int i=0;i<stringMap.get("locationLabelsText").split(",").length;i++) {
+			modifyBookLabelObjects[i] = new JLabel(stringMap.get("locationLabelsText").split(",")[i]);
 			modifyBookLabelObjects[i].setBounds(26, height, 135, 15);
 			modifyLocationTab.add(modifyBookLabelObjects[i]);
 			height+=25;
@@ -1160,6 +1161,38 @@ public class View {
 
 	//LOCATIONS setters and getters
 
+
+	public JLabel[] getAddLocationLabelObjects() {
+		return addLocationLabelObjects;
+	}
+
+	public void setAddLocationLabelObjects(JLabel[] addLocationLabelObjects) {
+		this.addLocationLabelObjects = addLocationLabelObjects;
+	}
+
+	public void setClearAddBookFieldsB(JButton clearAddBookFieldsB) {
+		this.clearAddBookFieldsB = clearAddBookFieldsB;
+	}
+
+	public void setAllLocationsTabTable(JTable allLocationsTabTable) {
+		this.allLocationsTabTable = allLocationsTabTable;
+	}
+
+	public JPanel getAddLocationTab() {
+		return addLocationTab;
+	}
+
+	public void setAddLocationTab(JPanel addLocationTab) {
+		this.addLocationTab = addLocationTab;
+	}
+
+	public JPanel getModifyLocationTab() {
+		return modifyLocationTab;
+	}
+
+	public void setModifyLocationTab(JPanel modifyLocationTab) {
+		this.modifyLocationTab = modifyLocationTab;
+	}
 
 	public void setAddBookB(JButton addBookB) {
 		this.addBookB = addBookB;
