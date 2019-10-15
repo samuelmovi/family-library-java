@@ -43,7 +43,7 @@ public class View {
 	private List<BookView> allBookViews;
 	private JPanel booksPanel;
 	private JPanel allBooksTab;
-	private JPanel deleteBooksTab = new JPanel();
+	private JPanel deleteBooksTab;
 	private JButton booksB;
 	private JButton searchBookB; 
 	private JButton addBookB;
@@ -74,6 +74,7 @@ public class View {
 	private JPanel searchBooksTab;
 	private JPanel addBookTab;
 	private JLabel[] addBookLabelObjects;
+	private JPanel modifyBookTab;
 
 	//  location stuff
 	private List<Location> all_locations;
@@ -529,11 +530,11 @@ public class View {
 	
 	@SuppressWarnings("unchecked")
 	public void createModifyBookTab() {
-		JPanel modifyBookTab = new JPanel();
+		modifyBookTab = new JPanel();
 		booksTabbedPane.addTab(stringMap.get("modify"), modifyBookTab);
 		modifyBookTab.setLayout(null);
 		
-		JLabel modifyBookLabelObjects[]=new JLabel[stringMap.get("bookLabelsText").split(",").length];
+		JLabel[] modifyBookLabelObjects = new JLabel[stringMap.get("bookLabelsText").split(",").length];
 		
 		int height=260;
 		
@@ -588,6 +589,7 @@ public class View {
 	}
 	
 	public void createDeleteBookTab() {
+		deleteBooksTab = new JPanel();
 		booksTabbedPane.addTab(stringMap.get("delete"), deleteBooksTab);
 		deleteBooksTab.setLayout(null);
 		
@@ -951,6 +953,14 @@ public class View {
 
 	//BOOKS setters and getters
 
+
+	public JPanel getModifyBookTab() {
+		return modifyBookTab;
+	}
+
+	public void setModifyBookTab(JPanel modifyBookTab) {
+		this.modifyBookTab = modifyBookTab;
+	}
 
 	public JLabel[] getAddBookLabelObjects() {
 		return addBookLabelObjects;

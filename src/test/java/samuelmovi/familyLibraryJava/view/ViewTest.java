@@ -336,6 +336,67 @@ public class ViewTest {
         Assert.assertEquals(1, view.getBooksTabbedPane().getComponentCount());
     }
 
+    @Test
+    public void testCreateModifyBookTab(){
+        // check null
+        Assert.assertNull(view.getModifyBookTab());
+        Assert.assertNull(view.getModifyBookTabTable());
+        Assert.assertNull(view.getModifyBookB());
+        Assert.assertNull(view.getResetModifyBookTabB());
+
+        // set object state
+        view.setBooksTabbedPane(new JTabbedPane());
+        this.controller = new Controller();
+        controller.loadTextStrings();
+        view.setStringMap(controller.getStringMap());
+        view.setLocationsArray(new String[1]);
+
+        // execute method
+        view.createModifyBookTab();
+
+        // assert expected outcome
+        Assert.assertNotNull(view.getModifyBookTab());
+        Assert.assertNotNull(view.getModifyBookTabTable());
+        Assert.assertNotNull(view.getModifyBookB());
+        Assert.assertNotNull(view.getResetModifyBookTabB());
+
+        Assert.assertEquals(
+                3
+                        + view.getModifyBookInputObjects().length
+                        + controller.getStringMap().get("bookLabelsText").split(",").length,
+                view.getModifyBookTab().getComponentCount()
+        );
+
+        Assert.assertEquals(1, view.getBooksTabbedPane().getComponentCount());
+
+    }
+
+    @Test
+    public void testCreateDeleteBookTab(){
+        // check null
+        Assert.assertNull(view.getDeleteBooksTab());
+        Assert.assertNull(view.getDeleteBookTabTable());
+        Assert.assertNull(view.getDeleteBookB());
+
+        // set object state
+        view.setBooksTabbedPane(new JTabbedPane());
+        this.controller = new Controller();
+        controller.loadTextStrings();
+        view.setStringMap(controller.getStringMap());
+        view.setLocationsArray(new String[1]);
+
+        // execute method
+        view.createDeleteBookTab();
+
+        // assert expected outcome
+        Assert.assertNotNull(view.getDeleteBooksTab());
+        Assert.assertNotNull(view.getDeleteBookTabTable());
+        Assert.assertNotNull(view.getDeleteBookB());
+
+        Assert.assertEquals(1, view.getBooksTabbedPane().getComponentCount());
+        Assert.assertEquals(2, view.getDeleteBooksTab().getComponentCount());
+
+    }
 
     // UTILITIES
     public void loadBookData(){
