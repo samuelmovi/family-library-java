@@ -66,6 +66,9 @@ public class ViewTest {
 
     }
 
+
+    // BOOK TESTS
+
     @Test
     public void testSetUpFrame(){
         // check frame and content pane are null
@@ -396,6 +399,49 @@ public class ViewTest {
         Assert.assertEquals(1, view.getBooksTabbedPane().getComponentCount());
         Assert.assertEquals(2, view.getDeleteBooksTab().getComponentCount());
 
+    }
+
+
+    // LOCATION TESTS
+
+    @Test
+    public void testCreateAllLocationsTab(){
+        // check null
+        Assert.assertNull(view.getAllLocationsTab());
+        Assert.assertNull(view.getAllLoansTabTable());
+        Assert.assertNull(view.getRefreshAllLocationsB());
+
+        // set object state
+        view.setLocationsTabbedPane(new JTabbedPane());
+        this.controller = new Controller();
+        controller.loadTextStrings();
+        view.setStringMap(controller.getStringMap());
+
+        // execute method
+        view.createAllLocationsTab();
+
+        // assert expected outcome
+        Assert.assertNotNull(view.getAllLocationsTab());
+        Assert.assertNotNull(view.getAllLocationsTabTable());
+        Assert.assertNotNull(view.getRefreshAllLocationsB());
+
+        Assert.assertEquals(1, view.getLocationsTabbedPane().getComponentCount());
+        Assert.assertEquals(2, view.getAllLocationsTab().getComponentCount());
+    }
+
+    @Test
+    public void testFillLocationModel(){
+        // populate database
+        this.loadLocationData();
+        this.loadBookData();
+        // set object state
+        this.controller = new Controller();
+        controller.loadTextStrings();
+        view.setStringMap(controller.getStringMap());
+        // execute method
+        view.fillLocationModel(view.getAllLocationsModel(), locations.findAll());
+        // assert expected outcome
+        Assert.assertEquals(locations.count(), view.getAllLocationsModel().getRowCount());
     }
 
     // UTILITIES

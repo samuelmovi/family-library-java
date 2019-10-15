@@ -377,7 +377,7 @@ public class ControllerTest {
         vector.add(testString);
 
         view.getAllLocationsModel().setRowCount(0);
-        view.getAllLocationsModel().setColumnCount(view.getLocationFieldAlias().length);
+        view.getAllLocationsModel().setColumnCount(controller.getStringMap().get("locationFieldAlias").split("/").length);
         view.getAllLocationsModel().addRow(vector);
         // set selected table row
         view.getModifyLocationTabTable().setRowSelectionInterval(0,0);
@@ -418,7 +418,7 @@ public class ControllerTest {
         vector.add(testLocation.getDetails());
 
         view.getAllLocationsModel().setRowCount(0);
-        view.getAllLocationsModel().setColumnCount(view.getLocationFieldAlias().length);
+        view.getAllLocationsModel().setColumnCount(controller.getStringMap().get("locationFieldAlias").split("/").length);
         view.getAllLocationsModel().addRow(vector);
         // set selected table row
         view.getDeleteLocationTabTable().setRowSelectionInterval(0,0);

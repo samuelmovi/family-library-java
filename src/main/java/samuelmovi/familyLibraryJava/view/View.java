@@ -84,8 +84,8 @@ public class View {
 	private JButton modifyLocationB;
 	private JButton clearAddLocationFieldsB;
 	private JButton deleteLocationB;
-	private JPanel allLocationsTab = new JPanel();
-	private JPanel deleteLocationTab = new JPanel();
+	private JPanel allLocationsTab;
+	private JPanel deleteLocationTab;
 	private JButton locationsB;	
 	private JButton addLocationB;
 	private DefaultTableModel allLocationsModel=new DefaultTableModel();
@@ -99,8 +99,8 @@ public class View {
 	private JTabbedPane locationsTabbedPane;
 	private String locationLabelsText[];
 	private JTextField modifyLocationTextFields[];
-	private String locationAliases;
-	private String[] locationFieldAlias;
+	//private String locationAliases;
+	// private String[] locationFieldAlias;
 
 	// loans stuff
 	private List<Loan> all_loans;
@@ -614,26 +614,29 @@ public class View {
 	}
 	
 	// LOCATIONS
-	public void createAllLocationsTab(JPanel everythingTab, JTabbedPane tabbedPane,JTable table, DefaultTableModel model,TableRowSorter<TableModel> sorter, String alias, String tableName, Integer[] widths) {
-		tabbedPane.addTab("Todos", everythingTab);
-		everythingTab.setLayout(null);
+	public void createAllLocationsTab() {
+
+		allLocationsTab = new JPanel();
+		locationsTabbedPane.addTab("Todos", allLocationsTab);
+		allLocationsTab.setLayout(null);
 		
 		JScrollPane scroll = new JScrollPane();
 		scroll.setBounds(12, 82, 920, 460);
-		everythingTab.add(scroll);
+		allLocationsTab.add(scroll);
 		
 		refreshAllLocationsB = new JButton("Refrescar");
 		refreshAllLocationsB.setBounds(375,25,120,25);
-		everythingTab.add(refreshAllLocationsB);
+		allLocationsTab.add(refreshAllLocationsB);
+
+		allLocationsTabTable = new JTable(allLocationsModel);
+		allLocationsTabTable.setFont(mediumBoldFont);
+		locationsSorter = new TableRowSorter<TableModel>(allLocationsModel);
+		allLocationsTabTable.setRowSorter(locationsSorter);
+		allLocationsTabTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		setColumnWidths(allLocationsTabTable, locationColumnWidths);
+		scroll.setViewportView(allLocationsTabTable);
 		
-		table.setFont(mediumBoldFont);
-		sorter=new TableRowSorter<TableModel>(model);
-		table.setRowSorter(sorter);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		setColumnWidths(table, widths);
-		scroll.setViewportView(table);
-		
-		JTableHeader header=table.getTableHeader();
+		JTableHeader header=allLocationsTabTable.getTableHeader();
 		header.setFont(mediumBoldFont);
 		
 	}
@@ -641,9 +644,9 @@ public class View {
 	public void fillLocationModel(DefaultTableModel model, List<Location> list) {
 		// set table info
 		model.setRowCount(0);
-		model.setColumnCount(locationFieldAlias.length);
-		model.setColumnIdentifiers(locationFieldAlias);
-		// populate samuelmovi.familyLibraryJava.model
+		model.setColumnCount(stringMap.get("locationFieldAlias").split("/").length);
+		model.setColumnIdentifiers(stringMap.get("locationFieldAlias").split("/"));
+		// populate model
 		
 		for(Location loc:list) {
 			Vector<String> vector = new Vector<String>();
@@ -672,7 +675,7 @@ public class View {
 		
 		allLocationsTabTable = new JTable(allLocationsModel);		
 		
-		createAllLocationsTab(allLocationsTab, locationsTabbedPane, allLocationsTabTable, allLocationsModel, locationsSorter, stringMap.get("locations"), "locations", locationColumnWidths);
+		createAllLocationsTab();
 		createAddLocationTab();
 		createModifyLocationTab();
 		createDeleteLocationTab();
@@ -776,6 +779,7 @@ public class View {
 	}
 	
 	public void createDeleteLocationTab() {
+		deleteLocationTab = new JPanel();
 		locationsTabbedPane.addTab(stringMap.get("delete"), deleteLocationTab);
 		deleteLocationTab.setLayout(null);
 		
@@ -952,7 +956,6 @@ public class View {
 
 
 	//BOOKS setters and getters
-
 
 	public JPanel getModifyBookTab() {
 		return modifyBookTab;
@@ -1154,21 +1157,83 @@ public class View {
 		this.booksTabbedPane = booksTabbedPane;
 	}
 
+
 	//LOCATIONS setters and getters
+
+
+	public void setAddBookB(JButton addBookB) {
+		this.addBookB = addBookB;
+	}
+
+	public void setRefreshAllLocationsB(JButton refreshAllLocationsB) {
+		this.refreshAllLocationsB = refreshAllLocationsB;
+	}
+
+	public void setLocationsB(JButton locationsB) {
+		this.locationsB = locationsB;
+	}
+
+	public void setAddLocationB(JButton addLocationB) {
+		this.addLocationB = addLocationB;
+	}
+
+	public void setModifyLocationTabTable(JTable modifyLocationTabTable) {
+		this.modifyLocationTabTable = modifyLocationTabTable;
+	}
+
+	public void setRefreshModifyLocationFieldsB(JButton refreshModifyLocationFieldsB) {
+		this.refreshModifyLocationFieldsB = refreshModifyLocationFieldsB;
+	}
+
+	public void setDeleteLocationTabTable(JTable deleteLocationTabTable) {
+		this.deleteLocationTabTable = deleteLocationTabTable;
+	}
+
+	public void setAddLocationTextFields(JTextField[] addLocationTextFields) {
+		this.addLocationTextFields = addLocationTextFields;
+	}
+
+	public JTabbedPane getLocationsTabbedPane() {
+		return locationsTabbedPane;
+	}
+
+	public void setLocationsTabbedPane(JTabbedPane locationsTabbedPane) {
+		this.locationsTabbedPane = locationsTabbedPane;
+	}
+
+	public void setModifyLocationB(JButton modifyLocationB) {
+		this.modifyLocationB = modifyLocationB;
+	}
+
+	public void setClearAddLocationFieldsB(JButton clearAddLocationFieldsB) {
+		this.clearAddLocationFieldsB = clearAddLocationFieldsB;
+	}
+
+	public void setDeleteLocationB(JButton deleteLocationB) {
+		this.deleteLocationB = deleteLocationB;
+	}
+
+	public JPanel getAllLocationsTab() {
+		return allLocationsTab;
+	}
+
+	public void setAllLocationsTab(JPanel allLocationsTab) {
+		this.allLocationsTab = allLocationsTab;
+	}
+
+	public JPanel getDeleteLocationTab() {
+		return deleteLocationTab;
+	}
+
+	public void setDeleteLocationTab(JPanel deleteLocationTab) {
+		this.deleteLocationTab = deleteLocationTab;
+	}
 	public List<Location> getAll_locations() {
 		return all_locations;
 	}
 
 	public void setAll_locations(List<Location> all_locations) {
 		this.all_locations = all_locations;
-	}
-
-	public void setLocationAliases(String locationAliases) {
-		this.locationAliases = locationAliases;
-	}
-
-	public String getLocationAliases() {
-		return locationAliases;
 	}
 
 	public JButton getRefreshAllLocationsB() {
@@ -1250,14 +1315,8 @@ public class View {
 	public DefaultTableModel getAllLocationsModel() {
 		return allLocationsModel;
 	}
-	
-	public String[] getLocationFieldAlias() {
-		return locationFieldAlias;
-	}
 
-	public void setLocationFieldAlias(String[] locationFieldAlias) {
-		this.locationFieldAlias = locationFieldAlias;
-	}
+
 
 	//LOANS setters and getters
 	public List<Loan> getAll_loans() {

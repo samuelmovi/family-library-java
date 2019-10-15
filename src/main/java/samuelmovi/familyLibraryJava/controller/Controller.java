@@ -71,9 +71,7 @@ public class Controller {
 		view.setAvailableBooks(books.findByLoaned(false));
 
 		// locations stuff
-		view.setLocationAliases(stringMap.get("locationAliases"));
 		view.setAll_locations(locations.findAll());
-		view.setLocationFieldAlias(stringMap.get("locationFieldAlias").split("/"));
 
 		// loans stuff
 		view.setLoanJoinAliases(stringMap.get("loanJoinAliases"));
