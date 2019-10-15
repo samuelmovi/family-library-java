@@ -68,14 +68,12 @@ public class View {
 	private TableRowSorter<TableModel> deleteBooksSorter=new TableRowSorter<TableModel>();
 	private JTextField addBookTextFields[];
 	private JTabbedPane booksTabbedPane;
-	private String bookLabelsText[];
 	private Object[] modifyBookInputObjects= {new JTextField(),new JTextField(),new JTextField(),new JTextField(),new JTextField(),new JTextField(),new JTextField(),new JComboBox<String>()};
-	//private String[] searchFields;
-	//private String[] bookFieldAlias;
-	//private String[] bookViewAliases;
 	private JComboBox<String> comboLocations;
 	private JComboBox<String> modifyBookCB;
 	private JPanel searchBooksTab;
+	private JPanel addBookTab;
+	private JLabel[] addBookLabelObjects;
 
 	//  location stuff
 	private List<Location> all_locations;
@@ -384,8 +382,8 @@ public class View {
 		booksTabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		booksTabbedPane.setBounds(12, 12, 950, 575);
 		booksPanel.add(booksTabbedPane);
-		
-		bookLabelsText = stringMap.get("bookLabelsText").split(",");
+
+		//bookLabelsText = stringMap.get("bookLabelsText").split(",");
 
 		createAllBooksTab();
 		createSearchBookTab();
@@ -490,21 +488,21 @@ public class View {
 	
 	public void createAddBookTab() {
 		// NEW BOOK TAB
-		JPanel addBookTab = new JPanel();
+		addBookTab = new JPanel();
 		booksTabbedPane.addTab(stringMap.get("new"), addBookTab);
 		addBookTab.setLayout(null);
 		
-		JLabel addBookLabelObjects[]=new JLabel[bookLabelsText.length];
+		addBookLabelObjects=new JLabel[stringMap.get("bookLabelsText").split(",").length];
 		int height=40;
 		
-		for(int i=0;i<bookLabelsText.length;i++) {
-			addBookLabelObjects[i] = new JLabel(bookLabelsText[i]);
+		for(int i=0;i<stringMap.get("bookLabelsText").split(",").length;i++) {
+			addBookLabelObjects[i] = new JLabel(stringMap.get("bookLabelsText").split(",")[i]);
 			addBookLabelObjects[i].setBounds(12, height, 250, 15);
 			addBookTab.add(addBookLabelObjects[i]);
 			height+=25;
 		}
 		
-		addBookTextFields=new JTextField[bookLabelsText.length-1];
+		addBookTextFields=new JTextField[stringMap.get("bookLabelsText").split(",").length-1];
 		height=40;
 		
 		for(int i=0;i<addBookTextFields.length;i++) {
@@ -517,7 +515,6 @@ public class View {
 		comboLocations=new JComboBox<String>();
 		comboLocations.setBounds(300,height,450,19);
 		comboLocations.setModel(new DefaultComboBoxModel<String>(locationsArray));
-		
 		comboLocations.setSelectedItem(null);
 		addBookTab.add(comboLocations);
 		
@@ -536,12 +533,12 @@ public class View {
 		booksTabbedPane.addTab(stringMap.get("modify"), modifyBookTab);
 		modifyBookTab.setLayout(null);
 		
-		JLabel modifyBookLabelObjects[]=new JLabel[bookLabelsText.length];
+		JLabel modifyBookLabelObjects[]=new JLabel[stringMap.get("bookLabelsText").split(",").length];
 		
 		int height=260;
 		
-		for(int i=0;i<bookLabelsText.length;i++) {
-			modifyBookLabelObjects[i] = new JLabel(bookLabelsText[i]);
+		for(int i=0;i<stringMap.get("bookLabelsText").split(",").length;i++) {
+			modifyBookLabelObjects[i] = new JLabel(stringMap.get("bookLabelsText").split(",")[i]);
 			modifyBookLabelObjects[i].setBounds(26, height, 200, 15);
 			modifyBookTab.add(modifyBookLabelObjects[i]);
 			height+=25;
@@ -943,9 +940,33 @@ public class View {
 		returnBookB.setBounds(425, 400, 117, 25);
 		returnBookTab.add(returnBookB);
 	}
-	
+
+
+
+
+
+
+
+
+
 	//BOOKS setters and getters
 
+
+	public JLabel[] getAddBookLabelObjects() {
+		return addBookLabelObjects;
+	}
+
+	public void setAddBookLabelObjects(JLabel[] addBookLabelObjects) {
+		this.addBookLabelObjects = addBookLabelObjects;
+	}
+
+	public JPanel getAddBookTab() {
+		return addBookTab;
+	}
+
+	public void setAddBookTab(JPanel addBookTab) {
+		this.addBookTab = addBookTab;
+	}
 
 	public JPanel getSearchBooksTab() {
 		return searchBooksTab;

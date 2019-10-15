@@ -288,7 +288,7 @@ public class ViewTest {
         this.controller = new Controller();
         controller.loadTextStrings();
         view.setStringMap(controller.getStringMap());
-        
+
         // execute method
         view.createSearchBookTab();
 
@@ -303,8 +303,41 @@ public class ViewTest {
         Assert.assertEquals(1, view.getBooksTabbedPane().getComponentCount());
     }
 
+    @Test
+    public void testCreateAddBookTab() {
+        // check null
+        Assert.assertNull(view.getAddBookTab());
+        Assert.assertNull(view.getComboLocations());
+        Assert.assertNull(view.getAddBookB());
+        Assert.assertNull(view.getClearAddBookFieldsB());
 
-        // UTILITIES
+        // set object state
+        view.setBooksTabbedPane(new JTabbedPane());
+        this.controller = new Controller();
+        controller.loadTextStrings();
+        view.setStringMap(controller.getStringMap());
+        view.setLocationsArray(new String[1]);
+
+        // execute method
+        view.createAddBookTab();
+
+        // assert expected result:
+        Assert.assertNotNull(view.getAddBookTab());
+        Assert.assertNotNull(view.getComboLocations());
+        Assert.assertNotNull(view.getAddBookB());
+        Assert.assertNotNull(view.getClearAddBookFieldsB());
+
+        Assert.assertEquals(
+                3
+                        + view.getAddBookTextFields().length
+                        + view.getAddBookLabelObjects().length,
+                view.getAddBookTab().getComponentCount()
+        );
+        Assert.assertEquals(1, view.getBooksTabbedPane().getComponentCount());
+    }
+
+
+    // UTILITIES
     public void loadBookData(){
         for (String[] data: bookData){
             Book newBook = new Book(
