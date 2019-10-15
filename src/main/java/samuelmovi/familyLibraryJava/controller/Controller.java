@@ -66,12 +66,9 @@ public class Controller {
 		view.setLocationsArray(createLocationList());
 		view.setStringMap(stringMap);
 		// books stuff
-		view.setBookViewAliases(stringMap.get("bookViewAliases").split("/"));
 		view.setAll_books(books.findAll());
 		view.setAllBookViews(bookViews.findAll());
-		view.setBookFieldAlias(stringMap.get("bookFieldAlias").split("/"));
 		view.setAvailableBooks(books.findByLoaned(false));
-		view.setSearchFields(stringMap.get("searchBookFields").split("/"));
 
 		// locations stuff
 		view.setLocationAliases(stringMap.get("locationAliases"));

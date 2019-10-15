@@ -70,9 +70,9 @@ public class View {
 	private JTabbedPane booksTabbedPane;
 	private String bookLabelsText[];
 	private Object[] modifyBookInputObjects= {new JTextField(),new JTextField(),new JTextField(),new JTextField(),new JTextField(),new JTextField(),new JTextField(),new JComboBox<String>()};
-	private String[] searchFields;
-	private String[] bookFieldAlias;
-	private String[] bookViewAliases;
+	//private String[] searchFields;
+	//private String[] bookFieldAlias;
+	//private String[] bookViewAliases;
 	private JComboBox<String> comboLocations;
 	private JComboBox<String> modifyBookCB;
 
@@ -334,8 +334,8 @@ public class View {
 	public void fillBookModel(DefaultTableModel model, List<Book> list) {
 		// set table info
 		model.setRowCount(0);
-		model.setColumnCount(bookFieldAlias.length);
-		model.setColumnIdentifiers(bookFieldAlias);
+		model.setColumnCount(stringMap.get("bookFieldAlias").split("/").length);
+		model.setColumnIdentifiers(stringMap.get("bookFieldAlias").split("/"));
 		// populate table model
 		for(Book b:list) {
 			Vector<String> vector = new Vector<String>();
@@ -357,8 +357,8 @@ public class View {
 	public void fillBookViewModel(DefaultTableModel model, List<BookView> list) {
 		// set table info
 		model.setRowCount(0);
-		model.setColumnCount(bookViewAliases.length);
-		model.setColumnIdentifiers(bookViewAliases);
+		model.setColumnCount( stringMap.get("bookViewAliases").split("/").length);
+		model.setColumnIdentifiers(stringMap.get("bookViewAliases").split("/"));
 		// populate model
 		for(BookView b:list) {
 			Vector<String> vector = new Vector<String>();
@@ -393,14 +393,22 @@ public class View {
 		createDeleteBookTab();
 		
 		try {
+			//System.out.println("[ 1 ]");
 			setColumnWidths(allBooksTabTable, bookColumnWidths);
+			//System.out.println("[ 2 ]");
 			setColumnWidths(deleteBookTabTable, bookColumnWidths);
+			//System.out.println("[ 3 ]");
 			fillBookModel(modifyBooksModel, all_books);
+			//System.out.println("[ 4 ]");
 			fillBookViewModel(allBooksModel, allBookViews);
+			//System.out.println("[ 5 ]");
 			setColumnWidths( modifyBookTabTable, bookColumnWidths);
+			//System.out.println("[ 6 ]");
 		}catch (Exception e) {
+			System.out.println("[!!!] Error: " + e);
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(frame, stringMap.get("refreshBookTablesX")+" :\n"+e, stringMap.get("refreshBookTablesXHeader"), JOptionPane.ERROR_MESSAGE);
-		    System.out.println(e.getMessage());
+
 		}		
 	}
 	
@@ -466,7 +474,7 @@ public class View {
 		searchBookCombo=new JComboBox<String>();
 		searchBookCombo.setBounds(120,35,150,25);
 		searchBooks.add(searchBookCombo);
-		searchBookCombo.setModel(new DefaultComboBoxModel<String>(searchFields));
+		searchBookCombo.setModel(new DefaultComboBoxModel<String>(stringMap.get("searchBookFields").split("/")));
 		searchBookCombo.setSelectedItem(null);
 		
 		searchTerm = new JTextField();
@@ -982,14 +990,6 @@ public class View {
 		this.allBookViewsModel = allBookViewsModel;
 	}
 
-	public String[] getBookViewAliases() {
-		return bookViewAliases;
-	}
-
-	public void setBookViewAliases(String[] bookViewAliases) {
-		this.bookViewAliases = bookViewAliases;
-	}
-	
 	public JComboBox<String> getSearchBookCombo() {
 		return searchBookCombo;
 	}
@@ -997,15 +997,7 @@ public class View {
 	public JTable getDeleteBookTabTable() {
 		return deleteBookTabTable;
 	}
-	
-	public String[] getBookFieldAlias() {
-		return bookFieldAlias;
-	}
 
-	public void setBookFieldAlias(String[] bookFieldAlias) {
-		this.bookFieldAlias = bookFieldAlias;
-	}
-	
 	public JTable getAllBooksTabTable() {
 		return allBooksTabTable;
 	}
@@ -1112,14 +1104,6 @@ public class View {
 	
 	public JButton getRefreshAllBooksTabB() {
 		return refreshAllBooksTabB;
-	}
-	
-	public String[] getSearchFields() {
-		return searchFields;
-	}
-
-	public void setSearchFields(String[] searchFields) {
-		this.searchFields = searchFields;
 	}
 
 	public JTabbedPane getBooksTabbedPane() {

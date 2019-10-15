@@ -223,7 +223,7 @@ public class ControllerTest {
         vector.add(b.getPurchase_date());
 
         view.getModifyBooksModel().setRowCount(0);
-        view.getModifyBooksModel().setColumnCount(view.getBookFieldAlias().length);
+        view.getModifyBooksModel().setColumnCount(controller.getStringMap().get("bookFieldAlias").split("/").length);
         view.getModifyBooksModel().addRow(vector);
         // set location combo content
         String[] locationString = new String[1];
@@ -279,7 +279,7 @@ public class ControllerTest {
         vector.add(b.getPurchase_date());
 
         view.getAllBooksModel().setRowCount(0);
-        view.getAllBooksModel().setColumnCount(view.getBookFieldAlias().length);
+        view.getAllBooksModel().setColumnCount(controller.getStringMap().get("bookFieldAlias").split("/").length);
         view.getAllBooksModel().addRow(vector);
         // set selected table row
         view.getDeleteBookTabTable().setRowSelectionInterval(0,0);
@@ -521,7 +521,7 @@ public class ControllerTest {
         vector.add(b.getPurchase_date());
 
         view.getAllBooksModel().setRowCount(0);
-        view.getAllBooksModel().setColumnCount(view.getBookFieldAlias().length);
+        view.getAllBooksModel().setColumnCount(controller.getStringMap().get("bookFieldAlias").split("/").length);
         view.getAllBooksModel().addRow(vector);
         // set selected table row
         view.getMakeLoanTabTable().setRowSelectionInterval(0,0);
