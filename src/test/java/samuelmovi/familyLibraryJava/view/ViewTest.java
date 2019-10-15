@@ -21,6 +21,9 @@ import samuelmovi.familyLibraryJava.repo.LocationRepository;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.util.List;
+
+import static org.mockito.ArgumentMatchers.eq;
 
 @ContextConfiguration(locations = "classpath:Tests.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -200,41 +203,50 @@ public class ViewTest {
         Assert.assertEquals(bookViews.count(), view.getAllBookViewsModel().getRowCount());
     }
 
-    //@Test // TODO: solve mocking of inner method calls
+    @Test // TODO: solve mocking of inner method calls
     public void testFillBooksPanel(){
         // check null: books tabbed pane
         Assert.assertNull(view.getBooksTabbedPane());
-        // set books panel
-        JPanel panel = new JPanel();
-        view.setBooksPanel(panel);
+
+        // create spy to mock inner method calls
+        View spyView = Mockito.spy(new View());
+
         // set strings
         this.controller = new Controller();
         controller.loadTextStrings();
-        view.setStringMap(controller.getStringMap());
-        // mock inner method calls
-        View spyView = Mockito.spy(view);
+        spyView.setStringMap(controller.getStringMap());
+
+        // set books panel
+        JPanel panel = new JPanel();
+        spyView.setBooksPanel(panel);
+
         Mockito.doNothing().when(spyView).createAllBooksTab();
         Mockito.doNothing().when(spyView).createSearchBookTab();
         Mockito.doNothing().when(spyView).createAddBookTab();
         Mockito.doNothing().when(spyView).createModifyBookTab();
         Mockito.doNothing().when(spyView).createDeleteBookTab();
 
-        Mockito.doNothing().when(spyView).setColumnWidths(view.getAllBooksTabTable(), view.getBookColumnWidths());
-        Mockito.doNothing().when(spyView).setColumnWidths(view.getDeleteBookTabTable(), view.getBookColumnWidths());
-        Mockito.doNothing().when(spyView).setColumnWidths(view.getModifyBookTabTable(), view.getBookColumnWidths());
-
-        Mockito.doNothing().when(spyView).fillBookModel(view.getModifyBooksModel(), books.findAll());
-
-        Mockito.doNothing().when(spyView).fillBookViewModel(view.getAllBooksModel(), bookViews.findAll());
-        Mockito.doNothing().when(spyView).setColumnWidths(new JTable(), new int[2]);
+        Mockito.doNothing().when(spyView)
+                .setColumnWidths(Mockito.any(JTable.class), Mockito.any(Integer[].class));
+        Mockito.doNothing().when(spyView)
+                .fillBookModel(Mockito.any(DefaultTableModel.class), Mockito.anyList());
+        Mockito.doNothing().when(spyView)
+                .fillBookViewModel(Mockito.any(DefaultTableModel.class), Mockito.anyList());
 
         // execute method
         spyView.fillBooksPanel();
 
         // assert expected outcome
         Assert.assertNotNull(spyView.getBooksTabbedPane());
-        Mockito.verify(spyView, Mockito.times(1)).setColumnWidths(new JTable(), new int[2]);
-        Mockito.verify(spyView, Mockito.times(1)).fillBookModel(new DefaultTableModel(), books.findAll());
+        Mockito.verify(spyView, Mockito.times(1)).createAllBooksTab();
+        Mockito.verify(spyView, Mockito.times(1)).createSearchBookTab();
+        Mockito.verify(spyView, Mockito.times(1)).createAddBookTab();
+        Mockito.verify(spyView, Mockito.times(1)).createModifyBookTab();
+        Mockito.verify(spyView, Mockito.times(1)).createDeleteBookTab();
+
+
+         Mockito.verify(spyView, Mockito.times(3)).setColumnWidths(Mockito.any(JTable.class), Mockito.any(Integer[].class));
+        Mockito.verify(spyView, Mockito.times(1)).fillBookModel(Mockito.any(DefaultTableModel.class), Mockito.anyList());
     }
 
     // UTILITIES

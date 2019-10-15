@@ -56,7 +56,7 @@ public class View {
 	private JTable searchBooksTabTable;
 	private JTable modifyBookTabTable;
 	private JTable deleteBookTabTable;
-	private	int[] bookColumnWidths = {25, 150, 125, 100, 80, 80, 95, 95, 80, 95, 95};
+	private	Integer[] bookColumnWidths = {25, 150, 125, 100, 80, 80, 95, 95, 80, 95, 95};
 	private DefaultTableModel allBooksModel=new DefaultTableModel();
 	private DefaultTableModel allBookViewsModel=new DefaultTableModel();
 	private DefaultTableModel searchBooksModel=new DefaultTableModel();
@@ -93,7 +93,7 @@ public class View {
 	private JTable modifyLocationTabTable;
 	private JButton refreshModifyLocationFieldsB;
 	private JTable deleteLocationTabTable;
-	private int[] locationColumnWidths = {25, 250, 200, 200, 300};
+	private Integer[] locationColumnWidths = {25, 250, 200, 200, 300};
 	private TableRowSorter<TableModel> locationsSorter=new TableRowSorter<TableModel>();
 	private JTextField addLocationTextFields[] = new JTextField[4];
 	private JTabbedPane locationsTabbedPane;
@@ -116,7 +116,7 @@ public class View {
 	private JTable allLoansTabTable;
 	private JTable makeLoanTabTable;
 	private JTable returnLoanTabTable;
-	private int[] loansColumnWidths= {27, 290, 250, 175, 175};
+	private Integer[] loansColumnWidths= {27, 290, 250, 175, 175};
 	private TableRowSorter<TableModel> loansSorter=new TableRowSorter<TableModel>();
 	private TableRowSorter<TableModel> allLoansSorter=new TableRowSorter<TableModel>();
 	private JTextField[] loanBookTextFields;
@@ -316,7 +316,7 @@ public class View {
 
 	}
 	
-	public void setColumnWidths(JTable table, int widths[]) {
+	public void setColumnWidths(JTable table, Integer[] widths) {
 		TableColumnModel model = table.getColumnModel();
 		if (model.getColumnCount() == widths.length) {
 			for ( int i = 0; i< widths.length; i++ ) {
@@ -614,7 +614,7 @@ public class View {
 	}
 	
 	// LOCATIONS
-	public void createAllLocationsTab(JPanel everythingTab, JTabbedPane tabbedPane,JTable table, DefaultTableModel model,TableRowSorter<TableModel> sorter, String alias, String tableName, int[] widths) {
+	public void createAllLocationsTab(JPanel everythingTab, JTabbedPane tabbedPane,JTable table, DefaultTableModel model,TableRowSorter<TableModel> sorter, String alias, String tableName, Integer[] widths) {
 		tabbedPane.addTab("Todos", everythingTab);
 		everythingTab.setLayout(null);
 		
@@ -850,7 +850,7 @@ public class View {
 		}
 	}
 	
-	public void createAllLoansTab(JPanel everythingTab, JTabbedPane tabbedPane,JTable table, DefaultTableModel model,TableRowSorter<TableModel> sorter, String alias, String tableName, int widths[]) {
+	public void createAllLoansTab(JPanel everythingTab, JTabbedPane tabbedPane,JTable table, DefaultTableModel model,TableRowSorter<TableModel> sorter, String alias, String tableName, Integer widths[]) {
 		tabbedPane.addTab(stringMap.get("everything"), everythingTab);
 		everythingTab.setLayout(null);
 		
@@ -917,7 +917,7 @@ public class View {
 
 	}
 	
-	public void createReturnBookTab(int widths[]) {
+	public void createReturnBookTab(Integer widths[]) {
 		JPanel returnBookTab=new JPanel();
 		loansTabbedPane.addTab(stringMap.get("returns"),returnBookTab);
 		returnBookTab.setLayout(null);
@@ -1002,7 +1002,7 @@ public class View {
 		return allBooksTabTable;
 	}
 	
-	public int[] getBookColumnWidths() {
+	public Integer[] getBookColumnWidths() {
 		return bookColumnWidths;
 	}
 
@@ -1139,7 +1139,7 @@ public class View {
 		return allLocationsTabTable;
 	}
 	
-	public int[] getLocationColumnWidths() {
+	public Integer[] getLocationColumnWidths() {
 		return locationColumnWidths;
 	}
 
