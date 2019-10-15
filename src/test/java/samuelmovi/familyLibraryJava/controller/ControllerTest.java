@@ -561,7 +561,7 @@ public class ControllerTest {
         vector.add(loan1.getLoan_date());
         vector.add(loan1.getReturn_date());
         view.getLoansModel().setRowCount(0);
-        view.getLoansModel().setColumnCount(view.getLoanFieldAlias().length);
+        view.getLoansModel().setColumnCount(controller.getStringMap().get("loanFieldALias").split("/").length);
         view.getLoansModel().addRow(vector);
         // set selected row
         view.getReturnLoanTabTable().setRowSelectionInterval(0,0);

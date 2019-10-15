@@ -518,6 +518,57 @@ public class ViewTest {
 
     }
 
+    @Test
+    public void testCreateDeleteLocationTab(){
+        // check null
+        Assert.assertNull(view.getDeleteLocationTab());
+        Assert.assertNull(view.getDeleteLocationTabTable());
+        Assert.assertNull(view.getDeleteLocationB());
+
+        // set object state
+        view.setLocationsTabbedPane(new JTabbedPane());
+        this.controller = new Controller();
+        controller.loadTextStrings();
+        view.setStringMap(controller.getStringMap());
+
+        // execute method
+        view.createDeleteLocationTab();
+
+        // assert expected outcome
+        Assert.assertNotNull(view.getDeleteLocationTab());
+        Assert.assertNotNull(view.getDeleteLocationTabTable());
+        Assert.assertNotNull(view.getDeleteLocationB());
+
+        Assert.assertEquals(1, view.getLocationsTabbedPane().getComponentCount());
+        Assert.assertEquals(2, view.getDeleteLocationTab().getComponentCount());
+    }
+
+
+
+    // LOANS
+
+    @Test
+    public void testFillLoansModel(){
+        // populate database
+        this.loadLocationData();
+        this.loadBookData();
+        // set number of instances of loans
+        Loan loan1 = new Loan(books.findAll().get(0).getIndex(), "borrower1");
+        Loan loan2 = new Loan(books.findAll().get(1).getIndex(), "borrower2");
+        loans.save(loan1);
+        loans.save(loan2);
+
+        // set object state
+        this.controller = new Controller();
+        controller.loadTextStrings();
+        view.setStringMap(controller.getStringMap());
+        // execute method
+        view.fillLoanModel(view.getLoansModel(), loans.findAll());
+        // assert expected outcome
+        Assert.assertEquals(loans.count(), view.getLoansModel().getRowCount());
+    }
+
+
     // UTILITIES
     public void loadBookData(){
         for (String[] data: bookData){

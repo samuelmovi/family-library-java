@@ -122,8 +122,6 @@ public class View {
 	private TableRowSorter<TableModel> allLoansSorter=new TableRowSorter<TableModel>();
 	private JTextField[] loanBookTextFields;
 	private JTabbedPane loansTabbedPane;
-	private String loanJoinAliases;
-	private String[] loanFieldAlias;
 
 	// SYSTEM
 	private JFrame frame;
@@ -808,8 +806,8 @@ public class View {
 	public void fillLoanModel(DefaultTableModel model, List<Loan> list) {
 		// set table info
 		model.setRowCount(0);
-		model.setColumnCount(loanFieldAlias.length);
-		model.setColumnIdentifiers(loanFieldAlias);
+		model.setColumnCount(stringMap.get("loanFieldALias").split("/").length);
+		model.setColumnIdentifiers(stringMap.get("loanFieldALias").split("/"));
 		// populate model
 		for(Loan loan:list) {
 			Vector<String> vector = new Vector<String>();
@@ -845,7 +843,6 @@ public class View {
 	
 	public void refreshLoanTables() {
 		try {
-			// fillJoinedModel(loansModel, loanJoinAliases, "loans", "books", "book", "books_index");
 			fillLoanModel(loansModel, all_loans);
 			setColumnWidths(allLoansTabTable, loansColumnWidths);
 			setColumnWidths(returnLoanTabTable, loansColumnWidths);
@@ -1394,22 +1391,6 @@ public class View {
 	
 	public DefaultTableModel getLoansModel() {
 		return loansModel;
-	}
-	
-	public String getLoanJoinAliases() {
-		return loanJoinAliases;
-	}
-
-	public void setLoanJoinAliases(String loanJoinAliases) {
-		this.loanJoinAliases = loanJoinAliases;
-	}
-
-	public String[] getLoanFieldAlias() {
-		return loanFieldAlias;
-	}
-
-	public void setLoanFieldAlias(String[] loanFieldAlias) {
-		this.loanFieldAlias = loanFieldAlias;
 	}
 
 	// SYSTEM setters and getters	

@@ -74,9 +74,7 @@ public class Controller {
 		view.setAll_locations(locations.findAll());
 
 		// loans stuff
-		view.setLoanJoinAliases(stringMap.get("loanJoinAliases"));
 		view.setAll_loans(loans.findAll());
-		view.setLoanFieldAlias(stringMap.get("loanFieldALias").split("/"));
 
 		// FINAL SETUP
 		view.finalSetup();
