@@ -203,7 +203,7 @@ public class ViewTest {
         Assert.assertEquals(bookViews.count(), view.getAllBookViewsModel().getRowCount());
     }
 
-    @Test // TODO: solve mocking of inner method calls
+    // @Test // TODO: solve mocking of inner method calls
     public void testFillBooksPanel(){
         // check null: books tabbed pane
         Assert.assertNull(view.getBooksTabbedPane());
@@ -249,7 +249,62 @@ public class ViewTest {
         Mockito.verify(spyView, Mockito.times(1)).fillBookModel(Mockito.any(DefaultTableModel.class), Mockito.anyList());
     }
 
-    // UTILITIES
+    // @Test
+    public void testRefreshBookTables(){
+
+    }
+
+    @Test
+    public void testCreateAllBooksTab() {
+        // check null
+        Assert.assertNull(view.getAllBooksTab());
+        Assert.assertNull(view.getAllBooksTabTable());
+        Assert.assertNull(view.getRefreshAllBooksTabB());
+
+        // set object state
+        view.setBooksTabbedPane(new JTabbedPane());
+
+        // execute method
+        view.createAllBooksTab();
+
+        // assert expected result:
+        Assert.assertNotNull(view.getAllBooksTab());
+        Assert.assertNotNull(view.getAllBooksTabTable());
+        Assert.assertNotNull(view.getRefreshAllBooksTabB());
+        Assert.assertEquals(1, view.getBooksTabbedPane().getComponentCount());
+    }
+
+    @Test
+    public void testCreateSearchBookTab() {
+        // check null
+        Assert.assertNull(view.getSearchBooksTab());
+        Assert.assertNull(view.getSearchBooksTabTable());
+        Assert.assertNull(view.getSearchTerm());
+        Assert.assertNull(view.getSearchBookB());
+        Assert.assertNull(view.getSearchBookCombo());
+
+        // set object state
+        view.setBooksTabbedPane(new JTabbedPane());
+        this.controller = new Controller();
+        controller.loadTextStrings();
+        view.setStringMap(controller.getStringMap());
+        
+        // execute method
+        view.createSearchBookTab();
+
+        // assert expected result:
+        Assert.assertNotNull(view.getSearchBooksTab());
+        Assert.assertNotNull(view.getSearchBooksTabTable());
+        Assert.assertNotNull(view.getSearchTerm());
+        Assert.assertNotNull(view.getSearchBookB());
+        Assert.assertNotNull(view.getSearchBookCombo());
+
+        Assert.assertEquals(4, view.getSearchBooksTab().getComponentCount());
+        Assert.assertEquals(1, view.getBooksTabbedPane().getComponentCount());
+    }
+
+
+        // UTILITIES
     public void loadBookData(){
         for (String[] data: bookData){
             Book newBook = new Book(

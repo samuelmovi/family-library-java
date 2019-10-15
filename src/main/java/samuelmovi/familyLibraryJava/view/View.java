@@ -42,7 +42,7 @@ public class View {
 	private List<Book> all_books;
 	private List<BookView> allBookViews;
 	private JPanel booksPanel;
-	private JPanel allBooksTab = new JPanel();
+	private JPanel allBooksTab;
 	private JPanel deleteBooksTab = new JPanel();
 	private JButton booksB;
 	private JButton searchBookB; 
@@ -75,6 +75,7 @@ public class View {
 	//private String[] bookViewAliases;
 	private JComboBox<String> comboLocations;
 	private JComboBox<String> modifyBookCB;
+	private JPanel searchBooksTab;
 
 	//  location stuff
 	private List<Location> all_locations;
@@ -427,6 +428,7 @@ public class View {
 	}
 	
 	public void createAllBooksTab() {
+		allBooksTab  = new JPanel();
 		booksTabbedPane.addTab(stringMap.get("everything"), allBooksTab);
 		allBooksTab.setLayout(null);
 		
@@ -451,14 +453,13 @@ public class View {
 	}
 	
 	public void createSearchBookTab() {
-		
-		JPanel searchBooks = new JPanel();
-		booksTabbedPane.addTab(stringMap.get("search"), searchBooks);
-		searchBooks.setLayout(null);
+		searchBooksTab = new JPanel();
+		booksTabbedPane.addTab(stringMap.get("search"), searchBooksTab);
+		searchBooksTab.setLayout(null);
 
 		JScrollPane consultationScroll = new JScrollPane();
 		consultationScroll.setBounds(12, 108, 920, 435);
-		searchBooks.add(consultationScroll);
+		searchBooksTab.add(consultationScroll);
 		
 		searchBooksTabTable = new JTable(searchBooksModel);
 		searchBooksSorter=new TableRowSorter<TableModel>(searchBooksModel);
@@ -473,18 +474,18 @@ public class View {
 
 		searchBookCombo=new JComboBox<String>();
 		searchBookCombo.setBounds(120,35,150,25);
-		searchBooks.add(searchBookCombo);
+		searchBooksTab.add(searchBookCombo);
 		searchBookCombo.setModel(new DefaultComboBoxModel<String>(stringMap.get("searchBookFields").split("/")));
 		searchBookCombo.setSelectedItem(null);
 		
 		searchTerm = new JTextField();
 		searchTerm.setBounds(325, 35, 250, 25);
-		searchBooks.add(searchTerm);
+		searchBooksTab.add(searchTerm);
 		searchTerm.setColumns(10);
 		
 		searchBookB = new JButton(stringMap.get("search"));
 		searchBookB.setBounds(650, 35, 117, 25);
-		searchBooks.add(searchBookB);
+		searchBooksTab.add(searchBookB);
 	}
 	
 	public void createAddBookTab() {
@@ -945,6 +946,14 @@ public class View {
 	
 	//BOOKS setters and getters
 
+
+	public JPanel getSearchBooksTab() {
+		return searchBooksTab;
+	}
+
+	public void setSearchBooksTab(JPanel searchBooksTab) {
+		this.searchBooksTab = searchBooksTab;
+	}
 
 	public void setAllBooksTabTable(JTable allBooksTabTable) {
 		this.allBooksTabTable = allBooksTabTable;
