@@ -61,7 +61,7 @@ public class Controller {
 	
 	public void initController() {
 
-		loadTextStrings();
+		stringMap = loadTextStrings();
 		// set view info
 		view.setLocationsArray(createLocationList());
 		view.setStringMap(stringMap);
@@ -617,12 +617,12 @@ public class Controller {
 	}
 	
 	// OTHER
-	public void loadTextStrings() {
+	public static Map<String, String> loadTextStrings() {
 		print("[#] Loading text strings...");
 		String line;
 		String chunks[];
 		String filePath="strings.txt";
-		stringMap = new HashMap<String, String>();
+		Map<String, String> stringMap = new HashMap<String, String>();
 		try(BufferedReader br=new BufferedReader(new FileReader(filePath))) {
 			line = br.readLine().trim();
 			while(line != null) {
@@ -641,6 +641,7 @@ public class Controller {
 			print("\n[!] Error loading text strings: "+e);
 			e.printStackTrace();
 		}
+		return stringMap;
 	}
 	
 	public void saveDbToCsv() {

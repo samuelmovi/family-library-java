@@ -21,9 +21,8 @@ import samuelmovi.familyLibraryJava.repo.LocationRepository;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.util.List;
 
-import static org.mockito.ArgumentMatchers.eq;
+
 
 @ContextConfiguration(locations = "classpath:Tests.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -39,7 +38,6 @@ public class ViewTest {
     private LoanRepository loans;
 
     private View view;
-    private Controller controller;
 
     private static String[][] bookData = {
             {"title1", "author1", "genre1", "publisher1", "isbn1", "publish_date1", "purchase_date1"},
@@ -182,9 +180,7 @@ public class ViewTest {
         this.loadLocationData();
         this.loadBookData();
         // set bookFieldAlias
-        this.controller = new Controller();
-        controller.loadTextStrings();
-        view.setStringMap(controller.getStringMap());
+        view.setStringMap(Controller.loadTextStrings());
         // execute method
         view.fillBookModel(view.getModifyBooksModel(), books.findAll());
         // assert expected outcome
@@ -197,9 +193,7 @@ public class ViewTest {
         this.loadLocationData();
         this.loadBookData();
         // set bookViewAlias
-        this.controller = new Controller();
-        controller.loadTextStrings();
-        view.setStringMap(controller.getStringMap());
+        view.setStringMap(Controller.loadTextStrings());
         // execute method
         view.fillBookViewModel(view.getAllBookViewsModel(), bookViews.findAll());
         // assert expected outcome
@@ -215,9 +209,7 @@ public class ViewTest {
         View spyView = Mockito.spy(new View());
 
         // set strings
-        this.controller = new Controller();
-        controller.loadTextStrings();
-        spyView.setStringMap(controller.getStringMap());
+        view.setStringMap(Controller.loadTextStrings());
 
         // set books panel
         JPanel panel = new JPanel();
@@ -288,9 +280,7 @@ public class ViewTest {
 
         // set object state
         view.setBooksTabbedPane(new JTabbedPane());
-        this.controller = new Controller();
-        controller.loadTextStrings();
-        view.setStringMap(controller.getStringMap());
+        view.setStringMap(Controller.loadTextStrings());
 
         // execute method
         view.createSearchBookTab();
@@ -316,9 +306,7 @@ public class ViewTest {
 
         // set object state
         view.setBooksTabbedPane(new JTabbedPane());
-        this.controller = new Controller();
-        controller.loadTextStrings();
-        view.setStringMap(controller.getStringMap());
+        view.setStringMap(Controller.loadTextStrings());
         view.setLocationsArray(new String[1]);
 
         // execute method
@@ -349,9 +337,7 @@ public class ViewTest {
 
         // set object state
         view.setBooksTabbedPane(new JTabbedPane());
-        this.controller = new Controller();
-        controller.loadTextStrings();
-        view.setStringMap(controller.getStringMap());
+        view.setStringMap(Controller.loadTextStrings());
         view.setLocationsArray(new String[1]);
 
         // execute method
@@ -366,7 +352,7 @@ public class ViewTest {
         Assert.assertEquals(
                 3
                         + view.getModifyBookInputObjects().length
-                        + controller.getStringMap().get("bookLabelsText").split(",").length,
+                        + Controller.loadTextStrings().get("bookLabelsText").split(",").length,
                 view.getModifyBookTab().getComponentCount()
         );
 
@@ -383,9 +369,7 @@ public class ViewTest {
 
         // set object state
         view.setBooksTabbedPane(new JTabbedPane());
-        this.controller = new Controller();
-        controller.loadTextStrings();
-        view.setStringMap(controller.getStringMap());
+        view.setStringMap(Controller.loadTextStrings());
         view.setLocationsArray(new String[1]);
 
         // execute method
@@ -413,9 +397,7 @@ public class ViewTest {
 
         // set object state
         view.setLocationsTabbedPane(new JTabbedPane());
-        this.controller = new Controller();
-        controller.loadTextStrings();
-        view.setStringMap(controller.getStringMap());
+        view.setStringMap(Controller.loadTextStrings());
 
         // execute method
         view.createAllLocationsTab();
@@ -435,9 +417,7 @@ public class ViewTest {
         this.loadLocationData();
         this.loadBookData();
         // set object state
-        this.controller = new Controller();
-        controller.loadTextStrings();
-        view.setStringMap(controller.getStringMap());
+        view.setStringMap(Controller.loadTextStrings());
         // execute method
         view.fillLocationModel(view.getAllLocationsModel(), locations.findAll());
         // assert expected outcome
@@ -463,9 +443,7 @@ public class ViewTest {
 
         // set object state
         view.setLocationsTabbedPane(new JTabbedPane());
-        this.controller = new Controller();
-        controller.loadTextStrings();
-        view.setStringMap(controller.getStringMap());
+        view.setStringMap(Controller.loadTextStrings());
 
         // execute method
         view.createAddLocationTab();
@@ -494,9 +472,7 @@ public class ViewTest {
 
         // set object state
         view.setLocationsTabbedPane(new JTabbedPane());
-        this.controller = new Controller();
-        controller.loadTextStrings();
-        view.setStringMap(controller.getStringMap());
+        view.setStringMap(Controller.loadTextStrings());
 
         // execute method
         view.createModifyLocationTab();
@@ -510,7 +486,7 @@ public class ViewTest {
         Assert.assertEquals(
                 3
                         + view.getModifyLocationTextFields().length
-                        + controller.getStringMap().get("locationLabelsText").split(",").length,
+                        + Controller.loadTextStrings().get("locationLabelsText").split(",").length,
                 view.getModifyLocationTab().getComponentCount()
         );
 
@@ -527,9 +503,7 @@ public class ViewTest {
 
         // set object state
         view.setLocationsTabbedPane(new JTabbedPane());
-        this.controller = new Controller();
-        controller.loadTextStrings();
-        view.setStringMap(controller.getStringMap());
+        view.setStringMap(Controller.loadTextStrings());
 
         // execute method
         view.createDeleteLocationTab();
@@ -559,9 +533,7 @@ public class ViewTest {
         loans.save(loan2);
 
         // set object state
-        this.controller = new Controller();
-        controller.loadTextStrings();
-        view.setStringMap(controller.getStringMap());
+        view.setStringMap(Controller.loadTextStrings());
         // execute method
         view.fillLoanModel(view.getLoansModel(), loans.findAll());
         // assert expected outcome
@@ -587,9 +559,7 @@ public class ViewTest {
 
         // set object state
         view.setLoansTabbedPane(new JTabbedPane());
-        this.controller = new Controller();
-        controller.loadTextStrings();
-        view.setStringMap(controller.getStringMap());
+        view.setStringMap(Controller.loadTextStrings());
 
         // execute method
         view.createAllLoansTab();
@@ -613,9 +583,8 @@ public class ViewTest {
 
         // set object state
         view.setLoansTabbedPane(new JTabbedPane());
-        this.controller = new Controller();
-        controller.loadTextStrings();
-        view.setStringMap(controller.getStringMap());
+
+        view.setStringMap(Controller.loadTextStrings());
 
         // execute method
         view.createLoanBookTab();
@@ -639,9 +608,7 @@ public class ViewTest {
 
         // set object state
         view.setLoansTabbedPane(new JTabbedPane());
-        this.controller = new Controller();
-        controller.loadTextStrings();
-        view.setStringMap(controller.getStringMap());
+        view.setStringMap(Controller.loadTextStrings());
 
         // execute method
         view.createReturnBookTab();

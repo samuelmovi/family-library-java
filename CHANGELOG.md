@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - fix create location list method in controller, causing issues in view test
 
 
+## 2019-10-16
+### Changed
+- loadTextString is  now a static method, for ease of access
+
 ## 2019-10-12
 ### Changed
 - tweaks to repositories
